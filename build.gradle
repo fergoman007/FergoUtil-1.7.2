@@ -22,7 +22,7 @@ group= "fergoman123.mods.fergoutil" // http://maven.apache.org/guides/mini/guide
 archivesBaseName = "FergoUtil"
 
 minecraft {
-    version = "1.7.2-10.12.1.1075"
+    version = "1.7.2-10.12.1.1082"
     assetDir = "eclipse/assets"
 }
 
