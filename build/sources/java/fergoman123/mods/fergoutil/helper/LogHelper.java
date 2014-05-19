@@ -12,7 +12,7 @@ public class LogHelper {
     public static Level lev;
 
     public static void log(Level level, Object object) {
-        FMLLog.log(ModInfo.name, level, "[FergoTools] " + String.valueOf(object));
+        FMLLog.log(ModInfo.name, level, "[" + ModInfo.modid + "] " + String.valueOf(object));
     }
 
     public static void all(Object o) {
