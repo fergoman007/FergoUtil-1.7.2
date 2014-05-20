@@ -7,9 +7,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import fergoman123.mods.fergoutil.helper.LogHelper;
 import fergoman123.mods.fergoutil.lib.ModInfo;
 
-/**
- * Created by Fergoman123 on 28/04/2014.
- */
 @Mod(modid = ModInfo.modid, name = ModInfo.name, version = ModInfo.mod_version)
 public class FergoUtil {
 
