@@ -7,7 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import fergoman123.mods.fergoutil.helper.LogHelper;
 import fergoman123.mods.fergoutil.lib.ModInfo;
 
-@Mod(modid = ModInfo.modid, name = ModInfo.name, version = ModInfo.mod_version)
+@Mod(modid = ModInfo.modid, name = ModInfo.name, version = ModInfo.mod)
 public class FergoUtil {
 
     @Mod.Instance(ModInfo.modid)
