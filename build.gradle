@@ -24,11 +24,6 @@ configFile.withReader{
     ext.config = new ConfigSlurper().parse prop
 }
 
-ext.buildnumber = 1
-if (System.getenv().BUILD_NUMBER)
-project.buildnumber = System.getenv().BUILD_NUMBER
-logger.lifecycle "Building Version: " + project.config.buildnumber
-
 
 version = config.mod_version
 group= "fergoman123.mods.fergoutil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -36,49 +31,30 @@ archivesBaseName = "FergoUtil"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
-    assetDir = "eclipse/assets"
+    assetDir = "run/assets"
 
-    replaceIn "fergoman123/mods/fergoutil/lib/ModInfo.java"
-    replace "@mod_version@", project.version
-    replace "@mcVersion@", project.config.minecraft_version
-    replace "@forge_version@", project.config.forge_version
-    replace "@buildNum@", project.buildnumber
+    replaceIn "lib/ModInfo.java"
+    replace "@version@", config.version
 }
 
-version = "${config.minecraft_version}-${config.mod_version}.${buildnumber}"
-
-dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-}
+version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
 
 processResources
 {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    // exclude xcf files, as they are for development only
+    exclude '**/*.xcf'
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
+        include '*.info'
+
         // replace version and mcversion
-        expand 'version':project.config.mod_version, 'mcversion':project.config.mcVersion
+        expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
     }
-        
+
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        include '**/*.info'
+        include '**/*.properties'
     }
 }

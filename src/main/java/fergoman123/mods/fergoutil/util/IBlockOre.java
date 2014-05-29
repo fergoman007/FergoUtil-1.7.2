@@ -9,9 +9,10 @@ import java.util.Random;
  */
 public interface IBlockOre {
 
-    Item getItemDropped(int par1, Random rand, int par3);
 
-    int quantityDropped(Random rand);
+    public Item getItemDropped(int par1, Random rand, int par3);
 
-    int damageDropped(Random rand);
+    public int quantityDropped(Random rand);
+
+    public int damageDropped(Random rand);
 }
