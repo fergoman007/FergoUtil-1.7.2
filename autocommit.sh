@@ -20,6 +20,5 @@ git commit -m "$COMMITMESSAGE" --allow-empty # (Allow empty will push an empty c
 git push --set-upstream origin master
 
 echo "==== Auto Commit completed"
-sleep 900
-exit
+sleep 100
 done
