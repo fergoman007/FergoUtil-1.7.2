@@ -7,7 +7,7 @@ public class LogHelper {
 
     public static void log(Level level, Object o)
     {
-        FMLLog.log(level, "[" + ModInfo.modid + "]" + String.valueOf(o));
+        FMLLog.log(level, "[" + ModInfo.modid + "] " + String.valueOf(o));
     }
 
     public static void all(Object o)

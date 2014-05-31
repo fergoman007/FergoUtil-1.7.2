@@ -14,16 +14,14 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+task("incrementBuildNumber")
+        {
+            doFirst {
+                config.build_number = (config.build_number.toString().toInteger()) + 1
+            }
+        }
 
 apply plugin: 'forge'
-
-ext.configFile = file "build.properties"
-configFile.withReader{
-    def prop = new Properties()
-    prop.load(it)
-    ext.config = new ConfigSlurper().parse prop
-}
-
 
 version = config.mod_version
 group= "fergoman123.mods.fergoutil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -37,10 +35,18 @@ minecraft {
     replace "@version@", config.version
 }
 
-version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+ext.configFile = file "build.properties"
+configFile.withReader{
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.minecraft_version}-${config.mod_version}.${config.build_number}"
 
 processResources
 {
+    dependsOn "incrementBuildNumber"
     // exclude xcf files, as they are for development only
     exclude '**/*.xcf'
 

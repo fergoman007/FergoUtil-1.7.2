@@ -5,7 +5,7 @@ package fergoman123.mods.fergoutil.helper;
  */
 public class NameHelper {
 
-    public String getUnwrappedUnlocalizedName(String unlocalizedName)
+    public static String getUnwrappedUnlocalizedName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
