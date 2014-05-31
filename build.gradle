@@ -14,14 +14,30 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+
 task("incrementBuildNumber")
         {
+            // increment build number
             doFirst {
+                // increment
                 config.build_number = (config.build_number.toString().toInteger()) + 1
+
+                // write back to the file
+                configFile.withWriter {
+                    config.toProperties().store(it, "")
+                }
             }
         }
 
 apply plugin: 'forge'
+
+ext.configFile = file "build.properties"
+configFile.withReader{
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
 
 version = config.mod_version
 group= "fergoman123.mods.fergoutil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -33,13 +49,6 @@ minecraft {
 
     replaceIn "lib/ModInfo.java"
     replace "@version@", config.version
-}
-
-ext.configFile = file "build.properties"
-configFile.withReader{
-    def prop = new Properties()
-    prop.load(it)
-    ext.config = new ConfigSlurper().parse prop
 }
 
 version = "${config.minecraft_version}-${config.mod_version}.${config.build_number}"
