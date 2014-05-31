@@ -21,5 +21,5 @@ git push --set-upstream origin master
 
 echo "==== Auto Commit completed"
 sleep 900
-done
 exit
+done
