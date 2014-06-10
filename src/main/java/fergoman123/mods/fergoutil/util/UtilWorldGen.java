@@ -8,9 +8,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-/**
- * Created by Fergoman123 on 03/04/2014.
- */
 public class UtilWorldGen {
 
     public static class WorldGenNetherMinable extends WorldGenerator {

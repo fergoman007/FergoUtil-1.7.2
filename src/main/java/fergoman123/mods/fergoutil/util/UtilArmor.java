@@ -4,9 +4,6 @@ import fergoman123.mods.fergoutil.item.ArmorType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 
-/**
- * Created by Fergoman123 on 17/05/2014.
- */
 public class UtilArmor
 {
 

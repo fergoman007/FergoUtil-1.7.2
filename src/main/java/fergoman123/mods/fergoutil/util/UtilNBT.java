@@ -3,9 +3,6 @@ package fergoman123.mods.fergoutil.util;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-/**
- * Created by Fergoman123 on 21/05/2014.
- */
 public class UtilNBT {
 
     private static void initNBTTagCompound(ItemStack stack)

@@ -5,9 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-/**
- * Created by Fergoman123 on 28/05/2014.
- */
 public class RecipeHelper {
 
     public static void addShapelessRecipe(ItemStack output, ItemStack input){GameRegistry.addShapelessRecipe(output, input);}

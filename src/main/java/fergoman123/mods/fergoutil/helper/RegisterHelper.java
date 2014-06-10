@@ -9,9 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 
-/**
- * Created by Fergoman123 on 29/05/2014.
- */
 public class RegisterHelper {
 
     public static void registerItem(Item item, String value)
