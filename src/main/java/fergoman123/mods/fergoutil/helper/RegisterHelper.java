@@ -1,5 +1,6 @@
 package fergoman123.mods.fergoutil.helper;
 
+import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -39,6 +40,11 @@ public class RegisterHelper {
     public static void registerMetadataBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String value)
     {
         GameRegistry.registerBlock(block, itemBlockClass, value);
+    }
+
+    public static void registerFuelHandler(IFuelHandler handler)
+    {
+        GameRegistry.registerFuelHandler(handler);
     }
 
 }
