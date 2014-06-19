@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class RegisterHelper {
@@ -45,6 +46,11 @@ public class RegisterHelper {
     public static void registerFuelHandler(IFuelHandler handler)
     {
         GameRegistry.registerFuelHandler(handler);
+    }
+
+    public static int getFuelValue(ItemStack stack)
+    {
+        return GameRegistry.getFuelValue(stack);
     }
 
 }
