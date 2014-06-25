@@ -2,16 +2,6 @@ package fergoman123.mods.fergoutil.helper;
 
 public class NameHelper {
 
-    public static boolean isFalse()
-    {
-        return false;
-    }
-
-    public static boolean isTrue()
-    {
-        return true;
-    }
-
     public static String getUnwrappedUnlocalizedName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
@@ -19,17 +9,18 @@ public class NameHelper {
 
     public static String getFurnaceType(boolean isActive)
     {
-        if (isTrue())
+        if (isActive)
         {
             return "Active";
         }
-        else if (isFalse())
+        else
         {
             return "Idle";
         }
-        else
-        {
-            return null;
-        }
+    }
+
+    public static String getAssetsLocation(String modid)
+    {
+        return modid + ":";
     }
 }

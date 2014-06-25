@@ -59,7 +59,7 @@ processResources
     // exclude xcf files, as they are for development only
     exclude '**/*.xcf'
 
-    // replace stuff in mcmod.info, nothing else
+    // replace stuff in mcmod1.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include '*.info'
 
@@ -67,7 +67,7 @@ processResources
         expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
     }
 
-    // copy everything else, thats not the mcmod.info
+    // copy everything else, thats not the mcmod1.info
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.info'
         include '**/*.properties'

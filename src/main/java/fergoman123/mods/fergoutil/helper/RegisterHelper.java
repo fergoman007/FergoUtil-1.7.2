@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RegisterHelper {
 
@@ -51,6 +52,21 @@ public class RegisterHelper {
     public static int getFuelValue(ItemStack stack)
     {
         return GameRegistry.getFuelValue(stack);
+    }
+
+    public static void registerOre(String name, Block ore)
+    {
+        OreDictionary.registerOre(name, ore);
+    }
+
+    public static void registerOre(String name, Item ore)
+    {
+        OreDictionary.registerOre(name, ore);
+    }
+
+    public static void registerOre(String name, ItemStack ore)
+    {
+        OreDictionary.registerOre(name, ore);
     }
 
 }
