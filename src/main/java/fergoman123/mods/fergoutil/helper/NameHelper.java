@@ -23,4 +23,10 @@ public class NameHelper {
     {
         return modid + ":";
     }
+    public static String getAssetsLocationGui(String modid){return modid;}
+
+    public static String getLogoFile(String modid)
+    {
+        return "/assets/" + modid + "/logo.png";
+    }
 }

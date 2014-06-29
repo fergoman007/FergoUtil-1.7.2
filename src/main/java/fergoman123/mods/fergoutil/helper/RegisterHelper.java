@@ -1,5 +1,6 @@
 package fergoman123.mods.fergoutil.helper;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -67,6 +68,11 @@ public class RegisterHelper {
     public static void registerOre(String name, ItemStack ore)
     {
         OreDictionary.registerOre(name, ore);
+    }
+
+    public static void register(Object eventClass)
+    {
+        FMLCommonHandler.instance().bus().register(eventClass);
     }
 
 }

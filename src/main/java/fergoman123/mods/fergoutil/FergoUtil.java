@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import fergoman123.mods.fergoutil.helper.LogHelper;
+import fergoman123.mods.fergoutil.lib.MetadataFU;
 import fergoman123.mods.fergoutil.lib.ModInfo;
 
 @Mod(modid = ModInfo.modid, name = ModInfo.name, version = ModInfo.versionMain)
@@ -16,7 +17,7 @@ public class FergoUtil {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
-        ModInfo.writeMetadata(evt.getModMetadata());
+        MetadataFU.writeMetadata(evt.getModMetadata());
         LogHelper.info("Mod Pre-Initialising");
     }
 

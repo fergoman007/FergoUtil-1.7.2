@@ -1,6 +1,6 @@
 package fergoman123.mods.fergoutil.util;
 
-import fergoman123.mods.fergoutil.item.ArmorType;
+import fergoman123.mods.fergoutil.item.Armor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 
@@ -12,10 +12,10 @@ public class UtilArmor
     public static final String legs = "Legs";
     public static final String boots = "Boots";
 
-    public static final int HELMET = ArmorType.HELMET.ordinal();
-    public static final int CHEST = ArmorType.CHEST.ordinal();
-    public static final int LEGS = ArmorType.LEGS.ordinal();
-    public static final int BOOTS = ArmorType.BOOTS.ordinal();
+    public static final int HELMET = Armor.EnumArmorType.HELMET.ordinal();
+    public static final int CHEST = Armor.EnumArmorType.CHEST.ordinal();
+    public static final int LEGS = Armor.EnumArmorType.LEGS.ordinal();
+    public static final int BOOTS = Armor.EnumArmorType.BOOTS.ordinal();
 
     public static String[] armorType = {helmet, chest, legs, boots};
     public static int[] armorNum = {0, 1, 2, 3};
