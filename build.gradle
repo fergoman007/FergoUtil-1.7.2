@@ -20,7 +20,7 @@ task("incrementBuildNumber")
             // increment build number
             doFirst {
                 // increment
-                fergoman123.mods.fergoutil.config.build_number = (fergoman123.mods.fergoutil.config.build_number.toString().toInteger()) + 1
+                config.build_number = (config.build_number.toString().toInteger()) + 1
 
                 // write back to the file
                 configFile.withWriter {
