@@ -28,7 +28,7 @@ public class NameHelper {
     {
         return modid + ":";
     }
-    public static String getAssetsLocationGui(String modid){return modid;}
+    public static String getAssetsLocationGui(String modid){return modid.toLowerCase();}
 
     public static String getLogoFile(String modid)
     {
