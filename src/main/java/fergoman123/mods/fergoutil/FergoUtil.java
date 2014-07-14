@@ -11,7 +11,7 @@ import fergoman123.mods.fergoutil.lib.ModInfo;
 @Mod(modid = ModInfo.modid, name = ModInfo.name, version = ModInfo.versionMain)
 public class FergoUtil {
 
-    @Mod.Instance(ModInfo.modid)
+    @Mod.Instance()
     public static FergoUtil instance;
 
     @Mod.EventHandler

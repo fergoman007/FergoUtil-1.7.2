@@ -1,9 +1,10 @@
 package fergoman123.mods.fergoutil.helper;
 
+import fergoman123.mods.fergoutil.world.gen.WorldGenEndMinable;
+import fergoman123.mods.fergoutil.world.gen.WorldGenNetherMinable;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import fergoman123.mods.fergoutil.util.UtilWorldGen.*;
 
 import java.util.Random;
 

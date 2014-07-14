@@ -15,16 +15,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class RegisterHelper {
 
-    public static void registerItem(Item item, String value)
-    {
-        GameRegistry.registerItem(item, value);
-    }
-
-    public static void registerBlock(Block block, String value)
-    {
-        GameRegistry.registerBlock(block, value);
-    }
-
     public static void registerTileEntity(Class<? extends TileEntity> tileClass, String tileValue)
     {
         GameRegistry.registerTileEntity(tileClass, tileValue);
@@ -73,6 +63,16 @@ public class RegisterHelper {
     public static void register(Object eventClass)
     {
         FMLCommonHandler.instance().bus().register(eventClass);
+    }
+
+    public static void registerItem(Item item, String name)
+    {
+        GameRegistry.registerItem(item, name);
+    }
+
+    public static void registerBlock(Block block, String name)
+    {
+        GameRegistry.registerBlock(block, name);
     }
 
 }
