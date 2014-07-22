@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class RecipeHelper {
 
@@ -11,4 +12,8 @@ public class RecipeHelper {
     public static void addShapedRecipe(ItemStack output, Object... params){GameRegistry.addRecipe(output, params);}
     public static void addBlockSmelting(Block block, ItemStack output, float xp){GameRegistry.addSmelting(block, output, xp);}
     public static void addItemSmelting(Item item, ItemStack output, float xp){GameRegistry.addSmelting(item, output, xp);}
+    public static void addItemStackSmelting(ItemStack input, ItemStack output, float xp)
+    {
+        FurnaceRecipes.smelting().func_151394_a(input, output, xp);
+    }
 }
