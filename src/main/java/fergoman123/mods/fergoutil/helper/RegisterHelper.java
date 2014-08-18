@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class RegisterHelper {
@@ -60,9 +61,10 @@ public class RegisterHelper {
         OreDictionary.registerOre(name, ore);
     }
 
-    public static void register(Object eventClass)
+    public static void registerEvent(Object eventClass)
     {
         FMLCommonHandler.instance().bus().register(eventClass);
+        MinecraftForge.EVENT_BUS.register(eventClass);
     }
 
     public static void registerItem(Item item, String name)

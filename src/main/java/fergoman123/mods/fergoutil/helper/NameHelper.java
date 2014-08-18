@@ -1,5 +1,7 @@
 package fergoman123.mods.fergoutil.helper;
 
+import net.minecraft.util.StatCollector;
+
 public class NameHelper {
 
     public static String getUnwrappedUnlocalizedName(String unlocalizedName)
@@ -24,6 +26,11 @@ public class NameHelper {
         }
     }
 
+    public static String translateToLocal(String locale)
+    {
+        return StatCollector.translateToLocal(locale);
+    }
+
     public static String getAssetsLocation(String modid)
     {
         return modid + ":";
@@ -33,5 +40,14 @@ public class NameHelper {
     public static String getLogoFile(String modid)
     {
         return "/assets/" + modid + "/logo.png";
+    }
+
+    public static String getTooltip(){return "tooltip.";}
+
+    public static String getContainer(){return "container.";}
+
+    public static String getInventory()
+    {
+        return "inventory";
     }
 }

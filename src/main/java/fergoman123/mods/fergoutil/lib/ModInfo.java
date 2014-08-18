@@ -13,5 +13,5 @@ public class ModInfo {
     public static final String author = "Fergoman123";
     public static final List<String> authorList = Arrays.asList(author);
     public static final String url = "fergoman123.github.io";
-    public static final String desc = "Fergoman123's Util is a utility mod thats is used to register items, block and other things";
+    public static final String desc = "Fergoman123's Util is a utility mod thats is used to registerEvent items, block and other things";
 }

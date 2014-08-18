@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public interface ITool {
+public interface ITooltipItem {
 
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean extraInfo);
 }
