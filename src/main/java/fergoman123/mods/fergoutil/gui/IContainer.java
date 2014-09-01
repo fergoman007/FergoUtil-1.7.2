@@ -7,11 +7,13 @@
   * http://www.gnu.org/licenses/gpl-3.0.html
   */
 
-package fergoman123.mods.fergoutil.lib;
+package fergoman123.mods.fergoutil.gui;
 
-public class Reference
-{
-    public static final String textureLoc = ModInfo.modid + ":";
-    public static final String textureLocGui = ModInfo.modid.toLowerCase();
-    public static final String dirGui = "textures/gui/";
+import net.minecraft.inventory.ICrafting;
+
+public interface IContainer {
+
+    public void detectAndSendChanges();
+
+    public void addCraftingToCrafters(ICrafting crafting);
 }

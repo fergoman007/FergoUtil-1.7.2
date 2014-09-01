@@ -31,7 +31,7 @@ public class RegisterHelper {
         NetworkRegistry.INSTANCE.registerGuiHandler(mod, handler);
     }
 
-    public static void registerMetadataBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String value)
+    public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String value)
     {
         GameRegistry.registerBlock(block, itemBlockClass, value);
     }
