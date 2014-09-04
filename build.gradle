@@ -53,23 +53,32 @@ minecraft {
 
 version = "${config.minecraft_version}-${config.mod_version}.${config.build_number}"
 
-processResources
-{
+jar{
     dependsOn "incrementBuildNumber"
-    // exclude xcf files, as they are for development only
-    exclude '**/*.xcf'
+    classifier = 'universal'
+    version = "${project.version}"
+}
 
-    // replace stuff in mcmod1.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include '*.info'
-
-        // replace version and mcversion
-        expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
+sourceSets{
+    main{
+        java{
+            srcDir = new File(project.projectDir.parentFile, "src")
+        }
     }
+}
 
-    // copy everything else, thats not the mcmod1.info
-    from(sourceSets.main.resources.srcDirs) {
-        include '**/*.info'
-        include '**/*.properties'
-    }
+task sourceJar(type: Jar){
+    from sourceSets.main.allSource
+    classifier = 'src'
+    version = "${project.version}"
+}
+
+task devJar(type: Jar){
+    from sourceSets.main.output
+    classifier = 'dev'
+    version = "${project}"
+}
+
+artifacts{
+    archives sourceJar, devJar
 }
