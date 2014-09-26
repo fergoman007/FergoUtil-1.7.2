@@ -14,26 +14,36 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class RegisterHelper {
-
-    public static void registerTileEntity(Class<? extends TileEntity> tileClass, String tileValue)
-    {
-        GameRegistry.registerTileEntity(tileClass, tileValue);
-    }
-
-    public static void registerWorldGen(IWorldGenerator generator, int weight)
+public class RegisterHelper
+{
+    public static void registerWorldGenerator(IWorldGenerator generator, int weight)
     {
         GameRegistry.registerWorldGenerator(generator, weight);
     }
 
-    public static void registerGuiHandler(Object mod, IGuiHandler handler)
+    public static void registerItem(Item item, String name)
     {
-        NetworkRegistry.INSTANCE.registerGuiHandler(mod, handler);
+        GameRegistry.registerItem(item, name);
     }
 
-    public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String value)
+    public static Item registerItem(Item item, String name, String modid)
     {
-        GameRegistry.registerBlock(block, itemBlockClass, value);
+        return GameRegistry.registerItem(item, name, modid);
+    }
+
+    public static Block registerBlock(Block block, String name)
+    {
+        return GameRegistry.registerBlock(block, name);
+    }
+
+    public static Block registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String name)
+    {
+        return GameRegistry.registerBlock(block, itemBlockClass, name);
+    }
+
+    public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String id)
+    {
+        GameRegistry.registerTileEntity(tileEntityClass, id);
     }
 
     public static void registerFuelHandler(IFuelHandler handler)
@@ -41,17 +51,12 @@ public class RegisterHelper {
         GameRegistry.registerFuelHandler(handler);
     }
 
-    public static int getFuelValue(ItemStack stack)
-    {
-        return GameRegistry.getFuelValue(stack);
-    }
-
-    public static void registerOre(String name, Block ore)
+    public static void registerOre(String name, Item ore)
     {
         OreDictionary.registerOre(name, ore);
     }
 
-    public static void registerOre(String name, Item ore)
+    public static void registerOre(String name, Block ore)
     {
         OreDictionary.registerOre(name, ore);
     }
@@ -61,20 +66,19 @@ public class RegisterHelper {
         OreDictionary.registerOre(name, ore);
     }
 
-    public static void registerEvent(Object eventClass)
+    public static void registerGuiHandler(Object modInstance, IGuiHandler handler)
     {
-        FMLCommonHandler.instance().bus().register(eventClass);
-        MinecraftForge.EVENT_BUS.register(eventClass);
+        NetworkRegistry.INSTANCE.registerGuiHandler(modInstance, handler);
     }
 
-    public static void registerItem(Item item, String name)
+    public static int getFuelValue(ItemStack stack)
     {
-        GameRegistry.registerItem(item, name);
+        return GameRegistry.getFuelValue(stack);
     }
 
-    public static void registerBlock(Block block, String name)
+    public static void registerEvent(Object event)
     {
-        GameRegistry.registerBlock(block, name);
+        MinecraftForge.EVENT_BUS.register(event);
     }
 
 }
