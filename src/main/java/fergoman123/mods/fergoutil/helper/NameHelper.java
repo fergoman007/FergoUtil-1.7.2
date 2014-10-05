@@ -66,4 +66,25 @@ public class NameHelper {
     {
         return "inventory";
     }
+
+    /**
+     *
+     * @param mod the mod number (1 is FergoTools, 2 is MoreStorageBlocks)
+     * @return
+     */
+    public static String getAssetStringBasedOnMod(int mod)
+    {
+        if (mod == 1)
+        {
+            return "FergoTools:";
+        }
+        else if (mod == 2)
+        {
+            return "MSB:";
+        }
+        else
+        {
+            return "nn";
+        }
+    }
 }
