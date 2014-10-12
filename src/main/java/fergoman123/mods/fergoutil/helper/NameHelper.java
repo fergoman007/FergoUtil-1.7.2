@@ -9,6 +9,7 @@
 
 package fergoman123.mods.fergoutil.helper;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 public class NameHelper {
@@ -70,9 +71,9 @@ public class NameHelper {
     /**
      *
      * @param mod the mod number (1 is FergoTools, 2 is MoreStorageBlocks)
-     * @return
+     * @return the mod prefix
      */
-    public static String getAssetStringBasedOnMod(int mod)
+    public static String getModString(int mod)
     {
         if (mod == 1)
         {
@@ -86,5 +87,10 @@ public class NameHelper {
         {
             return "nn";
         }
+    }
+
+    public static String getDurabilityString(ItemStack stack)
+    {
+        return (stack.getMaxDamage() - stack.getItemDamageForDisplay()) + "/" + stack.getMaxDamage();
     }
 }

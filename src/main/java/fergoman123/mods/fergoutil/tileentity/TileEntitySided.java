@@ -25,7 +25,7 @@ public abstract class TileEntitySided extends TileEntity implements ISidedInvent
 
     public abstract ItemStack getStackInSlot(int slot);
 
-    public abstract ItemStack decrStackSize(int par1, int par2);
+    public abstract ItemStack decrStackSize(int slot, int decrementAmount);
 
     public abstract ItemStack getStackInSlotOnClosing(int slot);
 

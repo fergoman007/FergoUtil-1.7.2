@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ITooltipItem {
 
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean extraInfo);
+    public abstract void addInformation(ItemStack stack, EntityPlayer player, List list, boolean extraInfo);
 }
