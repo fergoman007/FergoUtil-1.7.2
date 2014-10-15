@@ -40,7 +40,7 @@ configFile.withReader{
 
 
 version = config.mod_version
-group= "fergoman123.mods.fergoutil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "io.github.fergoman123.fergoutil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "FergoUtil"
 
 minecraft {
