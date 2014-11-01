@@ -21,24 +21,19 @@ public final class RegisterHelper
         GameRegistry.registerWorldGenerator(generator, weight);
     }
 
-    public static void registerItem(Item item, String name)
+    public static void registerItem(Item item)
     {
-        GameRegistry.registerItem(item, name);
+        GameRegistry.registerItem(item, NameHelper.getUnwrappedUnlocalizedNameForRegistry(item.getUnlocalizedName()));
     }
 
-    public static Item registerItem(Item item, String name, String modid)
+    public static Block registerBlock(Block block)
     {
-        return GameRegistry.registerItem(item, name, modid);
+        return GameRegistry.registerBlock(block, NameHelper.getUnwrappedUnlocalizedNameForRegistry(block.getUnlocalizedName()));
     }
 
-    public static Block registerBlock(Block block, String name)
+    public static Block registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass)
     {
-        return GameRegistry.registerBlock(block, name);
-    }
-
-    public static Block registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String name)
-    {
-        return GameRegistry.registerBlock(block, itemBlockClass, name);
+        return GameRegistry.registerBlock(block, itemBlockClass, NameHelper.getUnwrappedUnlocalizedNameForRegistry(block.getUnlocalizedName()));
     }
 
     public static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String id)

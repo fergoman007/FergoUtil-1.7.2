@@ -13,7 +13,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public interface INBTTaggable {
 
+    /** reads information from NBT */
     void readFromNBT(NBTTagCompound compound);
 
+    /** writes information from NBT */
     void writeToNBT(NBTTagCompound compound);
 }

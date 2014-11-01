@@ -33,6 +33,9 @@ public final class WorldGenNetherMinable extends WorldGenerator
         this.metadata = meta;
     }
 
+    //
+    // This is the algorithm that is generates ore in the world
+    //
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         float f = par2Random.nextFloat() * (float)Math.PI;

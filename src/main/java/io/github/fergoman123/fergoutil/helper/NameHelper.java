@@ -26,6 +26,11 @@ public final class NameHelper {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
+    public static String getUnwrappedUnlocalizedNameForRegistry(String unlocalizedName)
+    {
+        return unlocalizedName.substring(unlocalizedName.indexOf(":") + 1);
+    }
+
     public static String format(String text, Object... args)
     {
         return String.format(text, args);

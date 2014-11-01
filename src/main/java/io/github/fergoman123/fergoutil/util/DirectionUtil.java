@@ -13,28 +13,37 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public final class DirectionUtil
 {
+    /** gets north direction */
     public static ForgeDirection getDirectionNorth()
     {
         return ForgeDirection.NORTH;
     }
 
+    /** gets south direction */
     public static ForgeDirection getDirectionSouth()
     {
         return ForgeDirection.SOUTH;
     }
+
+    /** gets east direction */
     public static ForgeDirection getDirectionEast()
     {
         return ForgeDirection.EAST;
     }
+
+    /** gets west direction */
     public static ForgeDirection getDirectionWest()
     {
         return ForgeDirection.WEST;
     }
+
+    /** gets up direction */
     public static ForgeDirection getDirectionUp()
     {
         return ForgeDirection.UP;
     }
 
+    /** gets down direction*/
     public static ForgeDirection getDirectionDown()
     {
         return ForgeDirection.DOWN;
