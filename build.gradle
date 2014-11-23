@@ -62,7 +62,7 @@ jar{
 sourceSets{
     main{
         java{
-            srcDir = new File(project.projectDir.parentFile, "src")
+            srcDirs new File(project.projectDir.parentFile, "src")
         }
     }
 }
