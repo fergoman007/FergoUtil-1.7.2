@@ -40,15 +40,14 @@ configFile.withReader{
 
 
 version = config.mod_version
-group= "io.github.fergoman123.fergoutil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "io.github.fergoman123" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "FergoUtil"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
-    assetDir = "run/assets"
+    runDir = "run/assets"
 
-    replaceIn "lib/ModInfo.java"
-    replace "@version@", config.version
+    //mappings = "snapshot_nodoc_${config.mapping_version}"
 }
 
 version = "${config.minecraft_version}-${config.mod_version}.${config.build_number}"
@@ -81,4 +80,13 @@ task devJar(type: Jar){
 
 artifacts{
     archives sourceJar, devJar
+}
+
+uploadArchives{
+    repositories{
+        mavenDeployer
+                {
+                    repository(url: "file://C:/Projects/Site/maven")
+                }
+    }
 }

@@ -14,9 +14,10 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import io.github.fergoman123.fergoutil.helper.LogHelper;
 import io.github.fergoman123.fergoutil.lib.MetadataFU;
 import io.github.fergoman123.fergoutil.lib.ModInfo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
  @Mod(modid = ModInfo.modid, name = ModInfo.name, version = ModInfo.versionMain)
 public class FergoUtil {
@@ -24,22 +25,24 @@ public class FergoUtil {
     @Instance(ModInfo.modid)
     public static FergoUtil instance;
 
+    public static final Logger logger = LogManager.getLogger(ModInfo.modid);
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
         MetadataFU.writeMetadata(evt.getModMetadata());
-        LogHelper.info("Mod Pre-Initialising");
+        logger.info("Mod Pre-Initialising");
     }
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent evt)
     {
-        LogHelper.info("Mod Initialising");
+        logger.info("Mod Initialising");
     }
 
     @Mod.EventHandler
     public void modsLoaded(FMLPostInitializationEvent evt)
     {
-        LogHelper.info("Mod Loaded");
+        logger.info("Mod Loaded");
     }
 }

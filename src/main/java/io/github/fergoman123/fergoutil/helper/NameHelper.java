@@ -14,13 +14,6 @@ import net.minecraft.util.StatCollector;
 
 public final class NameHelper {
 
-    private static NameHelper instance;
-
-    public static NameHelper getInstance()
-    {
-        return instance;
-    }
-
     public static String getUnwrappedUnlocalizedName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);

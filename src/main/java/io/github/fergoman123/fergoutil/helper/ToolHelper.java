@@ -65,11 +65,6 @@ public class ToolHelper
         return EnumHelper.addEnchantmentType(name);
     }
 
-    public static EnumEntitySize addEntitySize(String name)
-    {
-        return EnumHelper.addEntitySize(name);
-    }
-
     public static Sensitivity addSensitivity(String name)
     {
         return EnumHelper.addSensitivity(name);
@@ -83,6 +78,11 @@ public class ToolHelper
     public static EnumSkyBlock addSkyBlock(String name, int lightValue)
     {
         return EnumHelper.addSkyBlock(name, lightValue);
+    }
+
+    public static EnumEntitySize addEntitySize(String name)
+    {
+        return EnumHelper.addEntitySize(name);
     }
 
     public static EnumStatus addStatus(String name)
