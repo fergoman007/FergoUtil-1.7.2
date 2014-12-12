@@ -36,6 +36,7 @@ public class ItemFergoSword extends ItemSword
         itemIcon = register.registerIcon(String.format("%s", NameHelper.getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
 
+    @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b)
     {
         list.add("Durability: " + NameHelper.getDurabilityString(stack));

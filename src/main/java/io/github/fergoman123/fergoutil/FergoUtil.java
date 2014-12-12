@@ -25,24 +25,30 @@ public class FergoUtil {
     @Instance(ModInfo.modid)
     public static FergoUtil instance;
 
-    public static final Logger logger = LogManager.getLogger(ModInfo.modid);
+    private static final Logger logger = LogManager.getLogger(ModInfo.modid);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
         MetadataFU.writeMetadata(evt.getModMetadata());
-        logger.info("Mod Pre-Initialising");
+        getLogger().info("Mod Pre-Initialising");
     }
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent evt)
     {
-        logger.info("Mod Initialising");
+        getLogger().info("Mod Initialising");
+        getLogger().info("Adding useful classes to minecraft");
     }
 
     @Mod.EventHandler
     public void modsLoaded(FMLPostInitializationEvent evt)
     {
         logger.info("Mod Loaded");
+    }
+
+    public static Logger getLogger()
+    {
+        return logger;
     }
 }
