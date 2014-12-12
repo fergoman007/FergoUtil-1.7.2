@@ -9,11 +9,10 @@ public class BlockFergo extends Block
 {
     public int mod;
 
-    public BlockFergo(Material material, int mod, String blockName, CreativeTabs tab)
+    public BlockFergo(Material material, int mod, CreativeTabs tab)
     {
         super(material);
         this.mod = mod;
-        this.setBlockName(blockName);
         this.setCreativeTab(tab);
     }
 

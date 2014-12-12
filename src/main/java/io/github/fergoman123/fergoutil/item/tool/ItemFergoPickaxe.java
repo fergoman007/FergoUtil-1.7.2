@@ -13,7 +13,7 @@ public class ItemFergoPickaxe extends ItemPickaxe
 {
     public int mod;
 
-    public ItemFergoPickaxe(ToolMaterial material, int mod, String itemName, CreativeTabs tab)
+    public ItemFergoPickaxe(ToolMaterial material, int mod, CreativeTabs tab)
     {
         super(material);
         this.setMaxDamage(material.getMaxUses());

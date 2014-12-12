@@ -12,10 +12,9 @@ public class ItemFergo extends Item
 {
     public int mod;
 
-    public ItemFergo(int mod, String itemName, CreativeTabs tab)
+    public ItemFergo(int mod, CreativeTabs tab)
     {
         super();
-        this.setUnlocalizedName(itemName);
         this.setCreativeTab(tab);
         this.mod = mod;
     }
