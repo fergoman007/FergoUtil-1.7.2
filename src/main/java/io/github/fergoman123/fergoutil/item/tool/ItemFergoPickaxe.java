@@ -4,6 +4,7 @@ import io.github.fergoman123.fergoutil.helper.NameHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 
@@ -12,13 +13,20 @@ import java.util.List;
 public class ItemFergoPickaxe extends ItemPickaxe
 {
     public int mod;
+    public Item repairItem;
 
-    public ItemFergoPickaxe(ToolMaterial material, int mod, CreativeTabs tab)
+    public ItemFergoPickaxe(ToolMaterial material, int mod, CreativeTabs tab, Item repairItem)
     {
         super(material);
         this.setMaxDamage(material.getMaxUses());
         this.setCreativeTab(tab);
         this.mod = mod;
+        this.repairItem = repairItem;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack itemToRepair, ItemStack repairItem) {
+        return repairItem.isItemEqual(new ItemStack(this.repairItem)) || super.getIsRepairable(itemToRepair, repairItem);
     }
 
     public String getUnlocalizedName()

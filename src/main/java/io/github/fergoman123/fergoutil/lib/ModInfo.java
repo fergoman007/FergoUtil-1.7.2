@@ -15,7 +15,7 @@ import java.util.List;
 public final class ModInfo {
     public static final String modid = "FergoUtil";
     public static final String name = "Fergoman123's Util";
-    public static final String versionMain = "1.7.10-1.0";
+    public static final String versionMain = "1.7.10-1.1";
     public static final String version = "@version@";
     public static final String logoFile = "/assets/fergoutil/logo.png";
     public static final String author = "Fergoman123";
