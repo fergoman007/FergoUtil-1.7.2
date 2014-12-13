@@ -25,6 +25,7 @@ public class ItemBowFergo extends ItemBow
     public int mod;
     public Item repairItem;
     public String textureName;
+    public String textureFolder;
     public ToolMaterial material;
 
     public static final String[] pullArray = new String[]{"_0", "_1", "_2", "_3"};
@@ -32,7 +33,7 @@ public class ItemBowFergo extends ItemBow
     @SideOnly(Side.CLIENT)
     public IIcon[] textures;
 
-    public ItemBowFergo(ToolMaterial material, int mod, CreativeTabs tabs, String textureName, Item repairItem)
+    public ItemBowFergo(ToolMaterial material, int mod, CreativeTabs tabs, String textureName, String textureFolder, Item repairItem)
     {
         super();
         this.setMaxDamage(material.getMaxUses());
@@ -41,6 +42,7 @@ public class ItemBowFergo extends ItemBow
         this.repairItem = repairItem;
         this.textureName = textureName;
         this.material = material;
+        this.textureFolder = textureFolder;
     }
 
     @Override
@@ -63,7 +65,7 @@ public class ItemBowFergo extends ItemBow
         this.textures = new IIcon[pullArray.length];
         for (int i = 0; i < pullArray.length; i++)
         {
-            this.textures[i] = register.registerIcon(getModString(this.mod) + "bow/" + this.textureName + "/bow" + this.textureName + pullArray[i]);
+            this.textures[i] = register.registerIcon(getModString(this.mod) + "bow/" + this.textureFolder + "/bow" + this.textureName + pullArray[i]);
         }
     }
 
