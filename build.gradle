@@ -68,7 +68,7 @@ sourceSets{
 
 task sourceJar(type: Jar){
     from sourceSets.main.allSource
-    classifier = 'src'
+    classifier = 'sources'
     version = "${project.version}"
 }
 
