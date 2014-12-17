@@ -50,6 +50,16 @@ public class ItemArmorFergo extends ItemArmor
         return repairItem.isItemEqual(new ItemStack(this.repairItem)) || super.getIsRepairable(itemToRepair, repairItem);
     }
 
+    public String getUnlocalizedName()
+    {
+        return String.format("item.%s%s", NameHelper.getModString(this.mod), NameHelper.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+    }
+
+    public String getUnlocalizedName(ItemStack stack)
+    {
+        return String.format("item.%s%s", NameHelper.getModString(this.mod), NameHelper.getUnwrappedUnlocalizedName(super.getUnlocalizedName(stack)));
+    }
+
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         if (slot == ArmorType.HELMET.ordinal() || slot == ArmorType.CHEST.ordinal() || slot == ArmorType.BOOTS.ordinal())
