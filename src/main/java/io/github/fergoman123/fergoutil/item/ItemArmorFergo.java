@@ -2,6 +2,7 @@ package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -33,7 +34,7 @@ public class ItemArmorFergo extends ItemArmor
      *
      * e.g. ToolMaterial.EMERALD, 0, ArmorType.HELMET, diamond
      */
-    public ItemArmorFergo(ArmorMaterial material, int mod, ArmorType type, String folder, String armorType, String armorTexture, Item repairItem)
+    public ItemArmorFergo(ArmorMaterial material, int mod, CreativeTabs tab, ArmorType type, String folder, String armorType, String armorTexture, Item repairItem)
     {
         super(material, 1, type.ordinal());
         this.mod = mod;
