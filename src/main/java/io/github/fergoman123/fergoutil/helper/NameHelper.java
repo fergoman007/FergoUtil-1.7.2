@@ -7,12 +7,12 @@ import java.util.Objects;
 
 public final class NameHelper
 {
-    public static String getUnwrappedUnlocalizedName(String unlocalizedName)
+    public static String getName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
-    public static String getUnwrappedUnlocalizedNameForRegistry(String unlocalizedName)
+    public static String getNameForRegistry(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(":") + 1);
     }
