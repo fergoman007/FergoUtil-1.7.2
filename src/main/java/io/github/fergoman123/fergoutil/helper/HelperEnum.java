@@ -17,6 +17,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.gen.structure.StructureStrongholdPieces;
 import net.minecraftforge.common.util.EnumHelper;
 
+@SuppressWarnings("rawtypes")
 public class HelperEnum
 {
     public static EnumAction addAction(String name)

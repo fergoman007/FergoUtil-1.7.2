@@ -30,6 +30,7 @@ public class ItemFergo extends Item
     }
 
     @Override
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
         tooltip.add(NameHelper.translate(this.getUnlocalizedName()));
     }

@@ -3,8 +3,6 @@ package io.github.fergoman123.fergoutil.helper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import java.util.Objects;
-
 public final class NameHelper
 {
     public static String getName(String unlocalizedName)

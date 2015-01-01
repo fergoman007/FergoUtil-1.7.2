@@ -1,25 +1,25 @@
 package io.github.fergoman123.fergoutil.item;
 
-public class ArmorType
+public enum ArmorType
 {
-    private static final int helmet = 0;
-    private static final int chestplate = 1;
-    private static final int leggings = 2;
-    private static final int boots = 3;
+    helmet,
+    chestplate,
+    leggings,
+    boots;
 
-    public static int getHelmet() {
+    public static ArmorType getHelmet() {
         return helmet;
     }
 
-    public static int getChestplate() {
+    public static ArmorType getChestplate() {
         return chestplate;
     }
 
-    public static int getLeggings() {
+    public static ArmorType getLeggings() {
         return leggings;
     }
 
-    public static int getBoots() {
+    public static ArmorType getBoots() {
         return boots;
     }
 
