@@ -1,6 +1,7 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -16,9 +17,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
+import java.util.List;
+
 public class ItemBowFergo extends ItemFergo
 {
     public static final String[] pullArray = new String[]{"_0", "_1", "_2"};
+    public static final String inventory = "inventory";
 
 
 
@@ -220,5 +224,33 @@ public class ItemBowFergo extends ItemFergo
         }
 
         return itemStackIn;
+    }
+
+    @Override
+    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining) {
+        if (stack.getItem() instanceof ItemBowFergo && player.getItemInUse() != null)
+        {
+            int i = stack.getMaxItemUseDuration() - player.getItemInUseCount();
+
+            if (i >= 18)
+            {
+                return new ModelResourceLocation("TestMod:" + NameHelper.getName(super.getUnlocalizedName()) + pullArray[2], inventory);
+            }
+            else if (i > 13)
+            {
+                return new ModelResourceLocation("TestMod:" + NameHelper.getName(super.getUnlocalizedName()) + pullArray[1], inventory);
+            }
+            else if (i > 0)
+            {
+                return new ModelResourceLocation("TestMod:" + NameHelper.getName(super.getUnlocalizedName()) + pullArray[0], inventory);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+        tooltip.add(NameHelper.getDurabilityString(stack));
+        tooltip.add(NameHelper.translate(this.getUnlocalizedName()));
     }
 }
