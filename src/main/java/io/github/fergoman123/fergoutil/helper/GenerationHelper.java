@@ -3,9 +3,12 @@ package io.github.fergoman123.fergoutil.helper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import io.github.fergoman123.fergoutil.worldgen.WorldGenEndMinable;
+import io.github.fergoman123.fergoutil.worldgen.WorldGenNetherMinable;
 
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class GenerationHelper
 {
     public static void addOverWorldOreSpawn(IBlockState block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
@@ -42,8 +45,7 @@ public class GenerationHelper
             int posX = blockXPos + rand.nextInt(maxX);
             int posY = minY + rand.nextInt(diffBtwnMinMaxY);
             int posZ = blockZPos + rand.nextInt(maxZ);
-            // TODO: create WorldGenNetherMinable
-//            (new WorldGenNetherMinable(block, maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
+            (new WorldGenNetherMinable(block, maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
         }
     }
 
@@ -62,8 +64,7 @@ public class GenerationHelper
             int posX = blockXPos + rand.nextInt(maxX);
             int posY = minY + rand.nextInt(diffBtwnMinMaxY);
             int posZ = blockZPos + rand.nextInt(maxZ);
-            // TODO: create WorldGenEndMinable
-//            (new WorldGenEndMinable(block, maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
+            (new WorldGenEndMinable(block, maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
         }
     }
 }

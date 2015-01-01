@@ -7,25 +7,23 @@ public enum ArmorType
     leggings,
     boots;
 
-    public static final ArmorType[] types = ArmorType.values();
-
-    public static ArmorType getHelmet()
-    {
+    public static ArmorType getHelmet() {
         return helmet;
     }
 
-    public static ArmorType getChestplate()
-    {
+    public static ArmorType getChestplate() {
         return chestplate;
     }
 
-    public static ArmorType getLeggings()
-    {
+    public static ArmorType getLeggings() {
         return leggings;
     }
 
-    public static ArmorType getBoots()
-    {
+    public static ArmorType getBoots() {
         return boots;
     }
+
+
+
+
 }

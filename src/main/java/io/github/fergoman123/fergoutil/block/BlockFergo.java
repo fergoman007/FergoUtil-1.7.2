@@ -22,7 +22,7 @@ public abstract class BlockFergo extends Block
 
     public String getUnlocalizedName()
     {
-        return String.format("tile.%s%s", NameHelper.getModString(this.mod), NameHelper.getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("tile.%s%s", NameHelper.getModString(this.mod), NameHelper.getName(super.getUnlocalizedName()));
     }
 
     public abstract Item getItemDropped(IBlockState state, Random rand, int fortune);
