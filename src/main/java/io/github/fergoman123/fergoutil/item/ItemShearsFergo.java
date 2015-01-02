@@ -1,4 +1,4 @@
 package io.github.fergoman123.fergoutil.item;
 
-public class ItemPickaxeFergo {
+public class ItemShearsFergo {
 }
