@@ -5,12 +5,12 @@ import net.minecraft.util.StatCollector;
 
 public final class NameHelper
 {
-    public static String getName(String unlocalizedName)
+    public static String getUnlocalizedName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
-    public static String getNameForRegistry(String unlocalizedName)
+    public static String getUnlocalizedNameForRegistry(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(":") + 1);
     }
@@ -39,15 +39,15 @@ public final class NameHelper
     {
         if (mod == 0)
         {
-            return "FergoTools:";
+            return "FergoTools";
         }
-        else if (mod == 0)
+        else if (mod == 1)
         {
-            return "MSB:";
+            return "MSB";
         }
         else
         {
-            return "null:";
+            return "null";
         }
     }
 
