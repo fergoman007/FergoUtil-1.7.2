@@ -51,6 +51,7 @@ public class ItemHoeFergo extends ItemHoe
             tooltip.add("Attack Damage: " + this.theToolMaterial.getDamageVsEntity());
             tooltip.add("Efficiency: " + this.theToolMaterial.getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.theToolMaterial.getHarvestLevel());
+            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
         }
         else
         {

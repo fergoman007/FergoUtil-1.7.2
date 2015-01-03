@@ -53,6 +53,7 @@ public class ItemSwordFergo extends ItemSword
             tooltip.add("Attack Damage: " + this.material.getDamageVsEntity());
             tooltip.add("Efficiency: " + this.material.getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.material.getHarvestLevel());
+            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
         }
         else
         {

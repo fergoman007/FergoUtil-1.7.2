@@ -29,6 +29,11 @@ public class ItemShearsFergo extends ItemShears
     }
 
     @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
+    }
+
+    @Override
     public String getUnlocalizedName() {
         return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
@@ -44,6 +49,8 @@ public class ItemShearsFergo extends ItemShears
         {
             list.add("Tool Material: " + this.material.toString());
             list.add("Max Uses: " + this.material.getMaxUses());
+            list.add("Enchantability: " + this.material.getEnchantability());
+            list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
         }
         else
         {

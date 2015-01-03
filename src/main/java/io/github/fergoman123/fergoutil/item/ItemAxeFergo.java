@@ -51,6 +51,7 @@ public class ItemAxeFergo extends ItemAxe
             tooltip.add("Attack Damage: " + this.getToolMaterial().getDamageVsEntity());
             tooltip.add("Efficiency: " + this.getToolMaterial().getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.getToolMaterial().getHarvestLevel());
+            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
         }
         else
         {

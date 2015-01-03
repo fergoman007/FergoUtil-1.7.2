@@ -1,26 +1,22 @@
 package io.github.fergoman123.fergoutil.tileentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.SlotFurnaceFuel;
-import net.minecraft.item.*;
-import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class TileEntityFurnaceFergo extends TileEntity implements IUpdatePlayerListBox, ISidedInventory
+public abstract class TileEntityFurnaceFergo extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory, ITileEntityFurnaceFergo
 {
 
 
@@ -134,34 +130,6 @@ public abstract class TileEntityFurnaceFergo extends TileEntity implements IUpda
         this.customName = customName;
     }
 
-    public void readFromNBT(NBTTagCompound compound)
-    {
-        super.readFromNBT(compound);
-        NBTTagList nbttaglist = compound.getTagList("Items", 10);
-        this.slots = new ItemStack[this.getSizeInventory()];
-
-        for (int i = 0; i < nbttaglist.tagCount(); ++i)
-        {
-            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-            byte b0 = nbttagcompound1.getByte("Slot");
-
-            if (b0 >= 0 && b0 < this.slots.length)
-            {
-                this.slots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-            }
-        }
-
-        this.burnTime = compound.getShort("BurnTime");
-        this.cookTime = compound.getShort("CookTime");
-        this.totalCookTime = compound.getShort("CookTimeTotal");
-        this.currentItemBurnTime = getItemBurnTime(this.slots[1]);
-
-        if (compound.hasKey("CustomName", 8))
-        {
-            this.customName = compound.getString("CustomName");
-        }
-    }
-
     public void writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
@@ -217,117 +185,17 @@ public abstract class TileEntityFurnaceFergo extends TileEntity implements IUpda
      */
     public abstract void update();
 
-    public int getFurnaceSpeed(ItemStack stack)
-    {
-        return 200;
-    }
+    public abstract int getFurnaceSpeed(ItemStack stack);
 
     /**
      * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
      */
-    private boolean canSmelt()
-    {
-        if (this.slots[0] == null)
-        {
-            return false;
-        }
-        else
-        {
-            ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.slots[0]);
-            if (itemstack == null) return false;
-            if (this.slots[2] == null) return true;
-            if (!this.slots[2].isItemEqual(itemstack)) return false;
-            int result = slots[2].stackSize + itemstack.stackSize;
-            return result <= getInventoryStackLimit() && result <= this.slots[2].getMaxStackSize(); //Forge BugFix: Make it respect stack sizes properly.
-        }
-    }
+    public abstract boolean canSmelt();
 
     /**
      * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
      */
-    public void smeltItem()
-    {
-        if (this.canSmelt())
-        {
-            ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.slots[0]);
-
-            if (this.slots[2] == null)
-            {
-                this.slots[2] = itemstack.copy();
-            }
-            else if (this.slots[2].getItem() == itemstack.getItem())
-            {
-                this.slots[2].stackSize += itemstack.stackSize; // Forge BugFix: Results may have multiple items
-            }
-
-            if (this.slots[0].getItem() == Item.getItemFromBlock(Blocks.sponge) && this.slots[0].getMetadata() == 1 && this.slots[1] != null && this.slots[1].getItem() == Items.bucket)
-            {
-                this.slots[1] = new ItemStack(Items.water_bucket);
-            }
-
-            --this.slots[0].stackSize;
-
-            if (this.slots[0].stackSize <= 0)
-            {
-                this.slots[0] = null;
-            }
-        }
-    }
-
-    /**
-     * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
-     * fuel
-     */
-    public static int getItemBurnTime(ItemStack p_145952_0_)
-    {
-        if (p_145952_0_ == null)
-        {
-            return 0;
-        }
-        else
-        {
-            Item item = p_145952_0_.getItem();
-
-            if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air)
-            {
-                Block block = Block.getBlockFromItem(item);
-
-                if (block == Blocks.wooden_slab)
-                {
-                    return 150;
-                }
-
-                if (block.getMaterial() == Material.wood)
-                {
-                    return 300;
-                }
-
-                if (block == Blocks.coal_block)
-                {
-                    return 16000;
-                }
-            }
-
-            if (item instanceof ItemTool && ((ItemTool)item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemSword && ((ItemSword)item).getToolMaterialName().equals("WOOD")) return 200;
-            if (item instanceof ItemHoe && ((ItemHoe)item).getMaterialName().equals("WOOD")) return 200;
-            if (item == Items.stick) return 100;
-            if (item == Items.coal) return 1600;
-            if (item == Items.lava_bucket) return 20000;
-            if (item == Item.getItemFromBlock(Blocks.sapling)) return 100;
-            if (item == Items.blaze_rod) return 2400;
-            return net.minecraftforge.fml.common.registry.GameRegistry.getFuelValue(p_145952_0_);
-        }
-    }
-
-    public static boolean isItemFuel(ItemStack p_145954_0_)
-    {
-        /**
-         * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
-         * fuel
-         */
-        return getItemBurnTime(p_145954_0_) > 0;
-    }
+    public abstract void smeltItem();
 
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
@@ -344,10 +212,7 @@ public abstract class TileEntityFurnaceFergo extends TileEntity implements IUpda
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int index, ItemStack stack)
-    {
-        return index == 2 ? false : (index != 1 ? true : isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
-    }
+    public abstract boolean isItemValidForSlot(int index, ItemStack stack);
 
     public int[] getSlotsForFace(EnumFacing side)
     {

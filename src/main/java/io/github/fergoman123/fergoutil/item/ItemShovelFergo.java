@@ -1,6 +1,7 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.reference.ModConstants;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -51,10 +52,11 @@ public class ItemShovelFergo extends ItemSpade
             tooltip.add("Attack Damage: " + this.getToolMaterial().getDamageVsEntity());
             tooltip.add("Efficiency: " + this.getToolMaterial().getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.getToolMaterial().getHarvestLevel());
+            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
         }
         else
         {
-            tooltip.add("<Hold Shift for" + (EnumChatFormatting.YELLOW + "Info") + ">");
+            tooltip.add(ModConstants.holdShift);
         }
     }
 

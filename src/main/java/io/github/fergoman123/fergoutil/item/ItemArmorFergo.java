@@ -56,6 +56,7 @@ public class ItemArmorFergo extends ItemArmor
                 list.add("Durability: " + this.material.getDurability(0));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(0));
                 list.add("Enchantability: " + this.material.getEnchantability());
+                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
 
             if (this.type == ArmorType.getChestplate())
@@ -64,6 +65,7 @@ public class ItemArmorFergo extends ItemArmor
                 list.add("Durability: " + this.material.getDurability(1));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(1));
                 list.add("Enchantability: " + this.material.getEnchantability());
+                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
 
             if (this.type == ArmorType.getLeggings())
@@ -72,6 +74,7 @@ public class ItemArmorFergo extends ItemArmor
                 list.add("Durability: " + this.material.getDurability(2));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(2));
                 list.add("Enchantability: " + this.material.getEnchantability());
+                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
 
             if (this.type == ArmorType.getBoots())
@@ -80,6 +83,7 @@ public class ItemArmorFergo extends ItemArmor
                 list.add("Durability: " + this.material.getDurability(3));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(3));
                 list.add("Enchantability: " + this.material.getEnchantability());
+                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
         }
         else
