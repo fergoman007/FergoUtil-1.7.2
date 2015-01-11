@@ -45,26 +45,13 @@ public class ItemPickaxeFergo extends ItemPickaxe
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-        {
             tooltip.add("Tool Material: " + this.getToolMaterial().toString());
             tooltip.add("Max Uses: " + this.getMaxDamage());
             tooltip.add("Attack Damage: " + this.getToolMaterial().getDamageVsEntity());
             tooltip.add("Efficiency: " + this.getToolMaterial().getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.getToolMaterial().getHarvestLevel());
-            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
+            tooltip.add(NameHelper.getDurabilityString(stack));
         }
-        else
-        {
-            tooltip.add("<Hold Shift for" + (EnumChatFormatting.YELLOW + "Info") + ">");
-        }
-    }
-
-    public ItemPickaxeFergo register(String name)
-    {
-        GameRegistry.registerItem(this, name);
-        return this;
-    }
 
     public Item setMod(int mod)
     {

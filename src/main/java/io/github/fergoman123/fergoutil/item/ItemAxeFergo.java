@@ -1,6 +1,7 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.reference.ModConstants;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -34,7 +35,7 @@ public class ItemAxeFergo extends ItemAxe
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return String.format("item%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
     @Override
@@ -44,25 +45,12 @@ public class ItemAxeFergo extends ItemAxe
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-        {
             tooltip.add("Tool Material: " + this.getToolMaterial().toString());
             tooltip.add("Max Uses: " + this.getMaxDamage());
             tooltip.add("Attack Damage: " + this.getToolMaterial().getDamageVsEntity());
             tooltip.add("Efficiency: " + this.getToolMaterial().getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.getToolMaterial().getHarvestLevel());
-            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
-        }
-        else
-        {
-            tooltip.add("<Hold Shift for" + (EnumChatFormatting.YELLOW + "Info") + ">");
-        }
-    }
-
-    public ItemAxeFergo register(String name)
-    {
-        GameRegistry.registerItem(this, name);
-        return this;
+            tooltip.add(NameHelper.getDurabilityString(stack));
     }
 
     public Item setMod(int mod)

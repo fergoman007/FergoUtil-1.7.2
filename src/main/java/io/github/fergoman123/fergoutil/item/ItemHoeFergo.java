@@ -34,7 +34,7 @@ public class ItemHoeFergo extends ItemHoe
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return String.format("item%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
     @Override
@@ -44,25 +44,12 @@ public class ItemHoeFergo extends ItemHoe
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-        {
             tooltip.add("Tool Material: " + this.theToolMaterial.toString());
             tooltip.add("Max Uses: " + this.theToolMaterial.getMaxUses());
             tooltip.add("Attack Damage: " + this.theToolMaterial.getDamageVsEntity());
             tooltip.add("Efficiency: " + this.theToolMaterial.getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.theToolMaterial.getHarvestLevel());
-            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
-        }
-        else
-        {
-            tooltip.add("<Hold Shift for" + (EnumChatFormatting.YELLOW + "Info") + ">");
-        }
-    }
-
-    public ItemHoeFergo register(String name)
-    {
-        GameRegistry.registerItem(this, name);
-        return this;
+            tooltip.add(NameHelper.getDurabilityString(stack));
     }
 
     public Item setMod(int mod)

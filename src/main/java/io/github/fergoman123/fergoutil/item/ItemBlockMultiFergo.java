@@ -9,11 +9,7 @@ import java.util.List;
 
 public abstract class ItemBlockMultiFergo extends ItemMultiTexture
 {
-
-    public ItemBlockMultiFergo(Block block, Block block2, String[] namesByMeta) {
-        super(block, block2, namesByMeta);
+    public ItemBlockMultiFergo(Block block, String[] namesByMeta) {
+        super(block, block, namesByMeta);
     }
-
-    @Override
-    public abstract void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced);
 }

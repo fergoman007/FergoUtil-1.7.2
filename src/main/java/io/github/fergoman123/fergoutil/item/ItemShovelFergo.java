@@ -35,7 +35,7 @@ public class ItemShovelFergo extends ItemSpade
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return String.format("item%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
     @Override
@@ -45,26 +45,13 @@ public class ItemShovelFergo extends ItemSpade
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-        {
             tooltip.add("Tool Material: " + this.getToolMaterial().toString());
             tooltip.add("Max Uses: " + this.getMaxDamage());
             tooltip.add("Attack Damage: " + this.getToolMaterial().getDamageVsEntity());
             tooltip.add("Efficiency: " + this.getToolMaterial().getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.getToolMaterial().getHarvestLevel());
-            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
+            tooltip.add(NameHelper.getDurabilityString(stack));
         }
-        else
-        {
-            tooltip.add(ModConstants.holdShift);
-        }
-    }
-
-    public ItemShovelFergo register(String name)
-    {
-        GameRegistry.registerItem(this, name);
-        return this;
-    }
 
     public Item setMod(int mod)
     {

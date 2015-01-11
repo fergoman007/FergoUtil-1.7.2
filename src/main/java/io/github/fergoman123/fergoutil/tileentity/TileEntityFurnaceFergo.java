@@ -16,22 +16,20 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class TileEntityFurnaceFergo extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory, ITileEntityFurnaceFergo
+public abstract class TileEntityFurnaceFergo extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory
 {
+    public static final int[] slotsTop = new int[]{0};
+    public static final int[] slotsBottom = new int[]{2, 1};
+    public static final int[] slotsSides = new int[]{1};
 
-
-    private static final int[] slotsTop = new int[]{0};
-    private static final int[] slotsBottom = new int[]{2, 1};
-    private static final int[] slotsSides = new int[]{1};
-
-    private ItemStack[] slots = new ItemStack[3];
+    public ItemStack[] slots = new ItemStack[3];
 
     public int currentItemBurnTime;
     public int cookTime;
     public int burnTime;
     public int totalCookTime;
 
-    private String customName;
+    public String customName;
 
     @Override
     public int getSizeInventory() {
@@ -73,10 +71,6 @@ public abstract class TileEntityFurnaceFergo extends TileEntityLockable implemen
         }
     }
 
-    /**
-     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
-     * like when you close a workbench GUI.
-     */
     public ItemStack getStackInSlotOnClosing(int index)
     {
         if (this.slots[index] != null)
@@ -91,9 +85,6 @@ public abstract class TileEntityFurnaceFergo extends TileEntityLockable implemen
         }
     }
 
-    /**
-     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-     */
     public void setInventorySlotContents(int index, ItemStack stack)
     {
         boolean flag = stack != null && stack.isItemEqual(this.slots[index]) && ItemStack.areItemStackTagsEqual(stack, this.slots[index]);
@@ -117,9 +108,6 @@ public abstract class TileEntityFurnaceFergo extends TileEntityLockable implemen
      */
     public abstract String getName();
 
-    /**
-     * Returns true if this thing is named
-     */
     public boolean hasCustomName()
     {
         return this.customName != null && this.customName.length() > 0;
@@ -209,9 +197,6 @@ public abstract class TileEntityFurnaceFergo extends TileEntityLockable implemen
 
     public void closeInventory(EntityPlayer player) {}
 
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
-     */
     public abstract boolean isItemValidForSlot(int index, ItemStack stack);
 
     public int[] getSlotsForFace(EnumFacing side)
@@ -219,19 +204,8 @@ public abstract class TileEntityFurnaceFergo extends TileEntityLockable implemen
         return side == EnumFacing.DOWN ? slotsBottom : (side == EnumFacing.UP ? slotsTop : slotsSides);
     }
 
-    /**
-     * Returns true if automation can insert the given item in the given slot from the given side. Args: slot, item,
-     * side
-     */
-    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
-    {
-        return this.isItemValidForSlot(index, itemStackIn);
-    }
+    public abstract boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction);
 
-    /**
-     * Returns true if automation can extract the given item in the given slot from the given side. Args: slot, item,
-     * side
-     */
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
     {
         if (direction == EnumFacing.DOWN && index == 1)

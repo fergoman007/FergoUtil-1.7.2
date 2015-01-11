@@ -8,17 +8,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
 public class ItemArmorFergo extends ItemArmor
 {
-    private int mod;
-    private ArmorMaterial material;
-    private ArmorType type;
-    private Item repairItem;
-    private String name;
+    public int mod;
+    public ArmorMaterial material;
+    public ArmorType type;
+    public Item repairItem;
+    public String name;
 
     public ItemArmorFergo(ArmorMaterial material, int mod, CreativeTabs tab, ArmorType type, Item repairItem, String name)
     {
@@ -48,15 +49,12 @@ public class ItemArmorFergo extends ItemArmor
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List list, boolean advanced)
     {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-        {
             if (this.type == ArmorType.getHelmet())
             {
                 list.add("Armor Material: " + this.material.getName());
                 list.add("Durability: " + this.material.getDurability(0));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(0));
                 list.add("Enchantability: " + this.material.getEnchantability());
-                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
 
             if (this.type == ArmorType.getChestplate())
@@ -65,7 +63,6 @@ public class ItemArmorFergo extends ItemArmor
                 list.add("Durability: " + this.material.getDurability(1));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(1));
                 list.add("Enchantability: " + this.material.getEnchantability());
-                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
 
             if (this.type == ArmorType.getLeggings())
@@ -74,34 +71,29 @@ public class ItemArmorFergo extends ItemArmor
                 list.add("Durability: " + this.material.getDurability(2));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(2));
                 list.add("Enchantability: " + this.material.getEnchantability());
-                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
 
-            if (this.type == ArmorType.getBoots())
-            {
+            if (this.type == ArmorType.getBoots()) {
                 list.add("Armor Material: " + this.material.getName());
                 list.add("Durability: " + this.material.getDurability(3));
                 list.add("Reduction Amount: " + this.material.getDamageReductionAmount(3));
                 list.add("Enchantability: " + this.material.getEnchantability());
-                list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
             }
-        }
-        else
-        {
-            list.add(ModConstants.holdShift);
-        }
     }
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        if (this.type == ArmorType.getHelmet() || this.type == ArmorType.getChestplate() || this.type == ArmorType.getBoots())
+        String layer1 = String.format("%s:textures/models/armor/%s_1.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
+        String layer2 = String.format("%s:textures/models/armor/%s_2.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
+
+        if (slot == ArmorType.getHelmet().ordinal() || slot == ArmorType.getChestplate().ordinal() || slot == ArmorType.getBoots().ordinal())
         {
-            return String.format("%s:textures/models/armor/%s_1", NameHelper.getModString(this.getMod()), this.material.toString());
+            return String.format("%s:textures/models/armor/%s_1.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
         }
 
-        if (this.type == ArmorType.getLeggings())
+        if (slot == ArmorType.getLeggings().ordinal())
         {
-            return String.format("%s:textures/models/armor/%s_2", NameHelper.getModString(this.getMod()), this.material.toString());
+            return layer2;
         }
         else
         {

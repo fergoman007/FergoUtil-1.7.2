@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
@@ -45,17 +46,10 @@ public class ItemShearsFergo extends ItemShears
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List list, boolean advanced) {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-        {
             list.add("Tool Material: " + this.material.toString());
             list.add("Max Uses: " + this.material.getMaxUses());
             list.add("Enchantability: " + this.material.getEnchantability());
-            list.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
-        }
-        else
-        {
-            list.add(ModConstants.holdShift);
-        }
+            list.add(NameHelper.getDurabilityString(stack));
     }
 
     public Item setMod(int mod)

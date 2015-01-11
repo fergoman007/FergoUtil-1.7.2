@@ -1,5 +1,6 @@
 package io.github.fergoman123.fergoutil.block;
 
+import io.github.fergoman123.fergoutil.enums.SwitchEnumFacing;
 import io.github.fergoman123.fergoutil.item.ItemBlockFergo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -36,7 +37,7 @@ public abstract class BlockFurnaceFergo extends BlockContainer
     private int mod;
 
 
-    protected BlockFurnaceFergo(Material material, boolean isBurning, int mod, CreativeTabs tab, String name)
+    protected BlockFurnaceFergo(Material material, boolean isBurning, int mod, String name)
     {
         super(Material.rock);
         this.setUnlocalizedName(name);
@@ -178,53 +179,6 @@ public abstract class BlockFurnaceFergo extends BlockContainer
         return new BlockState(this, new IProperty[] {facing});
     }
 
-    @SideOnly(Side.CLIENT)
-
-    static final class SwitchEnumFacing
-    {
-        static final int[] FACING_LOOKUP = new int[EnumFacing.values().length];
-        private static final String __OBFID = "CL_00002111";
-
-        static
-        {
-            try
-            {
-                FACING_LOOKUP[EnumFacing.WEST.ordinal()] = 1;
-            }
-            catch (NoSuchFieldError var4)
-            {
-                ;
-            }
-
-            try
-            {
-                FACING_LOOKUP[EnumFacing.EAST.ordinal()] = 2;
-            }
-            catch (NoSuchFieldError var3)
-            {
-                ;
-            }
-
-            try
-            {
-                FACING_LOOKUP[EnumFacing.NORTH.ordinal()] = 3;
-            }
-            catch (NoSuchFieldError var2)
-            {
-                ;
-            }
-
-            try
-            {
-                FACING_LOOKUP[EnumFacing.SOUTH.ordinal()] = 4;
-            }
-            catch (NoSuchFieldError var1)
-            {
-                ;
-            }
-        }
-    }
-
     public Block setMod(int mod)
     {
         this.mod = mod;
@@ -234,11 +188,5 @@ public abstract class BlockFurnaceFergo extends BlockContainer
     public int getMod()
     {
         return this.mod;
-    }
-
-    public BlockFurnaceFergo register(String name, Class<? extends ItemBlockFergo> ibClass)
-    {
-        GameRegistry.registerBlock(this, ibClass, name);
-        return this;
     }
 }

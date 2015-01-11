@@ -2,6 +2,7 @@ package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
 import io.github.fergoman123.fergoutil.reference.ModConstants;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class ItemBowFergo extends ItemBow
 {
+    public static final String[] pullArray = new String[]{"_0", "_1", "_2"};
     private ToolMaterial material;
     private int mod;
     private Item repairItem;
@@ -57,7 +59,7 @@ public class ItemBowFergo extends ItemBow
             tooltip.add("Tool Material: " + this.material.toString());
             tooltip.add("Max Uses: " + this.material.getMaxUses());
             tooltip.add("Enchantability: " + this.material.getEnchantability());
-            tooltip.add("Repair Item: " + NameHelper.translate(repairItem.getUnlocalizedName()));
+            tooltip.add("Repair Item: " + NameHelper.translate(this.getRepairItem().getUnlocalizedName()));
         }
         else
         {
@@ -147,10 +149,31 @@ public class ItemBowFergo extends ItemBow
         return itemStackIn;
     }
 
-    public ItemBowFergo register(String name)
+    @Override
+    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
     {
-        GameRegistry.registerItem(this, name);
-        return this;
+        String standby = String.format("%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        String pull0 = String.format("%s:%s%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()), pullArray[0]);
+        String pull1 = String.format("%s:%s%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()), pullArray[1]);
+        String pull2 = String.format("%s:%s%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()), pullArray[2]);
+        ModelResourceLocation modelresourcelocation;
+
+        if(stack.getItem() == this && player.getItemInUse() != null)
+        {
+            if(useRemaining >= 18)
+            {
+                return new ModelResourceLocation(pull2, "inventory");
+            }
+            else if(useRemaining > 13)
+            {
+                return new ModelResourceLocation(pull1, "inventory");
+            }
+            else if(useRemaining > 0)
+            {
+                return new ModelResourceLocation(pull0, "inventory");
+            }
+        }
+        return new ModelResourceLocation(standby, "inventory");
     }
 
     public Item setMod(int mod)

@@ -35,10 +35,4 @@ public class BlockMultiFergo extends Block
     {
         return mod;
     }
-
-    public BlockMultiFergo register(String name, Class<? extends ItemBlockMultiFergo> ibClass)
-    {
-        GameRegistry.registerBlock(this, ibClass, name);
-        return this;
-    }
 }

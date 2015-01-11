@@ -55,4 +55,9 @@ public final class NameHelper
     {
         return "Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + "/" + stack.getMaxDamage();
     }
+
+    public static String toLower(String text)
+    {
+        return text.toLowerCase();
+    }
 }

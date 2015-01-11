@@ -1,5 +1,6 @@
 package io.github.fergoman123.fergoutil.helper;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -11,7 +12,7 @@ import java.util.Random;
 @SuppressWarnings("unused")
 public class GenerationHelper
 {
-    public static void addOverWorldOreSpawn(IBlockState block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
+    public static void addOverWorldOreSpawn(Block block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
     {
         int maxPossY = minY + (maxY - 1);
         assert maxY > minY: "The maximum Y must be greater than the Minimum Y";
@@ -26,11 +27,11 @@ public class GenerationHelper
             int posX = blockXPos + rand.nextInt(maxX);
             int posY = minY + rand.nextInt(diffBtwnMinMaxY);
             int posZ = blockZPos + rand.nextInt(maxZ);
-            (new WorldGenMinable(block, maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
+            (new WorldGenMinable(block.getDefaultState(), maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
         }
     }
 
-    public static void addNetherOreSpawn(IBlockState block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
+    public static void addNetherOreSpawn(Block block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
     {
         int maxPossY = minY + (maxY - 1);
         assert maxY > minY: "The maximum Y must be greater than the Minimum Y";
@@ -45,11 +46,11 @@ public class GenerationHelper
             int posX = blockXPos + rand.nextInt(maxX);
             int posY = minY + rand.nextInt(diffBtwnMinMaxY);
             int posZ = blockZPos + rand.nextInt(maxZ);
-            (new WorldGenNetherMinable(block, maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
+            (new WorldGenNetherMinable(block.getDefaultState(), maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
         }
     }
 
-    public static void addEndOreSpawn(IBlockState block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
+    public static void addEndOreSpawn(Block block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
     {
         int maxPossY = minY + (maxY - 1);
         assert maxY > minY: "The maximum Y must be greater than the Minimum Y";
@@ -64,7 +65,7 @@ public class GenerationHelper
             int posX = blockXPos + rand.nextInt(maxX);
             int posY = minY + rand.nextInt(diffBtwnMinMaxY);
             int posZ = blockZPos + rand.nextInt(maxZ);
-            (new WorldGenEndMinable(block, maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
+            (new WorldGenEndMinable(block.getDefaultState(), maxVeinSize)).generate(world, rand, BlockHelper.getBlockPos(posX, posY, posZ));
         }
     }
 }
