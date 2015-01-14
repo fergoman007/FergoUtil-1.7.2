@@ -88,7 +88,7 @@ public class ItemArmorFergo extends ItemArmor
 
         if (slot == ArmorType.getHelmet().ordinal() || slot == ArmorType.getChestplate().ordinal() || slot == ArmorType.getBoots().ordinal())
         {
-            return String.format("%s:textures/models/armor/%s_1.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
+            return layer1;
         }
 
         if (slot == ArmorType.getLeggings().ordinal())
