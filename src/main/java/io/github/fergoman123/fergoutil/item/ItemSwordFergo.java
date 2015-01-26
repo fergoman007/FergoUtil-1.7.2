@@ -47,11 +47,10 @@ public class ItemSwordFergo extends ItemSword
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
             tooltip.add("Tool Material: " + this.material.toString());
-            tooltip.add("Max Uses: " + this.material.getMaxUses());
+            tooltip.add("Uses Remaining: " + (stack.getMaxDamage() - stack.getItemDamage()));
             tooltip.add("Attack Damage: " + this.material.getDamageVsEntity());
             tooltip.add("Efficiency: " + this.material.getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.material.getHarvestLevel());
-            tooltip.add(NameHelper.getDurabilityString(stack));
     }
 
     public Item setMod(int mod)

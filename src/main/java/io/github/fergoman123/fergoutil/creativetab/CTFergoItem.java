@@ -4,11 +4,11 @@ import io.github.fergoman123.fergoutil.helper.NameHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class CreativeTabFergoItem extends CreativeTabs
+public class CTFergoItem extends CreativeTabs
 {
     public String label;
     public Item tabIcon;
-    public CreativeTabFergoItem(String label, Item tabIcon)
+    public CTFergoItem(String label, Item tabIcon)
     {
         super(label);
         this.label = label;

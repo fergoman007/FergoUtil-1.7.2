@@ -3,6 +3,7 @@ package io.github.fergoman123.fergoutil.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 
 public abstract class BlockRPFergo extends BlockFergo

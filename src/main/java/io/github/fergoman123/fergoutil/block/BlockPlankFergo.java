@@ -2,6 +2,7 @@ package io.github.fergoman123.fergoutil.block;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 

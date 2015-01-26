@@ -7,9 +7,17 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public abstract class ItemBlockMultiFergo extends ItemMultiTexture
+public class ItemBlockMultiFergo extends ItemMultiTexture
 {
+
+    public String[] namesByMeta;
     public ItemBlockMultiFergo(Block block, String[] namesByMeta) {
         super(block, block, namesByMeta);
+        this.namesByMeta = namesByMeta;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+        tooltip.add("Ore Dictionary Name: " + this.namesByMeta[stack.getItemDamage()]);
     }
 }

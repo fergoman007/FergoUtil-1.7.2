@@ -45,11 +45,10 @@ public class ItemHoeFergo extends ItemHoe
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
             tooltip.add("Tool Material: " + this.theToolMaterial.toString());
-            tooltip.add("Max Uses: " + this.theToolMaterial.getMaxUses());
+            tooltip.add("Uses Remaining: " + (stack.getMaxDamage() - stack.getItemDamage()));
             tooltip.add("Attack Damage: " + this.theToolMaterial.getDamageVsEntity());
             tooltip.add("Efficiency: " + this.theToolMaterial.getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.theToolMaterial.getHarvestLevel());
-            tooltip.add(NameHelper.getDurabilityString(stack));
     }
 
     public Item setMod(int mod)

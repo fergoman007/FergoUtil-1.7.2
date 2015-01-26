@@ -46,11 +46,10 @@ public class ItemAxeFergo extends ItemAxe
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
             tooltip.add("Tool Material: " + this.getToolMaterial().toString());
-            tooltip.add("Max Uses: " + this.getMaxDamage());
+            tooltip.add("Uses Remaining: " + (stack.getMaxDamage() - stack.getItemDamage()));
             tooltip.add("Attack Damage: " + this.getToolMaterial().getDamageVsEntity());
             tooltip.add("Efficiency: " + this.getToolMaterial().getEfficiencyOnProperMaterial());
             tooltip.add("Harvest Level: " + this.getToolMaterial().getHarvestLevel());
-            tooltip.add(NameHelper.getDurabilityString(stack));
     }
 
     public Item setMod(int mod)
