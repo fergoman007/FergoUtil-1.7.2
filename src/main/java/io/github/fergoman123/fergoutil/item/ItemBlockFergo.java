@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class ItemBlockFergo extends ItemBlock
+public abstract class ItemBlockFergo extends ItemBlock
 {
     public Block block;
     public ItemBlockFergo(Block block) {
@@ -17,7 +17,5 @@ public class ItemBlockFergo extends ItemBlock
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-        tooltip.add("Ore Dictionary Name: " +  NameHelper.translate(NameHelper.getUnlocalizedNameForRegistry(this.block.getUnlocalizedName())));
-    }
+    public abstract void addInformation(ItemStack stack, EntityPlayer playerIn, List list, boolean advanced);
 }

@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class BlockStorageFergo extends BlockFergo
 {
-    public BlockStorageFergo(int mod, CreativeTabs tab, ItemBlock itemBlock, String name)
+    public BlockStorageFergo(int mod, CreativeTabs tab, String name)
     {
         super(Material.iron, mod, tab, 5.0f, 10.0f, name);
     }

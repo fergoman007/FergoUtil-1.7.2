@@ -11,7 +11,7 @@ import java.util.Random;
 public abstract class BlockOreFergo extends BlockFergo
 {
     public BlockOreFergo(int mod, CreativeTabs tab, String name) {
-        super(Material.rock, mod, tab, 2.5f, 50f, name);
+        super(Material.rock, mod, tab, 3.0f, 5.0f, name);
     }
 
     public abstract Item getItemDropped(IBlockState state, Random rand, int fortune);

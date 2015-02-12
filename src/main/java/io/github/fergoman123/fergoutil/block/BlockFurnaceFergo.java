@@ -1,7 +1,8 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.enums.SwitchEnumFacing;
-import io.github.fergoman123.fergoutil.item.ItemBlockFergo;
+import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.interfaces.IBlockFurnaceFergo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -9,41 +10,38 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public abstract class BlockFurnaceFergo extends BlockContainer
+public abstract class BlockFurnaceFergo extends BlockContainer implements IBlockFurnaceFergo
 {
     public static final PropertyDirection facing = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-    public final boolean isBurning;
+    public final boolean isActive;
     public static boolean keepInventory;
     private int mod;
 
 
-    protected BlockFurnaceFergo(Material material, boolean isBurning, int mod, String name)
+    protected BlockFurnaceFergo(Material material, boolean isActive, int mod, String name)
     {
         super(Material.rock);
         this.setUnlocalizedName(name);
         this.setMod(mod);
         this.setDefaultState(this.blockState.getBaseState().withProperty(facing, EnumFacing.NORTH));
-        this.isBurning = isBurning;
+        this.isActive = isActive;
+        this.setHardness(3.5f);
+        this.setResistance(2000f);
     }
 
     public abstract Item getItemDropped(IBlockState state, Random rand, int fortune);
@@ -53,7 +51,7 @@ public abstract class BlockFurnaceFergo extends BlockContainer
         this.setDefaultFacing(worldIn, pos, state);
     }
 
-    private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
+    public void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
     {
         if (!worldIn.isRemote)
         {
@@ -87,7 +85,7 @@ public abstract class BlockFurnaceFergo extends BlockContainer
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        if (this.isBurning)
+        if (this.isActive)
         {
             EnumFacing enumfacing = (EnumFacing)state.getValue(facing);
             double d0 = (double)pos.getX() + 0.5D;
@@ -129,8 +127,6 @@ public abstract class BlockFurnaceFergo extends BlockContainer
     }
 
     public abstract void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack);
-
-    public abstract void breakBlock(World worldIn, BlockPos pos, IBlockState state);
 
     public boolean hasComparatorInputOverride()
     {
@@ -188,5 +184,10 @@ public abstract class BlockFurnaceFergo extends BlockContainer
     public int getMod()
     {
         return this.mod;
+    }
+
+    public String getUnlocalizedName()
+    {
+        return String.format("tile.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 }

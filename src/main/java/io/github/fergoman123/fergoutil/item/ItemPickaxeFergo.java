@@ -6,30 +6,28 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
-public class ItemPickaxeFergo extends ItemPickaxe
+public abstract class ItemPickaxeFergo extends ItemPickaxe
 {
-    private int mod;
-    private Item repairItem;
+    public int mod;
+    public Item repairItem;
+    public ToolMaterial material;
 
     public ItemPickaxeFergo(ToolMaterial material, int mod, CreativeTabs tab, Item repairItem, String name)
     {
         super(material);
-        this.setMod(mod);
+        this.setUnlocalizedName(name);
         this.setMaxDamage(material.getMaxUses());
+        this.setMod(mod);
         this.setRepairItem(repairItem);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(name);
+        this.material = material;
     }
 
     @Override
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
@@ -43,34 +41,21 @@ public class ItemPickaxeFergo extends ItemPickaxe
         return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
     }
 
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-        tooltip.add("Tool Material: " + this.getToolMaterial().toString());
-        tooltip.add("Uses Remaining: " + (stack.getMaxDamage() - stack.getItemDamage()));
-        tooltip.add("Attack Damage: " + this.getToolMaterial().getDamageVsEntity());
-        tooltip.add("Efficiency: " + this.getToolMaterial().getEfficiencyOnProperMaterial());
-        tooltip.add("Harvest Level: " + this.getToolMaterial().getHarvestLevel());
+    public Item getRepairItem() {
+        return repairItem;
     }
 
-    public Item setMod(int mod)
-    {
-        this.mod = mod;
-        return this;
-    }
-
-    public int getMod()
-    {
-        return this.mod;
-    }
-
-    public Item setRepairItem(Item repairItem)
-    {
+    public Item setRepairItem(Item repairItem) {
         this.repairItem = repairItem;
         return this;
     }
 
-    public Item getRepairItem()
-    {
-        return this.repairItem;
+    public int getMod() {
+        return mod;
+    }
+
+    public Item setMod(int mod) {
+        this.mod = mod;
+        return this;
     }
 }
