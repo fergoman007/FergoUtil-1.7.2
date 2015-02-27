@@ -16,18 +16,11 @@ import org.apache.logging.log4j.Logger;
 public class FergoUtil
 {
     @Instance(ModInfo.modid)
-    private static FergoUtil instance;
-
-    public static final Logger logger = LogManager.getLogger(ModInfo.modid);
-
-    public static FergoUtil getInstance()
-    {
-        return instance;
-    }
+    public static FergoUtil instance;
 
     public static Logger getLogger()
     {
-        return logger;
+        return LogManager.getLogger(ModInfo.modid);
     }
 
     @EventHandler

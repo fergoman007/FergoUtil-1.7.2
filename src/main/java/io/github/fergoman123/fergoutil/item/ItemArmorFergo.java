@@ -26,7 +26,6 @@ public class ItemArmorFergo extends ItemArmor
         super(material, 0, type.ordinal());
         this.material = material;
         this.setMod(mod);
-        this.setRepairItem(repairItem);
         this.setCreativeTab(tab);
         this.setUnlocalizedName(name);
     }
@@ -44,41 +43,6 @@ public class ItemArmorFergo extends ItemArmor
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
         return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List list, boolean advanced)
-    {
-            if (this.type == ArmorType.getHelmet())
-            {
-                list.add("Armor Material: " + this.material.getName());
-                list.add("Durability: " + this.material.getDurability(0));
-                list.add("Reduction Amount: " + this.material.getDamageReductionAmount(0));
-                list.add("Enchantability: " + this.material.getEnchantability());
-            }
-
-            if (this.type == ArmorType.getChestplate())
-            {
-                list.add("Armor Material: " + this.material.getName());
-                list.add("Durability: " + this.material.getDurability(1));
-                list.add("Reduction Amount: " + this.material.getDamageReductionAmount(1));
-                list.add("Enchantability: " + this.material.getEnchantability());
-            }
-
-            if (this.type == ArmorType.getLeggings())
-            {
-                list.add("Armor Material: " + this.material.getName());
-                list.add("Durability: " + this.material.getDurability(2));
-                list.add("Reduction Amount: " + this.material.getDamageReductionAmount(2));
-                list.add("Enchantability: " + this.material.getEnchantability());
-            }
-
-            if (this.type == ArmorType.getBoots()) {
-                list.add("Armor Material: " + this.material.getName());
-                list.add("Durability: " + this.material.getDurability(3));
-                list.add("Reduction Amount: " + this.material.getDamageReductionAmount(3));
-                list.add("Enchantability: " + this.material.getEnchantability());
-            }
     }
 
     @Override

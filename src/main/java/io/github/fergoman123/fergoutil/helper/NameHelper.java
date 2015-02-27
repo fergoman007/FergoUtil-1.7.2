@@ -10,9 +10,9 @@ public final class NameHelper
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
-    public static String getUnlocalizedNameForRegistry(String unlocalizedName)
+    public static String getUnlocalizedName(String unlocalizedName, int plus)
     {
-        return unlocalizedName.substring(unlocalizedName.indexOf(":") + 1);
+        return unlocalizedName.substring(unlocalizedName.indexOf(".") + plus);
     }
 
     public static String translate(String locale)

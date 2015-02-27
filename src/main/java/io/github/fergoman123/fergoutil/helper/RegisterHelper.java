@@ -1,93 +1,90 @@
 package io.github.fergoman123.fergoutil.helper;
 
+import io.github.fergoman123.fergoutil.model.*;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
-public final class RegisterHelper {
-
-    public static void registerBlock(Block block, String name) {
-        GameRegistry.registerBlock(block, name);
-    }
-
-    public static void registerBlock(Block block, ItemBlock itemblock, String name) {
-        GameRegistry.registerBlock(block, itemblock.getClass(), name);
-    }
-
-    public static void registerItem(Item item, String name) {
+public final class RegisterHelper
+{
+    public static void registerItem(Item item, String modid, String name)
+    {
         GameRegistry.registerItem(item, name);
+        ModelHelper.registerItemModel(new ItemModel(item, modid + ":" + name));
+        ModelHelper.addItemVariant(new ItemVariant(item, modid + ":" +  name));
     }
 
-    public static void registerItemModel(Item item, int meta, String name, String modid)
+    public static void registerItem(Item item, String modid, String name, String[] modelNames)
     {
-        getItemModelMesher().register(item, meta, new ModelResourceLocation(modid.toLowerCase() + ":" + name, "inventory"));
+        GameRegistry.registerItem(item, name);
+        ItemModel[] models = new ItemModel[modelNames.length];
+        ItemVariant[] variants = new ItemVariant[modelNames.length];
+        for (int i = 0; i < modelNames.length; i++)
+        {
+            models[i] = new ItemModel(item, i, modid + ":" + modelNames[i]);
+            variants[i] = new ItemVariant(item, modid + ":" + modelNames[i]);
+        }
+
+        for(ItemModel model : models)
+        {
+            for(ItemVariant variant : variants) {
+                ModelHelper.registerItemModel(model);
+                ModelHelper.addItemVariant(variant);
+            }
+        }
     }
 
-    public static void registerItemModel(Item item, String name, String modid) {
-        registerItemModel(item, 0, name, modid);
-    }
-
-    public static void registerBlockModel(Block block, int meta, String name, String modid)
+    public static void registerBlock(Block block, Class<? extends ItemBlock> itemblock, String modid, String name)
     {
-        getItemModelMesher().register(Item.getItemFromBlock(block), meta, new ModelResourceLocation(modid.toLowerCase() + ":" + name, "inventory"));
+        GameRegistry.registerBlock(block, itemblock, name);
+        ModelHelper.registerBlockModel(new BlockModel(block, modid + ":" + name));
+        ModelHelper.addBlockVariant(new BlockVariant(block, modid + ":" + name));
     }
 
-    public static void registerBlockModel(Block block, String name, String modid)
+    public static void registerBlock(Block block, String modid, String name)
     {
-        registerBlockModel(block, 0, name, modid);
+        GameRegistry.registerBlock(block, name);
+        ModelHelper.registerBlockModel(new BlockModel(block, modid + ":" + name));
+        ModelHelper.addBlockVariant(new BlockVariant(block, modid + ":" + name));
     }
 
-    public static void addVariantName(Item item, String variant, String modid)
+    public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlock, String modid, String name, String[] modelNames)
     {
-        ModelBakery.addVariantName(item, modid.toLowerCase() + ":" + variant);
+        GameRegistry.registerBlock(block, itemBlock, name);
+        BlockModel[] models = new BlockModel[modelNames.length];
+        BlockVariant[] variants = new BlockVariant[modelNames.length];
+
+        for (int i = 0; i < modelNames.length; i++)
+        {
+            models[i] = new BlockModel(block, i, modid + ":" + modelNames[i]);
+            variants[i] = new BlockVariant(block, modid + ":" + modelNames[i]);
+        }
+
+        for(BlockModel model : models)
+        {
+            for(BlockVariant variant : variants) {
+                ModelHelper.registerBlockModel(model);
+                ModelHelper.addBlockVariant(variant);
+            }
+        }
     }
 
-    public static void addVariantName(Block block, String variant, String modid)
+    public static void registerTileEntity(Class<? extends TileEntity> tileClass, String tileID)
     {
-        addVariantName(Item.getItemFromBlock(block), variant, modid);
+        GameRegistry.registerTileEntity(tileClass, tileID);
     }
 
-    public static ItemModelMesher getItemModelMesher()
+    public static void registerEvent(Object event)
     {
-        return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-    }
-
-    public static void registerEvent(Object evt)
-    {
-        MinecraftForge.EVENT_BUS.register(evt);
-    }
-
-    public static void registerOre(String oreDictName, ItemStack ore)
-    {
-        OreDictionary.registerOre(oreDictName, ore);
-    }
-
-    public static void registerOre(String oreDictName, Item ore)
-    {
-        OreDictionary.registerOre(oreDictName, ore);
-    }
-
-    public static void registerOre(String oreDictName, Block ore)
-    {
-        OreDictionary.registerOre(oreDictName, ore);
+        MinecraftForge.EVENT_BUS.register(event);
     }
 
     public static void registerFuelHandler(IFuelHandler handler)
     {
         GameRegistry.registerFuelHandler(handler);
-    }
-
-    public static void getFuelValue(ItemStack stack)
-    {
-        GameRegistry.getFuelValue(stack);
     }
 }

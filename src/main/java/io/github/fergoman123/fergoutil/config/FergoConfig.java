@@ -9,4 +9,9 @@ public class FergoConfig extends Configuration
     public FergoConfig(File file) {
         super(file);
     }
+
+    public String getGeneral()
+    {
+        return Configuration.CATEGORY_GENERAL;
+    }
 }

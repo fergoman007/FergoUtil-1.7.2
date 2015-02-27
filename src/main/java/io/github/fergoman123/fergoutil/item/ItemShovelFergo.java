@@ -1,59 +1,24 @@
 package io.github.fergoman123.fergoutil.item;
 
-import io.github.fergoman123.fergoutil.helper.NameHelper;
+import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
 
-import java.util.List;
+import java.util.Set;
 
-public abstract class ItemShovelFergo extends ItemSpade {
-    public int mod;
-    public Item repairItem;
-    public ToolMaterial material;
+public class ItemShovelFergo extends ItemToolFergo
+{
+    private static final Set effectiveBlocks = Sets.newHashSet(new Block[]{Blocks.clay, Blocks.dirt, Blocks.farmland, Blocks.grass, Blocks.gravel, Blocks.mycelium, Blocks.sand, Blocks.snow, Blocks.snow_layer, Blocks.soul_sand});
 
-    public ItemShovelFergo(ToolMaterial material, int mod, CreativeTabs tab, Item repairItem, String name) {
-        super(material);
-        this.setUnlocalizedName(name);
-        this.setMaxDamage(material.getMaxUses());
-        this.setMod(mod);
-        this.setRepairItem(repairItem);
-        this.setCreativeTab(tab);
-        this.material = material;
+    public ItemShovelFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
+    {
+        super(1.0F, material, effectiveBlocks, mod, tab, name);
     }
 
-    @Override
-    public String getUnlocalizedName() {
-        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
-    }
-
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
-    }
-
-    public Item getRepairItem() {
-        return repairItem;
-    }
-
-    public Item setRepairItem(Item repairItem) {
-        this.repairItem = repairItem;
-        return this;
-    }
-
-    public int getMod() {
-        return mod;
-    }
-
-    public Item setMod(int mod) {
-        this.mod = mod;
-        return this;
+    public boolean canHarvestBlock(Block blockIn)
+    {
+        return blockIn == Blocks.snow_layer ? true : blockIn == Blocks.snow;
     }
 }

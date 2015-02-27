@@ -1,67 +1,35 @@
 package io.github.fergoman123.fergoutil.item;
 
+import com.google.common.collect.Sets;
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
+import java.util.Set;
 
-public abstract class ItemAxeFergo extends ItemAxe
+public class ItemAxeFergo extends ItemToolFergo
 {
-    public int mod;
-    public Item repairItem;
-    public ToolMaterial material;
+    private static final Set effectiveBlocks = Sets.newHashSet(new Block[] {Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin, Blocks.melon_block, Blocks.ladder});
 
-    public ItemAxeFergo(ToolMaterial material, int mod, CreativeTabs tab, Item repairItem, String name)
+    public ItemAxeFergo(ToolMaterial material, int mod, CreativeTabs tab, String name) {
+        super(2.0F, material, effectiveBlocks, mod, tab, name);
+    }
+
+    public boolean canHarvestBlock(Block blockIn)
     {
-        super(material);
-        this.setUnlocalizedName(name);
-        this.setMaxDamage(material.getMaxUses());
-        this.setMod(mod);
-        this.setRepairItem(repairItem);
-        this.setCreativeTab(tab);
-        this.material = material;
+        return blockIn == Blocks.obsidian ? this.material.getHarvestLevel() == 3 : (blockIn != Blocks.diamond_block && blockIn != Blocks.diamond_ore ? (blockIn != Blocks.emerald_ore && blockIn != Blocks.emerald_block ? (blockIn != Blocks.gold_block && blockIn != Blocks.gold_ore ? (blockIn != Blocks.iron_block && blockIn != Blocks.iron_ore ? (blockIn != Blocks.lapis_block && blockIn != Blocks.lapis_ore ? (blockIn != Blocks.redstone_ore && blockIn != Blocks.lit_redstone_ore ? (blockIn.getMaterial() == Material.rock ? true : (blockIn.getMaterial() == Material.iron ? true : blockIn.getMaterial() == Material.anvil)) : this.material.getHarvestLevel() >= 2) : this.material.getHarvestLevel() >= 1) : this.material.getHarvestLevel() >= 1) : this.material.getHarvestLevel() >= 2) : this.material.getHarvestLevel() >= 2) : this.material.getHarvestLevel() >= 2);
     }
 
     @Override
-    public String getUnlocalizedName() {
-        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
-    }
-
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
-    }
-
-    public Item getRepairItem() {
-        return repairItem;
-    }
-
-    public Item setRepairItem(Item repairItem) {
-        this.repairItem = repairItem;
-        return this;
-    }
-
-    public int getMod() {
-        return mod;
-    }
-
-    public Item setMod(int mod) {
-        this.mod = mod;
-        return this;
-    }
-
-    public boolean isKeyDown(int key)
-    {
-        return Keyboard.isKeyDown(key);
+    public float getStrVsBlock(ItemStack stack, Block block) {
+        return block.getMaterial() != Material.iron && block.getMaterial() != Material.anvil && block.getMaterial() != Material.rock ? super.getStrVsBlock(stack, block) : this.efficiencyOnProperMaterial;
     }
 }
