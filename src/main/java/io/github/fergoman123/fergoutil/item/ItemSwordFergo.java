@@ -102,6 +102,11 @@ public class ItemSwordFergo extends ItemFergo
         return this.material.getEnchantability();
     }
 
+    public ToolMaterial getToolMaterial()
+    {
+        return this.material;
+    }
+
     public String getToolMaterialName()
     {
         return this.material.toString();

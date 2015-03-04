@@ -132,10 +132,6 @@ public abstract class BlockFurnaceFergo extends BlockContainerFergo {
         return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
     }
 
-    /*
-    TODO: BreakBlock
-     */
-
     @Override
     public IBlockState getStateFromMeta(int meta) {
         EnumFacing facing = EnumFacing.getFront(meta);

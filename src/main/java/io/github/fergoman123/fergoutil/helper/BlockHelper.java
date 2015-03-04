@@ -12,10 +12,9 @@ public class BlockHelper
         return item;
     }
 
-    public static Block getBlockForItem(Item item)
+    public static Block getBlockFromItem(Item item)
     {
-        Block block = Block.getBlockFromItem(item);
-        return block;
+        return Block.getBlockFromItem(item);
     }
 
     public static BlockPos getBlockPos(int x, int y, int z)

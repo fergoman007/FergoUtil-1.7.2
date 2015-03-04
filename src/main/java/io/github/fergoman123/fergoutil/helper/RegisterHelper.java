@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public final class RegisterHelper
 {
@@ -43,6 +44,10 @@ public final class RegisterHelper
         GameRegistry.registerBlock(block, itemblock, name);
         ModelHelper.registerBlockModel(new BlockModel(block, modid + ":" + name));
         ModelHelper.addBlockVariant(new BlockVariant(block, modid + ":" + name));
+        if (name.contains("ore") || name.contains("block"))
+        {
+            OreDictionary.registerOre(name, block);
+        }
     }
 
     public static void registerBlock(Block block, String modid, String name)
@@ -50,6 +55,10 @@ public final class RegisterHelper
         GameRegistry.registerBlock(block, name);
         ModelHelper.registerBlockModel(new BlockModel(block, modid + ":" + name));
         ModelHelper.addBlockVariant(new BlockVariant(block, modid + ":" + name));
+        if (name.contains("ore") || name.contains("block"))
+        {
+            OreDictionary.registerOre(name, block);
+        }
     }
 
     public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlock, String modid, String name, String[] modelNames)

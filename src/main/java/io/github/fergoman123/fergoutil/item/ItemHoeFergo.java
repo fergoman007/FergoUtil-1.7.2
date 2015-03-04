@@ -85,6 +85,11 @@ public class ItemHoeFergo extends ItemFergo
         return true;
     }
 
+    public ToolMaterial getToolMaterial()
+    {
+        return this.material;
+    }
+
     public String getMaterialName()
     {
         return this.material.toString();
