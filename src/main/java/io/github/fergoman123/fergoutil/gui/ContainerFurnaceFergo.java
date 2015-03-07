@@ -6,28 +6,28 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ContainerFurnaceFergo extends Container
+public abstract class ContainerFurnaceFergo extends Container implements IContainerFurnaceFergo
 {
+    public final IInventory furnace;
+    public final InventoryPlayer invPlayer;
+    public int lastCookTime;
+    public int lastTotalCookTime;
+    public int lastBurnTime;
+    public int lastItemBurnTime;
+
     public int playerInvRows = 3;
     public int playerInvCols = 9;
 
-    public ContainerFurnaceFergo()
+    public ContainerFurnaceFergo(InventoryPlayer invPlayer, IInventory furnace)
     {
-
+        this.invPlayer = invPlayer;
+        this.furnace = furnace;
         this.addInventorySlots();
-        this.addPlayerInv();
+        this.addPlayerInventory();
     }
-
-    public abstract void addInventorySlots();
-
-    public abstract void addPlayerInv();
-
-    @Override
-    public abstract void updateProgressBar(int id, int data);
-
-    @Override
-    public abstract boolean canInteractWith(EntityPlayer playerIn);
 
     public abstract ItemStack transferStackInSlot(EntityPlayer player, int index);
 }

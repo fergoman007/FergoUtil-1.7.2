@@ -153,4 +153,15 @@ public abstract class BlockFurnaceFergo extends BlockContainerFergo {
     protected BlockState createBlockState() {
         return new BlockState(this, new IProperty[]{FACING});
     }
+
+    @SideOnly(Side.CLIENT)
+    public void openGui(Object mod, int guiId, World world, BlockPos pos, EntityPlayer player)
+    {
+        player.openGui(mod, guiId, world, pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    public boolean getIsActive()
+    {
+        return this.isActive;
+    }
 }

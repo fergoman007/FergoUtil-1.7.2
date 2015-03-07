@@ -10,19 +10,36 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public abstract class GuiFurnaceFergo extends GuiContainer
 {
-    public Container container;
+    public InventoryPlayer invPlayer;
+    public IInventory furnace;
 
-    public GuiFurnaceFergo(Container container)
+    public GuiFurnaceFergo(Container container, InventoryPlayer invPlayer, IInventory furnace)
     {
         super(container);
-        this.container = container;
+        this.furnace = furnace;
+        this.invPlayer = invPlayer;
     }
 
     public abstract void drawGuiContainerForegroundLayer(int mouseX, int mouseY);
 
     public abstract void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);
 
-    public abstract int getCookProgressScaled(int speed);
+    public int getCookProgressScaled(int speed)
+    {
+        int j = this.furnace.getField(2);
+        int k = this.furnace.getField(3);
+        return k != 0 && j != 0 ? j * speed / k : 0;
+    }
 
-    public abstract int getBurnTimeRemainingScaled(int speed, int furnaceSpeed);
+    public int getBurnTimeRemainingScaled(int speed)
+    {
+        int j = this.furnace.getField(1);
+
+        if (j == 0)
+        {
+            j = 200;
+        }
+
+        return this.furnace.getField(0) * speed / j;
+    }
 }

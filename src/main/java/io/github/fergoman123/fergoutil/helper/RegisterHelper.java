@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -90,6 +91,7 @@ public final class RegisterHelper
     public static void registerEvent(Object event)
     {
         MinecraftForge.EVENT_BUS.register(event);
+        FMLCommonHandler.instance().bus().register(event);
     }
 
     public static void registerFuelHandler(IFuelHandler handler)
