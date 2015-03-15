@@ -36,11 +36,6 @@ public class ItemSwordFergo extends ItemFergo
         this.attackDamage = 4.0F + material.getDamageVsEntity();
     }
 
-    public float getDamageVsEntity()
-    {
-        return this.material.getDamageVsEntity();
-    }
-
     public float getStrVsBlock(ItemStack stack, Block block)
     {
         if (block == Blocks.web)
@@ -124,6 +119,31 @@ public class ItemSwordFergo extends ItemFergo
         Multimap multimap = super.getAttributeModifiers(stack);
         multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", (double)this.attackDamage, 0));
         return multimap;
+    }
+
+    public int getHarvestLevel()
+    {
+        return getToolMaterial().getHarvestLevel();
+    }
+
+    public int getMaxUses()
+    {
+        return getToolMaterial().getMaxUses();
+    }
+
+    public float getEfficiency()
+    {
+        return getToolMaterial().getEfficiencyOnProperMaterial();
+    }
+
+    public float getDamageVsEntity()
+    {
+        return getToolMaterial().getDamageVsEntity();
+    }
+
+    public int getEnchantability()
+    {
+        return getToolMaterial().getEnchantability();
     }
 
 }

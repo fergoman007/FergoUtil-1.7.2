@@ -20,8 +20,6 @@ public abstract class GuiFurnaceFergo extends GuiContainer
         this.invPlayer = invPlayer;
     }
 
-    public abstract void drawGuiContainerForegroundLayer(int mouseX, int mouseY);
-
     public abstract void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);
 
     public int getCookProgressScaled(int speed)

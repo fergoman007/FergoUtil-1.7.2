@@ -7,8 +7,8 @@ public class ModInfo
 {
     public static final String modid = "FergoUtil";
     public static final String name = "Fergoman123's Util";
-    public static final String mcVersion = "1.8.0";
-    public static final String version = "1.1.0";
+    public static final String mcVersion = "1.8";
+    public static final String version = mcVersion + "-" + "1.1";
     public static final String logoFile = "/assets/fergoutil/logo.png";
     public static final String author = "Fergoman123";
     public static final List<String> authorList = Arrays.asList(author);

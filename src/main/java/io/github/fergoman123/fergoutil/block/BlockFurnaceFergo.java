@@ -164,4 +164,9 @@ public abstract class BlockFurnaceFergo extends BlockContainerFergo {
     {
         return this.isActive;
     }
+
+    public String getFurnaceType()
+    {
+        return this.getIsActive() ? "Active" : "Idle";
+    }
 }

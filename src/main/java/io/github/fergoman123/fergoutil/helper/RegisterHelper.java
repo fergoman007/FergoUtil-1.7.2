@@ -81,6 +81,11 @@ public final class RegisterHelper
                 ModelHelper.addBlockVariant(variant);
             }
         }
+
+        if (name.contains("ore") || name.contains("block"))
+        {
+            OreDictionary.registerOre(name, block);
+        }
     }
 
     public static void registerTileEntity(Class<? extends TileEntity> tileClass, String tileID)

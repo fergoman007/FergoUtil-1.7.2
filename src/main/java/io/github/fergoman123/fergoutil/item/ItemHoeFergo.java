@@ -94,4 +94,29 @@ public class ItemHoeFergo extends ItemFergo
     {
         return this.material.toString();
     }
+
+    public int getHarvestLevel()
+    {
+        return getToolMaterial().getHarvestLevel();
+    }
+
+    public int getMaxUses()
+    {
+        return getToolMaterial().getMaxUses();
+    }
+
+    public float getEfficiency()
+    {
+        return getToolMaterial().getEfficiencyOnProperMaterial();
+    }
+
+    public float getDamageVsEntity()
+    {
+        return getToolMaterial().getDamageVsEntity();
+    }
+
+    public int getEnchantability()
+    {
+        return getToolMaterial().getEnchantability();
+    }
 }

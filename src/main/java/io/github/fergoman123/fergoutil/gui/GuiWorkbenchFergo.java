@@ -21,8 +21,8 @@ public class GuiWorkbenchFergo extends GuiContainer
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(I18n.format(this.invName, new Object[0]), 28, 6, 4210752);
-        fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+        fontRendererObj.drawString(I18n.format(this.invName), 28, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     @Override
