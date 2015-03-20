@@ -32,12 +32,12 @@ public class ItemArmorFergo extends ItemArmor
 
     @Override
     public String getUnlocalizedName() {
-        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("item.%s.%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return String.format("item.%s:%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+        return String.format("item.%s.%s", NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
     @Override
@@ -87,5 +87,23 @@ public class ItemArmorFergo extends ItemArmor
         return this.repairItem;
     }
 
+    public int getDurability(int armorType)
+    {
+        return getArmorMaterial().getDurability(armorType);
+    }
 
+    public int getReductAmount(int armorType)
+    {
+        return getArmorMaterial().getDamageReductionAmount(armorType);
+    }
+
+    public int getEnchantability()
+    {
+        return getArmorMaterial().getEnchantability();
+    }
+
+    public String getArmorName()
+    {
+        return getArmorMaterial().name();
+    }
 }
