@@ -6,24 +6,4 @@ public enum ArmorType
     chestplate,
     leggings,
     boots;
-
-    public static ArmorType getHelmet() {
-        return helmet;
-    }
-
-    public static ArmorType getChestplate() {
-        return chestplate;
-    }
-
-    public static ArmorType getLeggings() {
-        return leggings;
-    }
-
-    public static ArmorType getBoots() {
-        return boots;
-    }
-
-
-
-
 }

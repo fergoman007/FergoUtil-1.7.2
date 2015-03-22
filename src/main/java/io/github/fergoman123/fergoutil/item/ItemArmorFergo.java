@@ -24,6 +24,7 @@ public class ItemArmorFergo extends ItemArmor
     public ItemArmorFergo(ArmorMaterial material, int mod, CreativeTabs tab, ArmorType type, Item repairItem, String name)
     {
         super(material, 0, type.ordinal());
+        this.type = type;
         this.material = material;
         this.setMod(mod);
         this.setCreativeTab(tab);
@@ -50,12 +51,12 @@ public class ItemArmorFergo extends ItemArmor
         String layer1 = String.format("%s:textures/models/armor/%s_1.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
         String layer2 = String.format("%s:textures/models/armor/%s_2.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
 
-        if (slot == ArmorType.getHelmet().ordinal() || slot == ArmorType.getChestplate().ordinal() || slot == ArmorType.getBoots().ordinal())
+        if (slot == ArmorType.helmet.ordinal() || slot == ArmorType.chestplate.ordinal() || slot == ArmorType.boots.ordinal())
         {
             return layer1;
         }
 
-        if (slot == ArmorType.getLeggings().ordinal())
+        if (slot == ArmorType.leggings.ordinal())
         {
             return layer2;
         }
@@ -63,6 +64,11 @@ public class ItemArmorFergo extends ItemArmor
         {
             return null;
         }
+    }
+
+    public ArmorType getArmorType()
+    {
+        return type;
     }
 
     public Item setMod(int mod)
