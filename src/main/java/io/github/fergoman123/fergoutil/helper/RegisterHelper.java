@@ -1,5 +1,10 @@
 package io.github.fergoman123.fergoutil.helper;
 
+import io.github.fergoman123.fergoutil.block.BlockFergo;
+import io.github.fergoman123.fergoutil.block.BlockMultiFergo;
+import io.github.fergoman123.fergoutil.item.ItemBlockVariants;
+import io.github.fergoman123.fergoutil.item.ItemFergo;
+import io.github.fergoman123.fergoutil.item.ItemMultiFergo;
 import io.github.fergoman123.fergoutil.model.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -13,78 +18,55 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public final class RegisterHelper
 {
-    public static void registerItem(Item item, String modid, String name)
+    public static Item registerItem(Item item)
     {
-        GameRegistry.registerItem(item, name);
-        ModelHelper.registerItemModel(new ItemModel(item, modid + ":" + name));
-        ModelHelper.addItemVariant(new ItemVariant(item, modid + ":" +  name));
-    }
-
-    public static void registerItem(Item item, String modid, String name, String[] modelNames)
-    {
-        GameRegistry.registerItem(item, name);
-        ItemModel[] models = new ItemModel[modelNames.length];
-        ItemVariant[] variants = new ItemVariant[modelNames.length];
-        for (int i = 0; i < modelNames.length; i++)
+        if (item instanceof ItemMultiFergo)
         {
-            models[i] = new ItemModel(item, i, modid + ":" + modelNames[i]);
-            variants[i] = new ItemVariant(item, modid + ":" + modelNames[i]);
-        }
-
-        for(ItemModel model : models)
-        {
-            for(ItemVariant variant : variants) {
-                ModelHelper.registerItemModel(model);
-                ModelHelper.addItemVariant(variant);
+            ItemMultiFergo multiItem = (ItemMultiFergo)item;
+            GameRegistry.registerItem(multiItem, multiItem.getName());
+            for(ItemModel model : multiItem.getItemModels())
+            {
+                for(ItemVariant variant : multiItem.getItemVariants())
+                {
+                    ModelHelper.registerItemModel(model);
+                    ModelHelper.addItemVariant(variant);
+                }
             }
+            return multiItem;
+        }
+        else
+        {
+            ItemFergo itemFergo = (ItemFergo)item;
+            GameRegistry.registerItem(itemFergo, itemFergo.getName());
+            ModelHelper.registerItemModel(itemFergo.getItemModel());
+            ModelHelper.addItemVariant(itemFergo.getItemVariant());
+            return itemFergo;
         }
     }
 
-    public static void registerBlock(Block block, Class<? extends ItemBlock> itemblock, String modid, String name)
+    public static Block registerBlock(Block block)
     {
-        GameRegistry.registerBlock(block, itemblock, name);
-        ModelHelper.registerBlockModel(new BlockModel(block, modid + ":" + name));
-        ModelHelper.addBlockVariant(new BlockVariant(block, modid + ":" + name));
-        if (name.contains("ore") || name.contains("block"))
+        if (block instanceof BlockMultiFergo)
         {
-            OreDictionary.registerOre(name, block);
-        }
-    }
-
-    public static void registerBlock(Block block, String modid, String name)
-    {
-        GameRegistry.registerBlock(block, name);
-        ModelHelper.registerBlockModel(new BlockModel(block, modid + ":" + name));
-        ModelHelper.addBlockVariant(new BlockVariant(block, modid + ":" + name));
-        if (name.contains("ore") || name.contains("block"))
-        {
-            OreDictionary.registerOre(name, block);
-        }
-    }
-
-    public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlock, String modid, String name, String[] modelNames)
-    {
-        GameRegistry.registerBlock(block, itemBlock, name);
-        BlockModel[] models = new BlockModel[modelNames.length];
-        BlockVariant[] variants = new BlockVariant[modelNames.length];
-
-        for (int i = 0; i < modelNames.length; i++)
-        {
-            models[i] = new BlockModel(block, i, modid + ":" + modelNames[i]);
-            variants[i] = new BlockVariant(block, modid + ":" + modelNames[i]);
-        }
-
-        for(BlockModel model : models)
-        {
-            for(BlockVariant variant : variants) {
-                ModelHelper.registerBlockModel(model);
-                ModelHelper.addBlockVariant(variant);
+            BlockMultiFergo multiBlock = (BlockMultiFergo)block;
+            GameRegistry.registerBlock(block, ItemBlockVariants.class, multiBlock.getName());
+            for (BlockModel model : multiBlock.getBlockModels())
+            {
+                for(BlockVariant variant : multiBlock.getBlockVariants())
+                {
+                    ModelHelper.registerBlockModel(model);
+                    ModelHelper.addBlockVariant(variant);
+                }
             }
+            return multiBlock;
         }
-
-        if (name.contains("ore") || name.contains("block"))
+        else
         {
-            OreDictionary.registerOre(name, block);
+            BlockFergo blockFergo = (BlockFergo)block;
+            GameRegistry.registerBlock(block, blockFergo.getName());
+            ModelHelper.registerBlockModel(blockFergo.getBlockModel());
+            ModelHelper.addBlockVariant(blockFergo.getBlockVariant());
+            return blockFergo;
         }
     }
 

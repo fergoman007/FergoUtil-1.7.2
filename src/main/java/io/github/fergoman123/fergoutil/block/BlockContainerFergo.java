@@ -1,5 +1,6 @@
 package io.github.fergoman123.fergoutil.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -10,6 +11,8 @@ import net.minecraft.world.World;
 
 public abstract class BlockContainerFergo extends BlockFergo implements ITileEntityProvider
 {
+    public Class<? extends TileEntity> tileEntity;
+
     public BlockContainerFergo(Material material, int mod, CreativeTabs tab, float hardness, float resistance, String name) {
         super(material, mod, tab, hardness, resistance, name);
     }
@@ -30,5 +33,16 @@ public abstract class BlockContainerFergo extends BlockFergo implements ITileEnt
         super.onBlockEventReceived(worldIn, pos, state, eventID, eventParam);
         TileEntity tile = worldIn.getTileEntity(pos);
         return tile == null ? false : tile.receiveClientEvent(eventID, eventParam);
+    }
+
+    public Block setTileEntity(Class<? extends TileEntity> tileEntity)
+    {
+        this.tileEntity = tileEntity;
+        return this;
+    }
+
+    public Class<? extends TileEntity> getTileEntityClass()
+    {
+        return this.tileEntity;
     }
 }
