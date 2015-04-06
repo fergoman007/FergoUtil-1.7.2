@@ -1,6 +1,8 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.ToolInfo;
+import io.github.fergoman123.fergoutil.model.ModelHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
@@ -8,19 +10,16 @@ import net.minecraft.item.ItemStack;
 
 public class ItemShearsFergo extends ItemShears
 {
-    public int mod;
-    public ToolMaterial material;
-    public Item repairItem;
+    private int mod;
+    private ToolInfo info;
 
-    public ItemShearsFergo(ToolMaterial material, int mod, CreativeTabs tab, Item repairItem, String name)
+    public ItemShearsFergo(ToolInfo info, int mod, CreativeTabs tab, String name)
     {
         super();
         this.setUnlocalizedName(name);
-        this.setMaxDamage(material.getMaxUses());
+        this.setMaxDamage(info.getMaterial().getMaxUses());
         this.setCreativeTab(tab);
         this.setMod(mod);
-        this.setRepairItem(repairItem);
-        this.material = material;
     }
 
     public String getUnlocalizedName()
@@ -35,7 +34,7 @@ public class ItemShearsFergo extends ItemShears
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
+        return repair.isItemEqual(new ItemStack(info.getRepairItem())) || super.getIsRepairable(toRepair, repair);
     }
 
     public Item setMod(int mod)
@@ -44,19 +43,14 @@ public class ItemShearsFergo extends ItemShears
         return this;
     }
 
-    public Item setRepairItem(Item repairItem)
-    {
-        this.repairItem = repairItem;
-        return this;
-    }
-
     public int getMod()
     {
         return this.mod;
     }
 
-    public Item getRepairItem()
+    public void registerModel()
     {
-        return this.repairItem;
+        ModelHelper.registerItemModel(info.getModel());
+        ModelHelper.addItemVariant(info.getVariant());
     }
 }

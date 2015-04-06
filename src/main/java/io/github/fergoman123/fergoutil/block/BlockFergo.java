@@ -1,8 +1,10 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.BlockInfo;
 import io.github.fergoman123.fergoutil.model.BlockModel;
 import io.github.fergoman123.fergoutil.model.BlockVariant;
+import io.github.fergoman123.fergoutil.model.ModelHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,16 +15,18 @@ public abstract class BlockFergo extends Block
 {
     private int mod;
     private String name;
+    private BlockInfo info;
 
-    public BlockFergo(Material material, int mod, CreativeTabs tab, float hardness, float resistance, String name)
+    public BlockFergo(BlockInfo info, int mod, CreativeTabs tab, String name)
     {
-        super(material);
+        super(info.getMaterial());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
+        this.setHardness(info.getHardness());
+        this.setResistance(info.getResistance());
         this.setUnlocalizedName(name);
         this.name = name;
+        this.info = info;
     }
 
     public String getUnlocalizedName()
@@ -46,18 +50,9 @@ public abstract class BlockFergo extends Block
         return this.name;
     }
 
-    public BlockModel getBlockModel()
+    public void registerModels()
     {
-        return new BlockModel(this, getModString(this.getMod()) + ":" + this.getName());
-    }
-
-    public BlockVariant getBlockVariant()
-    {
-        return new BlockVariant(this, getModString(this.getMod()) + ":" + this.getName());
-    }
-
-    public String getModString(int mod)
-    {
-        return NameHelper.getModString(mod).toLowerCase();
+        ModelHelper.registerBlockModel(info.getModel());
+        ModelHelper.addBlockVariant(info.getVariant());
     }
 }

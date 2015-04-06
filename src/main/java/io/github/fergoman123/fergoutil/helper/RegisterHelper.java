@@ -1,20 +1,20 @@
 package io.github.fergoman123.fergoutil.helper;
 
+import io.github.fergoman123.fergoutil.block.BlockContainerFergo;
 import io.github.fergoman123.fergoutil.block.BlockFergo;
 import io.github.fergoman123.fergoutil.block.BlockMultiFergo;
+import io.github.fergoman123.fergoutil.item.ItemArmorFergo;
 import io.github.fergoman123.fergoutil.item.ItemBlockVariants;
 import io.github.fergoman123.fergoutil.item.ItemFergo;
 import io.github.fergoman123.fergoutil.item.ItemMultiFergo;
 import io.github.fergoman123.fergoutil.model.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 public final class RegisterHelper
 {
@@ -33,6 +33,14 @@ public final class RegisterHelper
                 }
             }
             return multiItem;
+        }
+        else if (item instanceof ItemArmorFergo)
+        {
+            ItemArmorFergo armor = (ItemArmorFergo)item;
+            GameRegistry.registerItem(armor, armor.getName());
+            ModelHelper.registerItemModel(armor.getItemModel());
+            ModelHelper.addItemVariant(armor.getItemVariant());
+            return armor;
         }
         else
         {
@@ -59,6 +67,15 @@ public final class RegisterHelper
                 }
             }
             return multiBlock;
+        }
+        else if(block instanceof BlockContainerFergo)
+        {
+            BlockContainerFergo blockContainer = (BlockContainerFergo)block;
+            GameRegistry.registerBlock(blockContainer, blockContainer.getName());
+            ModelHelper.registerBlockModel(blockContainer.getBlockModel());
+            ModelHelper.addBlockVariant(blockContainer.getBlockVariant());
+            registerTileEntity(blockContainer.getTileEntity().getClass(), blockContainer.getTileName());
+            return blockContainer;
         }
         else
         {

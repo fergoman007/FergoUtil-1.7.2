@@ -1,6 +1,9 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.ArmorInfo;
+import io.github.fergoman123.fergoutil.model.ItemModel;
+import io.github.fergoman123.fergoutil.model.ItemVariant;
 import io.github.fergoman123.fergoutil.reference.ModConstants;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -16,19 +19,17 @@ import java.util.List;
 public class ItemArmorFergo extends ItemArmor
 {
     public int mod;
-    public ArmorMaterial material;
-    public ArmorType type;
-    public Item repairItem;
     public String name;
+    private ArmorInfo info;
 
-    public ItemArmorFergo(ArmorMaterial material, int mod, CreativeTabs tab, ArmorType type, Item repairItem, String name)
+    public ItemArmorFergo(ArmorInfo info, int mod, CreativeTabs tab, String name)
     {
-        super(material, 0, type.ordinal());
-        this.type = type;
-        this.material = material;
+        super(info.getMaterial(), 0, info.getType().ordinal());
+        this.name = name;
         this.setMod(mod);
         this.setCreativeTab(tab);
         this.setUnlocalizedName(name);
+        this.info = info;
     }
 
     @Override
@@ -43,13 +44,13 @@ public class ItemArmorFergo extends ItemArmor
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
+        return repair.isItemEqual(new ItemStack(info.getRepairItem())) || super.getIsRepairable(toRepair, repair);
     }
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        String layer1 = String.format("%s:textures/models/armor/%s_1.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
-        String layer2 = String.format("%s:textures/models/armor/%s_2.png", NameHelper.getModString(this.getMod()), this.material.getName().toLowerCase());
+        String layer1 = String.format("%s:textures/models/armor/%s_1.png", getModString(this.getMod()), info.getMaterial().getName().toLowerCase());
+        String layer2 = String.format("%s:textures/models/armor/%s_2.png", getModString(this.getMod()), info.getMaterial().getName().toLowerCase());
 
         if (slot == ArmorType.helmet.ordinal() || slot == ArmorType.chestplate.ordinal() || slot == ArmorType.boots.ordinal())
         {
@@ -66,9 +67,8 @@ public class ItemArmorFergo extends ItemArmor
         }
     }
 
-    public ArmorType getArmorType()
-    {
-        return type;
+    public String getName() {
+        return name;
     }
 
     public Item setMod(int mod)
@@ -82,34 +82,38 @@ public class ItemArmorFergo extends ItemArmor
         return this.mod;
     }
 
-    public Item setRepairItem(Item repairItem)
-    {
-        this.repairItem = repairItem;
-        return this;
-    }
-
-    public Item getRepairItem()
-    {
-        return this.repairItem;
-    }
-
     public int getDurability(int armorType)
     {
-        return getArmorMaterial().getDurability(armorType);
+        return info.getMaterial().getDurability(armorType);
     }
 
     public int getReductAmount(int armorType)
     {
-        return getArmorMaterial().getDamageReductionAmount(armorType);
+        return info.getMaterial().getDamageReductionAmount(armorType);
     }
 
     public int getEnchantability()
     {
-        return getArmorMaterial().getEnchantability();
+        return info.getMaterial().getEnchantability();
     }
 
     public String getArmorName()
     {
-        return getArmorMaterial().name();
+        return info.getMaterial().name();
+    }
+
+    public String getModString(int mod)
+    {
+        return NameHelper.getModString(mod).toLowerCase();
+    }
+
+    public ItemModel getItemModel()
+    {
+        return info.getModel();
+    }
+
+    public ItemVariant getItemVariant()
+    {
+        return info.getVariant();
     }
 }

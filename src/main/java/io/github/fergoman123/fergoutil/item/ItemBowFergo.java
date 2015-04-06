@@ -1,6 +1,12 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.BowInfo;
+import io.github.fergoman123.fergoutil.model.ItemModel;
+import io.github.fergoman123.fergoutil.model.ItemVariant;
+import io.github.fergoman123.fergoutil.model.ModelHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,16 +20,32 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
-import java.util.List;
-
-public abstract class ItemBowFergo extends ItemFergo
+public abstract class ItemBowFergo extends Item
 {
     public static final String[] pullArray = new String[]{"_0", "_1", "_2"};
-    private ToolMaterial material;
+    private BowInfo info;
+    private int mod;
 
-    public ItemBowFergo(ToolMaterial material, int mod, CreativeTabs tab, Item repairItem, String name) {
-        super(mod, tab, name);
-        this.setMaxDamage(material.getMaxUses());
+    public ItemBowFergo(BowInfo info, int mod, CreativeTabs tab, Item repairItem, String name) {
+        super();
+        this.mod = mod;
+        this.info = info;
+        this.setMaxDamage(info.getMaterial().getMaxUses());
+    }
+
+    public String getUnlocalizedName()
+    {
+        return String.format("item.%s.%s", NameHelper.getModString(this.mod).toLowerCase(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+    }
+
+    public String getUnlocalizedName(ItemStack stack)
+    {
+        return String.format("item.%s.%s", NameHelper.getModString(this.mod).toLowerCase(), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.isItemEqual(new ItemStack(info.getRepairItem())) || super.getIsRepairable(toRepair, repair);
     }
 
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft)
@@ -127,6 +149,42 @@ public abstract class ItemBowFergo extends ItemFergo
 
     public int getItemEnchantability()
     {
-        return 1;
+        return info.getMaterial().getEnchantability();
+    }
+
+    @Override
+    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
+    {
+        ModelResourceLocation modelresourcelocation;
+
+        modelresourcelocation = info.getModels()[0];
+
+        if(stack.getItem() == this && player.getItemInUse() != null)
+        {
+            if(useRemaining >= 18)
+            {
+                modelresourcelocation = info.getModels()[1];
+            }
+            else if(useRemaining > 13)
+            {
+                modelresourcelocation = info.getModels()[2];
+            }
+            else if(useRemaining > 0)
+            {
+                modelresourcelocation = info.getModels()[3];
+            }
+        }
+        return modelresourcelocation;
+    }
+
+    public void registerModel()
+    {
+        for(ItemModel model : info.getItemModels())
+        {
+            for(ItemVariant variant : info.getVariant()) {
+                ModelHelper.registerItemModel(model);
+                ModelHelper.addItemVariant(variant);
+            }
+        }
     }
 }

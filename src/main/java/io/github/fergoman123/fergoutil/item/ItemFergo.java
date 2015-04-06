@@ -1,6 +1,7 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.ItemInfo;
 import io.github.fergoman123.fergoutil.model.ItemModel;
 import io.github.fergoman123.fergoutil.model.ItemVariant;
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,14 +12,16 @@ public class ItemFergo extends Item
 {
     private int mod;
     private String name;
+    private ItemInfo info;
 
-    public ItemFergo(int mod, CreativeTabs tab, String name)
+    public ItemFergo(ItemInfo info, int mod, CreativeTabs tab, String name)
     {
         super();
         this.setUnlocalizedName(name);
         this.setCreativeTab(tab);
         this.setMod(mod);
         this.name = name;
+        this.info = info;
     }
 
     @Override
@@ -49,11 +52,11 @@ public class ItemFergo extends Item
 
     public ItemModel getItemModel()
     {
-        return new ItemModel(this, NameHelper.getModString(this.getMod()).toLowerCase() + ":" + this.getName());
+        return info.getModel();
     }
 
     public ItemVariant getItemVariant()
     {
-        return new ItemVariant(this, NameHelper.getModString(this.getMod()).toLowerCase() + ":" + this.getName());
+        return info.getVariant();
     }
 }

@@ -1,8 +1,10 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.BlockMultiInfo;
 import io.github.fergoman123.fergoutil.model.BlockModel;
 import io.github.fergoman123.fergoutil.model.BlockVariant;
+import io.github.fergoman123.fergoutil.model.ModelHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,20 +13,20 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class BlockMultiFergo extends Block
 {
     private int mod;
-    private String[] models;
     private String name;
+    private BlockMultiInfo info;
 
-    public BlockMultiFergo(Material materialIn, int mod, CreativeTabs tab, String name, String[] models, float hardness, float resistance) {
-        super(materialIn);
+    public BlockMultiFergo(BlockMultiInfo info, int mod, CreativeTabs tab, String name) {
+        super(info.getMaterial());
         this.setMod(mod);
         this.setCreativeTab(tab);
         this.setUnlocalizedName(name);
-        this.setModels(models);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
+        this.setHardness(info.getHardness());
+        this.setResistance(info.getResistance());
         this.name = name;
     }
 
@@ -46,36 +48,9 @@ public class BlockMultiFergo extends Block
         return this;
     }
 
-    public String[] getModels() {
-        return models;
-    }
-
-    public Block setModels(String[] models) {
-        this.models = models;
-        return this;
-    }
-
-    public BlockModel[] getBlockModels()
-    {
-        BlockModel[] blockModels = new BlockModel[getModels().length];
-        for (int i = 0; i < blockModels.length; i++) {
-            blockModels[i] = new BlockModel(this, i, getModString(this.getMod()) + ":" + getModels()[i]);
-        }
-        return blockModels;
-    }
-
-    public BlockVariant[] getBlockVariants()
-    {
-        BlockVariant[] blockVariants = new BlockVariant[getModels().length];
-        for (int i = 0; i < blockVariants.length; i++) {
-            blockVariants[i] = new BlockVariant(this, getModString(this.getMod()) + ":" + getModels()[i]);
-        }
-        return blockVariants;
-    }
-
     @Override
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List list) {
-        for (int i = 0; i < getModels().length; i++) {
+        for (int i = 0; i < info.getModels().length; i++) {
             list.add(new ItemStack(itemIn, 1, i));
         }
     }
@@ -85,5 +60,15 @@ public class BlockMultiFergo extends Block
         return this.name;
     }
     
-    
+    public void registerModels()
+    {
+        for(BlockModel model : info.getModels())
+        {
+            for(BlockVariant variant : info.getVariants())
+            {
+                ModelHelper.registerBlockModel(model);
+                ModelHelper.addBlockVariant(variant);
+            }
+        }
+    }
 }
