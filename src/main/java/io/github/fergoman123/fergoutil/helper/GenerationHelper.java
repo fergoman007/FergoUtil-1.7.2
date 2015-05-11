@@ -9,7 +9,6 @@ import io.github.fergoman123.fergoutil.worldgen.WorldGenNetherMinable;
 
 import java.util.Random;
 
-@SuppressWarnings("unused")
 public class GenerationHelper
 {
     public static void addOverWorldOreSpawn(Block block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)

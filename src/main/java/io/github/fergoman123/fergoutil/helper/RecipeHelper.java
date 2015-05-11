@@ -1,37 +1,50 @@
 package io.github.fergoman123.fergoutil.helper;
 
-import io.github.fergoman123.fergoutil.item.crafting.*;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public final class RecipeHelper
 {
-    public static void addRecipe(RecipeFergo recipe)
+    public static void addPickaxeRecipe(ItemStack output, ItemStack toolItem)
     {
-        GameRegistry.addRecipe(recipe.getOutput(), recipe.getRecipe());
+        GameRegistry.addRecipe(new ShapedOreRecipe(output, "xxx", " y ", " y ", 'x', toolItem, 'y', "stickWood"));
     }
 
-    public static void addBlockRecipe(BlockRecipe recipe)
+    public static void addShovelRecipe(ItemStack output, ItemStack toolItem)
     {
-        addRecipe(recipe);
+        GameRegistry.addRecipe(new ShapedOreRecipe(output, "x", "y", "y", 'x', toolItem, 'y', "stickWood"));
     }
 
-    public static void addItemRecipe(ItemRecipe recipe)
+    public static void addAxeRecipe(ItemStack output, ItemStack toolItem)
     {
-        addRecipe(recipe);
+        GameRegistry.addRecipe(new ShapedOreRecipe(output, "xx", "xy", "y", 'x', toolItem, 'y', "stickWood"));
     }
 
-    public static void addShapelessRecipe(ShapelessRecipeFergo recipe)
+    public static void addHoeRecipe(ItemStack output, ItemStack toolItem)
     {
-        GameRegistry.addShapelessRecipe(recipe.getOutput(), recipe.getRecipe());
+        GameRegistry.addRecipe(new ShapedOreRecipe(output, "xx", " y", " y", 'x', toolItem, 'y', "stickWood"));
     }
 
-    public static void addShapelessBlockRecipe(ShapelessBlockRecipe recipe)
+    public static void addSwordRecipe(ItemStack output, ItemStack toolItem)
     {
-        addShapelessRecipe(recipe);
+        GameRegistry.addRecipe(new ShapedOreRecipe(output, "x", "x", "y", 'x', toolItem, 'y', "stickWood"));
     }
 
-    public static void addShapelessItemRecipe(ShapelessItemRecipe recipe)
+    public static void addStorageBlockRecipe(ItemStack output, ItemStack input)
     {
-        addShapelessRecipe(recipe);
+        GameRegistry.addRecipe(output, "xxx", "xxx", "xxx", 'x', input);
     }
+
+    public static void addRecipe(ItemStack output, Object... recipe)
+    {
+        GameRegistry.addRecipe(output, recipe);
+    }
+
+    public static void addShapelessRecipe(ItemStack output, ItemStack... recipe)
+    {
+        GameRegistry.addShapelessRecipe(output, recipe);
+    }
+
+
 }

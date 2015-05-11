@@ -4,6 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -12,12 +13,15 @@ public abstract class GuiFurnaceFergo extends GuiContainer
 {
     public InventoryPlayer invPlayer;
     public IInventory furnace;
+    public ResourceLocation texture;
 
-    public GuiFurnaceFergo(Container container, InventoryPlayer invPlayer, IInventory furnace)
+
+    public GuiFurnaceFergo(Container container, InventoryPlayer invPlayer, IInventory furnace, ResourceLocation texture)
     {
         super(container);
         this.furnace = furnace;
         this.invPlayer = invPlayer;
+        this.texture = texture;
     }
 
     public abstract void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);

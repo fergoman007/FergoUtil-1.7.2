@@ -36,4 +36,13 @@ public class ItemStackHelper
     {
         return new ItemStack(item, quantity, metadata);
     }
+
+    public static ItemStack consumeStack(ItemStack stack)
+    {
+        if (stack != null)
+        {
+            --stack.stackSize;
+        }
+        return stack;
+    }
 }

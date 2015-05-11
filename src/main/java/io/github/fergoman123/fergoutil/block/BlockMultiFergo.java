@@ -1,74 +1,54 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.info.BlockMultiInfo;
-import io.github.fergoman123.fergoutil.model.BlockModel;
-import io.github.fergoman123.fergoutil.model.BlockVariant;
-import io.github.fergoman123.fergoutil.model.ModelHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-public class BlockMultiFergo extends Block
+public abstract class BlockMultiFergo extends Block
 {
     private int mod;
-    private String name;
-    private BlockMultiInfo info;
+    private String[] subNames;
 
-    public BlockMultiFergo(BlockMultiInfo info, int mod, CreativeTabs tab, String name) {
-        super(info.getMaterial());
+    public BlockMultiFergo(Material material, int mod, CreativeTabs tab, float hardness, float resistance, String[] subNames, String name) {
+        super(material);
         this.setMod(mod);
         this.setCreativeTab(tab);
+        this.setHardness(hardness);
+        this.setResistance(resistance);
+        this.setSubNames(subNames);
         this.setUnlocalizedName(name);
-        this.setHardness(info.getHardness());
-        this.setResistance(info.getResistance());
-        this.name = name;
     }
 
-    public String getUnlocalizedName()
-    {
-        return String.format("tile.%s.%s", getModString(this.getMod()), this.getName());
+    @Override
+    public String getUnlocalizedName() {
+        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
-    public String getModString(int mod) {
-        return NameHelper.getModString(mod).toLowerCase();
+    public void setSubNames(String[] subNames) {
+        this.subNames = subNames;
+    }
+
+    public String[] getSubNames() {
+        return subNames;
+    }
+
+    public void setMod(int mod) {
+        this.mod = mod;
     }
 
     public int getMod() {
         return mod;
     }
 
-    public Block setMod(int mod) {
-        this.mod = mod;
-        return this;
-    }
-
-    @Override
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, List list) {
-        for (int i = 0; i < info.getModels().length; i++) {
-            list.add(new ItemStack(itemIn, 1, i));
-        }
-    }
-
-    public String getName()
-    {
-        return this.name;
-    }
-    
-    public void registerModels()
-    {
-        for(BlockModel model : info.getModels())
-        {
-            for(BlockVariant variant : info.getVariants())
-            {
-                ModelHelper.registerBlockModel(model);
-                ModelHelper.addBlockVariant(variant);
-            }
-        }
-    }
+    public abstract int damageDropped(IBlockState state);
+    public abstract void getSubBlocks(Item item, CreativeTabs tab, List list);
+    public abstract IBlockState getStateFromMeta(int meta);
+    public abstract int getMetaFromState(IBlockState state);
+    public abstract BlockState createBlockState();
 }

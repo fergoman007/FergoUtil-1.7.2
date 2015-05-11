@@ -1,20 +1,18 @@
 package io.github.fergoman123.fergoutil.block;
 
-import io.github.fergoman123.fergoutil.enums.Properties;
 import io.github.fergoman123.fergoutil.enums.SwitchEnumFacing;
-import io.github.fergoman123.fergoutil.helper.BlockStateHelper;
-import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.info.BlockFurnaceInfo;
+import io.github.fergoman123.fergoutil.interfaces.IBlockFurnaceFergo;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -24,74 +22,79 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public abstract class BlockFurnaceFergo extends BlockContainer
-{
-    private final boolean isActive;
-    private static boolean keepInventory;
-    private int mod;
-    private BlockFurnaceInfo info;
+public abstract class BlockFurnaceFergo extends BlockContainerFergo implements IBlockFurnaceFergo{
 
-    public BlockFurnaceFergo(BlockFurnaceInfo info, int mod, CreativeTabs tab, String name) {
-        super(info.getMaterial());
-        this.setUnlocalizedName(name);
-        this.isActive = info.getState();
-        this.setHardness(info.getHardness());
-        this.setResistance(info.getResistance());
-        this.info = info;
-        this.mod = mod;
-        this.setBasedOnState(tab);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(Properties.FACING, EnumFacing.NORTH));
-    }
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    private boolean isActive;
+    public static boolean keepInventory;
 
-    @Override
-    public String getUnlocalizedName()
-    {
-        return NameHelper.formatBlockName(NameHelper.getModString(this.mod).toLowerCase(), super.getUnlocalizedName());
-    }
-
-    public abstract Item getItemDropped(IBlockState state, Random rand, int fortune);
-
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
-    {
-        this.setDefaultFacing(world, pos, state);
-    }
-
-    private void setDefaultFacing(World world, BlockPos pos, IBlockState state) {
-        if (!world.isRemote)
+    public BlockFurnaceFergo(Material material, boolean isActive, int mod, CreativeTabs tab, String name) {
+        super(material, mod, null, 3.5f, 2000f, name);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setIsActive(isActive);
+        if (isActive)
         {
-            Block block = world.getBlockState(pos.north()).getBlock();
-            Block block1 = world.getBlockState(pos.south()).getBlock();
-            Block block2 = world.getBlockState(pos.west()).getBlock();
-            Block block3 = world.getBlockState(pos.east()).getBlock();
-            EnumFacing facing = (EnumFacing)state.getValue(Properties.FACING);
-
-            if (facing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock())
-            {
-                facing = EnumFacing.SOUTH;
-            }
-            else if (facing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock())
-            {
-                facing = EnumFacing.NORTH;
-            }
-            else if (facing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock())
-            {
-                facing = EnumFacing.EAST;
-            }
-            else if (facing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock())
-            {
-                facing = EnumFacing.WEST;
-            }
-
-            world.setBlockState(pos, state.withProperty(Properties.FACING, facing), 2);
+            this.setLightLevel(0.875f);
+        }
+        else
+        {
+            this.setCreativeTab(tab);
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
-    {
-        if (this.isActive)
+
+    public abstract Item getItemDropped(IBlockState state, Random random, int fortune);
+
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        this.setDefaultFacing(worldIn, pos, state);
+    }
+
+    private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state) {
+        if (!worldIn.isRemote)
         {
-            EnumFacing enumfacing = (EnumFacing)state.getValue(Properties.FACING);
+            Block block = worldIn.getBlockState(pos.north()).getBlock();
+            Block block1 = worldIn.getBlockState(pos.south()).getBlock();
+            Block block2 = worldIn.getBlockState(pos.west()).getBlock();
+            Block block3 = worldIn.getBlockState(pos.east()).getBlock();
+            EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+
+            if (enumfacing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock())
+            {
+                enumfacing = EnumFacing.SOUTH;
+            }
+            else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock())
+            {
+                enumfacing = EnumFacing.NORTH;
+            }
+            else if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock())
+            {
+                enumfacing = EnumFacing.EAST;
+            }
+            else if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock())
+            {
+                enumfacing = EnumFacing.WEST;
+            }
+
+            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+        }
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public boolean getIsActive()
+    {
+        return this.isActive;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+        if (this.getIsActive())
+        {
+            EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
             double d0 = (double)pos.getX() + 0.5D;
             double d1 = (double)pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
             double d2 = (double)pos.getZ() + 0.5D;
@@ -101,33 +104,32 @@ public abstract class BlockFurnaceFergo extends BlockContainer
             switch (SwitchEnumFacing.FACING_LOOKUP[enumfacing.ordinal()])
             {
                 case 1:
-                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
-                    world.spawnParticle(EnumParticleTypes.FLAME, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
                     break;
                 case 2:
-                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
-                    world.spawnParticle(EnumParticleTypes.FLAME, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
                     break;
                 case 3:
-                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
-                    world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
                     break;
                 case 4:
-                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
-                    world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
             }
         }
     }
 
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return info.getTileEntity();
+    public abstract boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ);
+
+    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
-    @Override
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(Properties.FACING, placer.getHorizontalFacing().getOpposite());
-    }
+    public abstract void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack);
 
     @Override
     public boolean hasComparatorInputOverride() {
@@ -148,41 +150,27 @@ public abstract class BlockFurnaceFergo extends BlockContainer
 
     @Override
     public IBlockState getStateForEntityRender(IBlockState state) {
-        return this.getDefaultState().withProperty(Properties.FACING, EnumFacing.SOUTH);
+        return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         EnumFacing facing = EnumFacing.getFront(meta);
-
         if (facing.getAxis() == EnumFacing.Axis.Y)
         {
             facing = EnumFacing.NORTH;
         }
 
-        return this.getDefaultState().withProperty(Properties.FACING, facing);
+        return this.getDefaultState().withProperty(FACING, facing);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing)state.getValue(Properties.FACING)).getIndex();
+        return ((EnumFacing)state.getValue(FACING)).getIndex();
     }
 
-    public BlockState createBlockState(IBlockState state)
-    {
-        return new BlockState(this, Properties.FACING);
-    }
-
-    public Block setBasedOnState(CreativeTabs tab)
-    {
-        if (info.getState())
-        {
-            this.setLightLevel(0.875f);
-        }
-        else
-        {
-            this.setCreativeTab(tab);
-        }
-        return this;
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, FACING);
     }
 }

@@ -1,12 +1,10 @@
 package io.github.fergoman123.fergoutil.proxy;
 
-import net.minecraft.block.Block;
-
 public interface IProxy
 {
-    abstract void registerTileEntities();
+    void registerTileEntities();
 
-    abstract void registerRenderers();
+    void registerRenderers();
 
-    abstract void registerEventHandlers();
+    void registerEventHandlers();
 }

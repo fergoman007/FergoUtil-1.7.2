@@ -1,28 +1,30 @@
-package io.github.fergoman123.fergoutil.item;
+package io.github.fergoman123.fergoutil.item.tools;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 
-public class ItemFergo extends Item
+public class ItemAxeFergo extends ItemAxe
 {
     private int mod;
 
-    public ItemFergo(int mod, CreativeTabs tab, String name)
+    public ItemAxeFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
     {
+        super(material);
+        this.setMaxDamage(material.getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
         this.setUnlocalizedName(name);
     }
 
-    public String getUnlocalizedName()
-    {
+    @Override
+    public String getUnlocalizedName() {
         return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
-    public String getUnlocalizedName(ItemStack stack)
-    {
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
         return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
