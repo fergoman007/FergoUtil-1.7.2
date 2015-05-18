@@ -5,7 +5,6 @@ import net.minecraft.block.BlockDirt;
 public final class SwitchDirtType
 {
     public static final int[] TYPE_LOOKUP = new int[BlockDirt.DirtType.values().length];
-    private static final String __OBFID = "CL_00002179";
 
     static
     {

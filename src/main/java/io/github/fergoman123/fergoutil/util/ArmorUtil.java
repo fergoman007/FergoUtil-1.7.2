@@ -1,28 +1,29 @@
 package io.github.fergoman123.fergoutil.util;
 
+import io.github.fergoman123.fergoutil.item.ArmorType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ArmorUtil
 {
-    public static ItemStack getArmorType(EntityPlayer player, int num)
+    public static ItemStack getArmorType(EntityPlayer player, ArmorType type)
     {
-        if (num == 3)
+        if (type == ArmorType.helmet)//3)
         {
-            return player.getCurrentArmor(num);
+            return player.getCurrentArmor(3);
         }
-        else if (num == 2)
+        else if (type == ArmorType.chestplate)//2)
         {
-            return player.getCurrentArmor(num);
+            return player.getCurrentArmor(2);
         }
-        else if (num == 1)
+        else if (type == ArmorType.leggings)//1)
         {
-            return player.getCurrentArmor(num);
+            return player.getCurrentArmor(1);
         }
-        else if (num == 0)
+        else if (type == ArmorType.boots)
         {
-            return player.getCurrentArmor(num);
+            return player.getCurrentArmor(0);
         }
         else
         {
@@ -30,8 +31,8 @@ public class ArmorUtil
         }
     }
 
-    public static Item getArmorItem(EntityPlayer player, int num)
+    public static Item getArmorItem(EntityPlayer player, ArmorType type)
     {
-        return getArmorType(player, num).getItem();
+        return getArmorType(player, type).getItem();
     }
 }

@@ -5,7 +5,6 @@ import net.minecraft.util.EnumFacing;
 public class SwitchAxis
 {
     public static final int[] AXIS_LOOKUP = new int[EnumFacing.Axis.values().length];
-    private static final String __OBFID = "CL_00002101";
 
     static
     {

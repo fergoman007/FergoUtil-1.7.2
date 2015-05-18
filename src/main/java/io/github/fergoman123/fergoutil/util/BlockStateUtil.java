@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+@SuppressWarnings({"unchecked", "rawtypes", "unused"})
 public class BlockStateUtil
 {
     public static IProperty getPropertyByName(IBlockState blockState, String propertyName)

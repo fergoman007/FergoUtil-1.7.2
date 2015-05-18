@@ -46,6 +46,7 @@ public abstract class ItemMultiFergo extends Item
         return subNames;
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List list) {
         for (int i = 0; i < this.getSubNames().length; i++) {

@@ -13,7 +13,8 @@ public abstract class ItemBlockFergo extends ItemBlock
     {
         super(block);
     }
-
+    
+    @SuppressWarnings("rawtypes")
     @Override
     public abstract void addInformation(ItemStack stack, EntityPlayer playerIn, List list, boolean advanced);
 }

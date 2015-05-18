@@ -47,7 +47,9 @@ public abstract class BlockMultiFergo extends Block
     }
 
     public abstract int damageDropped(IBlockState state);
-    public abstract void getSubBlocks(Item item, CreativeTabs tab, List list);
+    
+    @SuppressWarnings("rawtypes")
+	public abstract void getSubBlocks(Item item, CreativeTabs tab, List list);
     public abstract IBlockState getStateFromMeta(int meta);
     public abstract int getMetaFromState(IBlockState state);
     public abstract BlockState createBlockState();

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemSword;
 public class ItemSwordFergo extends ItemSword
 {
     private int mod;
+    private ToolMaterial material;
 
     public ItemSwordFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
     {
@@ -16,6 +17,7 @@ public class ItemSwordFergo extends ItemSword
         this.setMod(mod);
         this.setCreativeTab(tab);
         this.setUnlocalizedName(name);
+        this.material = material;
     }
 
     @Override
@@ -35,5 +37,10 @@ public class ItemSwordFergo extends ItemSword
 
     public int getMod() {
         return mod;
+    }
+
+    public ToolMaterial getMaterial()
+    {
+        return this.material;
     }
 }

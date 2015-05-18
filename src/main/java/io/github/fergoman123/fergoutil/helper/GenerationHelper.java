@@ -1,7 +1,6 @@
 package io.github.fergoman123.fergoutil.helper;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import io.github.fergoman123.fergoutil.worldgen.WorldGenEndMinable;
@@ -13,7 +12,6 @@ public class GenerationHelper
 {
     public static void addOverWorldOreSpawn(Block block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
     {
-        int maxPossY = minY + (maxY - 1);
         assert maxY > minY: "The maximum Y must be greater than the Minimum Y";
         assert maxX > 0 && maxX <= 16: "addOreSpawn: The Maximum X must be greater than 0 and less than 16";
         assert minY > 0: "“addOreSpawn: The Minimum Y must be greater than 0";
@@ -32,7 +30,6 @@ public class GenerationHelper
 
     public static void addNetherOreSpawn(Block block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
     {
-        int maxPossY = minY + (maxY - 1);
         assert maxY > minY: "The maximum Y must be greater than the Minimum Y";
         assert maxX > 0 && maxX <= 16: "addOreSpawn: The Maximum X must be greater than 0 and less than 16";
         assert minY > 0: "“addOreSpawn: The Minimum Y must be greater than 0";
@@ -51,7 +48,6 @@ public class GenerationHelper
 
     public static void addEndOreSpawn(Block block, World world, Random rand, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chancesToSpawn, int minY, int maxY)
     {
-        int maxPossY = minY + (maxY - 1);
         assert maxY > minY: "The maximum Y must be greater than the Minimum Y";
         assert maxX > 0 && maxX <= 16: "addOreSpawn: The Maximum X must be greater than 0 and less than 16";
         assert minY > 0: "“addOreSpawn: The Minimum Y must be greater than 0";

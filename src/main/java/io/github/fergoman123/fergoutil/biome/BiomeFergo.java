@@ -10,6 +10,7 @@ public class BiomeFergo extends BiomeGenBase
 {
     private int[] color;
 
+    @SuppressWarnings("rawtypes")
     public BiomeFergo(int biomeId, String biomeName, float rainfall, float temperature, List spawnableCreatureList, int[] color) {
         super(biomeId);
         this.setBiomeName(biomeName);

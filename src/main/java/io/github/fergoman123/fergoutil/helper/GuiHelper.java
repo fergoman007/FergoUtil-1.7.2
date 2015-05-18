@@ -9,8 +9,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import java.util.Objects;
-
 public class GuiHelper
 {
     public static void bindTexture(ResourceLocation texture)

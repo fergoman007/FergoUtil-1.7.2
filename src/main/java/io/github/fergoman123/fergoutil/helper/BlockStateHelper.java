@@ -18,6 +18,7 @@ public class BlockStateHelper
         return state.getBlock();
     }
 
+    @SuppressWarnings("rawtypes")
     public static IBlockState getStateWithProps(Block block, IProperty property, Comparable comparable)
     {
         return block.getDefaultState().withProperty(property, comparable);

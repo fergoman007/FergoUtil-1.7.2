@@ -36,4 +36,9 @@ public class ItemHoeFergo extends ItemHoe
     public int getMod() {
         return mod;
     }
+
+    public ToolMaterial getMaterial()
+    {
+        return this.theToolMaterial;
+    }
 }

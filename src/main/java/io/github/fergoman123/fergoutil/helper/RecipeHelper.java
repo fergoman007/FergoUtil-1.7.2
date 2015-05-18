@@ -41,7 +41,7 @@ public final class RecipeHelper
         GameRegistry.addRecipe(output, recipe);
     }
 
-    public static void addShapelessRecipe(ItemStack output, ItemStack... recipe)
+    public static void addShapelessRecipe(ItemStack output, Object... recipe)
     {
         GameRegistry.addShapelessRecipe(output, recipe);
     }

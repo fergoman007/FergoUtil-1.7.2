@@ -5,7 +5,6 @@ import net.minecraft.block.BlockLog.EnumAxis;
 public class SwitchEnumAxis
 {
     public static final int[] AXIS_LOOKUP = new int[EnumAxis.values().length];
-    private static final String __OBFID = "CL_00002083";
 
     static
     {
