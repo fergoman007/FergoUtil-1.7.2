@@ -4,6 +4,7 @@ import io.github.fergoman123.fergoutil.helper.NameHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class BlockFergo extends Block
 {
@@ -36,5 +37,10 @@ public class BlockFergo extends Block
 
     public int getMod() {
         return mod;
+    }
+
+    public Item getItemFromBlock(Block block)
+    {
+        return Item.getItemFromBlock(block);
     }
 }
