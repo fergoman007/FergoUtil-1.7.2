@@ -2,7 +2,6 @@ package io.github.fergoman123.fergoutil.helper;
 
 import io.github.fergoman123.fergoutil.block.BlockMultiFergo;
 import io.github.fergoman123.fergoutil.item.ItemBlockVariants;
-import io.github.fergoman123.fergoutil.model.ModelHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
