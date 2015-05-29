@@ -1,7 +1,10 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.ToolInfo;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
@@ -9,16 +12,16 @@ import net.minecraft.item.ItemStack;
 public class ItemShearsFergo extends ItemShears
 {
     private int mod;
-    private Item repairItem;
+    private ToolInfo info;
 
-    public ItemShearsFergo(ToolMaterial material, int mod, CreativeTabs tab, Item repairItem, String name)
+    public ItemShearsFergo(int mod, CreativeTabs tab, ToolInfo info)
     {
         super();
-        this.setMaxDamage(material.getMaxUses());
+        this.setMaxDamage(info.getMaterial().getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setRepairItem(repairItem);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName(info.getName());
+        this.info = info;
     }
 
     public String getUnlocalizedName()
@@ -33,7 +36,7 @@ public class ItemShearsFergo extends ItemShears
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.isItemEqual(new ItemStack(this.getRepairItem())) || super.getIsRepairable(toRepair, repair);
+        return repair.isItemEqual(getInfo().getMaterial().getRepairItemStack()) || super.getIsRepairable(toRepair, repair);
     }
 
     public void setMod(int mod) {
@@ -44,11 +47,12 @@ public class ItemShearsFergo extends ItemShears
         return mod;
     }
 
-    public void setRepairItem(Item repairItem) {
-        this.repairItem = repairItem;
+    public ToolInfo getInfo()
+    {
+        return info;
     }
 
-    public Item getRepairItem() {
-        return repairItem;
+    public ModelResourceLocation getModel() {
+        return new ModelResourceLocation(getInfo().getModel(), "inventory");
     }
 }

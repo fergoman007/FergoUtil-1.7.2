@@ -1,6 +1,8 @@
 package io.github.fergoman123.fergoutil.item.tools;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.ToolInfo;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -8,14 +10,16 @@ import net.minecraft.item.ItemStack;
 public class ItemPickaxeFergo extends ItemPickaxe
 {
     private int mod;
+    private ToolInfo info;
 
-    public ItemPickaxeFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
+    public ItemPickaxeFergo(int mod, CreativeTabs tab, ToolInfo info)
     {
-        super(material);
-        this.setMaxDamage(material.getMaxUses());
+        super(info.getMaterial());
+        this.setMaxDamage(info.getMaterial().getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName(info.getName());
+        this.info = info;
     }
 
     @Override
@@ -35,5 +39,15 @@ public class ItemPickaxeFergo extends ItemPickaxe
 
     public int getMod() {
         return mod;
+    }
+
+    public ToolInfo getInfo()
+    {
+        return info;
+    }
+
+    public ModelResourceLocation getModel()
+    {
+        return new ModelResourceLocation(getInfo().getModel(), "inventory");
     }
 }

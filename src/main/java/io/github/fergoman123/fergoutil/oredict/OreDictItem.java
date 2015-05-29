@@ -1,7 +1,8 @@
 package io.github.fergoman123.fergoutil.oredict;
 
 import net.minecraft.item.Item;
-//todo ore dictionary item
+import net.minecraftforge.oredict.OreDictionary;
+
 public class OreDictItem
 {
     private String name;
@@ -19,5 +20,10 @@ public class OreDictItem
 
     public Item getItem() {
         return item;
+    }
+
+    public void registerOre()
+    {
+        OreDictionary.registerOre(this.name, this.getItem());
     }
 }

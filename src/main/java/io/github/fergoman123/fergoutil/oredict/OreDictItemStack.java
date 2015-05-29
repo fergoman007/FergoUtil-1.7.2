@@ -1,6 +1,7 @@
 package io.github.fergoman123.fergoutil.oredict;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDictItemStack
 {
@@ -19,5 +20,10 @@ public class OreDictItemStack
 
     public ItemStack getStack() {
         return stack;
+    }
+
+    public void registerOre()
+    {
+        OreDictionary.registerOre(this.name, this.stack);
     }
 }

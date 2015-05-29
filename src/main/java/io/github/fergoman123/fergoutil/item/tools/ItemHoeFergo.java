@@ -1,6 +1,8 @@
 package io.github.fergoman123.fergoutil.item.tools;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.ToolInfo;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
@@ -8,14 +10,16 @@ import net.minecraft.item.ItemStack;
 public class ItemHoeFergo extends ItemHoe
 {
     private int mod;
+    private ToolInfo info;
 
-    public ItemHoeFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
+    public ItemHoeFergo(int mod, CreativeTabs tab, ToolInfo info)
     {
-        super(material);
-        this.setMaxDamage(material.getMaxUses());
+        super(info.getMaterial());
+        this.setMaxDamage(info.getMaterial().getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName(info.getName());
+        this.info = info;
     }
 
     @Override
@@ -37,8 +41,13 @@ public class ItemHoeFergo extends ItemHoe
         return mod;
     }
 
-    public ToolMaterial getMaterial()
+    public ToolInfo getInfo()
     {
-        return this.theToolMaterial;
+        return info;
+    }
+
+    public ModelResourceLocation getModel()
+    {
+        return new ModelResourceLocation(getInfo().getName(), "inventory");
     }
 }

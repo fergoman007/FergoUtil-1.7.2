@@ -23,6 +23,6 @@ public class ItemBlockVariants extends ItemBlock
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         BlockMultiFergo block = (BlockMultiFergo)this.block;
-        return super.getUnlocalizedName(stack) + "." + block.getSubNames()[stack.getItemDamage()];
+        return super.getUnlocalizedName(stack) + "." + block.getInfo().getNames()[stack.getItemDamage()];
     }
 }

@@ -1,5 +1,7 @@
 package io.github.fergoman123.fergoutil.block;
 
+import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.BlockInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
@@ -33,13 +35,20 @@ public abstract class BlockLeavesFergo extends BlockLeavesBase implements IShear
     protected boolean isTransparent;
 
     private int mod;
+    private BlockInfo info;
 
-    public BlockLeavesFergo(int mod, CreativeTabs tab, String name)
+    public BlockLeavesFergo(int mod, CreativeTabs tab, BlockInfo info)
     {
         super(Material.leaves, false);
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName(info.getName());
+        this.info = info;
+    }
+
+    @Override
+    public String getUnlocalizedName() {
+        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), getInfo().getName());
     }
 
     @SideOnly(Side.CLIENT)
@@ -331,5 +340,9 @@ public abstract class BlockLeavesFergo extends BlockLeavesBase implements IShear
 
     public int getMod() {
         return mod;
+    }
+
+    public BlockInfo getInfo() {
+        return info;
     }
 }

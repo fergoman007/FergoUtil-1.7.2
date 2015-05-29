@@ -1,5 +1,6 @@
 package io.github.fergoman123.fergoutil.block;
 
+import io.github.fergoman123.fergoutil.info.BlockInfo;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,8 +12,8 @@ import net.minecraft.world.World;
 public abstract class BlockContainerFergo extends BlockFergo implements ITileEntityProvider
 {
 
-    public BlockContainerFergo(Material material, int mod, CreativeTabs tab, float hardness, float resistance, String name) {
-        super(material, mod, tab, hardness, resistance, name);
+    public BlockContainerFergo(int mod, CreativeTabs tab, float hardness, float resistance, BlockInfo info) {
+        super(mod, tab, hardness, resistance, info);
         this.isBlockContainer = true;
     }
 

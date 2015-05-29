@@ -13,15 +13,13 @@ public abstract class GuiFurnaceFergo extends GuiContainer
 {
     public InventoryPlayer invPlayer;
     public IInventory furnace;
-    public ResourceLocation texture;
 
 
-    public GuiFurnaceFergo(Container container, InventoryPlayer invPlayer, IInventory furnace, ResourceLocation texture)
+    public GuiFurnaceFergo(Container container, InventoryPlayer invPlayer, IInventory furnace)
     {
         super(container);
         this.furnace = furnace;
         this.invPlayer = invPlayer;
-        this.texture = texture;
     }
 
     public abstract void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);

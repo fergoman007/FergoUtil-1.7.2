@@ -1,38 +1,41 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.BlockInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class BlockFergo extends Block
 {
     private int mod;
-    private String name;
+    private BlockInfo info;
 
-    public BlockFergo(Material material, int mod, CreativeTabs tab, float hardness, float resistance, String name)
+    public BlockFergo(int mod, CreativeTabs tab, float hardness, float resistance, BlockInfo info)
     {
-        super(material);
+        super(info.getMaterial());
         this.setMod(mod);
         this.setCreativeTab(tab);
         this.setHardness(hardness);
         this.setResistance(resistance);
-        this.setUnlocalizedName(name);
-        this.name = name;
+        this.setUnlocalizedName(info.getName());
+        this.info = info;
     }
 
     public String getUnlocalizedName()
     {
-        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), this.getName());
+        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), getInfo().getName());
+    }
+
+    public ModelResourceLocation getModel()
+    {
+        return new ModelResourceLocation(getInfo().getModel(), "inventory");
     }
 
     public void setMod(int mod) {
         this.mod = mod;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getMod() {
@@ -42,5 +45,10 @@ public class BlockFergo extends Block
     public Item getItemFromBlock(Block block)
     {
         return Item.getItemFromBlock(block);
+    }
+
+    public BlockInfo getInfo()
+    {
+        return info;
     }
 }

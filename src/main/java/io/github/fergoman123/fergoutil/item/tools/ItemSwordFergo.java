@@ -1,6 +1,8 @@
 package io.github.fergoman123.fergoutil.item.tools;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
+import io.github.fergoman123.fergoutil.info.ToolInfo;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -8,16 +10,16 @@ import net.minecraft.item.ItemSword;
 public class ItemSwordFergo extends ItemSword
 {
     private int mod;
-    private ToolMaterial material;
+    private ToolInfo info;
 
-    public ItemSwordFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
+    public ItemSwordFergo(int mod, CreativeTabs tab, ToolInfo info)
     {
-        super(material);
-        this.setMaxDamage(material.getMaxUses());
+        super(info.getMaterial());
+        this.setMaxDamage(info.getMaterial().getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(name);
-        this.material = material;
+        this.setUnlocalizedName(info.getName());
+        this.info = info;
     }
 
     @Override
@@ -30,6 +32,11 @@ public class ItemSwordFergo extends ItemSword
         return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
+    public ModelResourceLocation getModel()
+    {
+        return new ModelResourceLocation(getInfo().getModel(), "inventory");
+    }
+
     public void setMod(int mod)
     {
         this.mod = mod;
@@ -39,8 +46,8 @@ public class ItemSwordFergo extends ItemSword
         return mod;
     }
 
-    public ToolMaterial getMaterial()
+    public ToolInfo getInfo()
     {
-        return this.material;
+        return info;
     }
 }
