@@ -1,11 +1,11 @@
 package io.github.fergoman123.fergoutil.helper;
 
-import org.lwjgl.opengl.GL11;
+import net.minecraft.client.renderer.GlStateManager;
 
 public class GLStateHelper
 {
     public static void color()
     {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
 }

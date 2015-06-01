@@ -3,9 +3,9 @@ package io.github.fergoman123.fergoutil.block;
 import io.github.fergoman123.fergoutil.helper.NameHelper;
 import io.github.fergoman123.fergoutil.info.MultiBlockInfo;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -50,4 +50,18 @@ public abstract class BlockMultiFergo extends Block
     public abstract IBlockState getStateFromMeta(int meta);
     public abstract int getMetaFromState(IBlockState state);
     public abstract BlockState createBlockState();
+
+    public ModelResourceLocation[] getModels()
+    {
+        ModelResourceLocation[] models = new ModelResourceLocation[getInfo().getModels().length];
+        for(ModelResourceLocation model: models)
+        {
+            for (String modelName : getInfo().getModels())
+            {
+                model = new ModelResourceLocation(modelName, "inventory");
+            }
+        }
+
+        return models;
+    }
 }
