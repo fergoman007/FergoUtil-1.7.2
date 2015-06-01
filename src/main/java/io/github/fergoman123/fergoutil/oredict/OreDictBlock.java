@@ -1,6 +1,7 @@
 package io.github.fergoman123.fergoutil.oredict;
 
 import net.minecraft.block.Block;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDictBlock
 {
@@ -19,5 +20,10 @@ public class OreDictBlock
 
     public Block getBlock() {
         return block;
+    }
+
+    public void registerOre()
+    {
+        OreDictionary.registerOre(name, block);
     }
 }
