@@ -64,17 +64,17 @@ public final class NameHelper
 
     public static String formatItemName(String modid, String name)
     {
-        return String.format("item.%s.%s", modid.toLowerCase(), name);
+        return String.format("item.%s:%s", modid.toLowerCase(), name);
     }
 
     public static String formatBlockName(String modid, String name)
     {
-        return String.format("tile.%s.%s", modid.toLowerCase(), name);
+        return String.format("tile.%s:%s", modid.toLowerCase(), name);
     }
 
     public static String formatMetadataItem(ItemStack stack, String modid, String name, String[] subNames)
     {
-        return String.format("item.%s.%s.%s", modid.toLowerCase(), name, subNames[MathHelper.clamp_int(stack.getItemDamage(), 0, subNames.length - 1)]);
+        return String.format("item.%s:%s.%s", modid.toLowerCase(), name, subNames[MathHelper.clamp_int(stack.getItemDamage(), 0, subNames.length - 1)]);
     }
 
     public static String getBowModel(String modid, String name, String pull)

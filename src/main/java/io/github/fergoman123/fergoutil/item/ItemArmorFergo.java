@@ -1,7 +1,7 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.info.ArmorInfo;
+import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -11,20 +11,20 @@ import net.minecraft.item.ItemStack;
 public class ItemArmorFergo extends ItemArmor
 {
     private int mod;
-    private ArmorInfo info;
+    private ArmorMaterial material;
 
-    public ItemArmorFergo(int mod, CreativeTabs tab, ArmorInfo info)
+    public ItemArmorFergo(ArmorMaterial material, int mod, CreativeTabs tab, ArmorType type, String name)
     {
-        super(info.getMaterial(), 0, info.getType().ordinal());
+        super(material, 0, type.ordinal());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(info.getName());
-        this.info = info;
+        this.setUnlocalizedName(name);
+        this.material = material;
     }
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.isItemEqual(new ItemStack(getInfo().getMaterial().getRepairItem())) || super.getIsRepairable(toRepair, repair);
+        return repair.isItemEqual(new ItemStack(material.getRepairItem())) || super.getIsRepairable(toRepair, repair);
     }
 
     @Override
@@ -60,25 +60,25 @@ public class ItemArmorFergo extends ItemArmor
 
     public int getDurability(int armorType)
     {
-        return info.getMaterial().getDurability(armorType);
+        return material.getDurability(armorType);
     }
 
     public int getReductAmount(int armorType)
     {
-        return info.getMaterial().getDamageReductionAmount(armorType);
+        return material.getDamageReductionAmount(armorType);
     }
 
     public int getEnchantability()
     {
-        return info.getMaterial().getEnchantability();
+        return material.getEnchantability();
     }
 
     public String getArmorName()
     {
-        return info.getMaterial().getName();
+        return material.getName();
     }
 
-    public ArmorInfo getInfo() {
-        return info;
+    public void registerModel(){
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

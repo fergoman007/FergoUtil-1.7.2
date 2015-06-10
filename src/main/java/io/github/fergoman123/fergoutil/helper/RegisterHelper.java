@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,27 +38,24 @@ public final class RegisterHelper
         GameRegistry.registerWorldGenerator(worldGen, weight);
     }
 
-    public static void registerBlock(Block block){
-        if (block instanceof BlockFergo) {
-            BlockFergo blockFergo = (BlockFergo)block;
-            GameRegistry.registerBlock(blockFergo, blockFergo.getInfo().getName());
-            getModelMesher().register(Item.getItemFromBlock(blockFergo), 0, blockFergo.getModel());
-            ModelBakery.addVariantName(Item.getItemFromBlock(blockFergo), blockFergo.getInfo().getModel());
-        }
-        else if (block instanceof BlockMultiFergo)
-        {
-            BlockMultiFergo multiFergo = (BlockMultiFergo)block;
-            GameRegistry.registerBlock(multiFergo, ItemBlockVariants.class, multiFergo.getInfo().getName());
-            for (int i = 0; i < multiFergo.getInfo().getNames().length; i++)
-            {
-                getModelMesher().register(Item.getItemFromBlock(multiFergo), i, multiFergo.getModels()[i]);
-                ModelBakery.addVariantName(Item.getItemFromBlock(multiFergo), multiFergo.getInfo().getNames());
-            }
-        }
-    }
-
     public static ItemModelMesher getModelMesher()
     {
         return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+    }
+
+    public static void registerModel(Item item, int meta, String name){
+        getModelMesher().register(item, meta, new ModelResourceLocation(name, "inventory"));
+    }
+
+    public static void registerModel(Item item, String name) {
+        registerModel(item, 0, name);
+    }
+
+    public static void registerModel(Block block, int meta, String name){
+        registerModel(Item.getItemFromBlock(block), meta, name);
+    }
+
+    public static void registerModel(Block block, String name){
+        registerModel(block, 0, name);
     }
 }

@@ -1,7 +1,7 @@
 package io.github.fergoman123.fergoutil.block;
 
-import io.github.fergoman123.fergoutil.info.BlockInfo;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
@@ -24,9 +24,9 @@ public abstract class BlockSlabFergo extends BlockFergo
 {
     public static final PropertyEnum HALF = PropertyEnum.create("half", EnumBlockHalf.class);
 
-    public BlockSlabFergo(int mod, CreativeTabs tabs, BlockInfo info)
+    public BlockSlabFergo(Material material, int mod, CreativeTabs tabs, String name)
     {
-        super(mod, tabs, 2.0f, 5.0f, info);
+        super(material, mod, tabs, 2.0f, 5.0f, name);
 
         if (this.isDouble())
         {
@@ -126,7 +126,7 @@ public abstract class BlockSlabFergo extends BlockFergo
             IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
             boolean flag = isSlab(iblockstate.getBlock()) && iblockstate.getValue(HALF) == EnumBlockHalf.TOP;
             boolean flag1 = isSlab(iblockstate1.getBlock()) && iblockstate1.getValue(HALF) == EnumBlockHalf.TOP;
-            return flag1 ? (side == EnumFacing.DOWN ? true : (side == EnumFacing.UP && super.shouldSideBeRendered(worldIn, pos, side) ? true : !isSlab(iblockstate.getBlock()) || !flag)) : (side == EnumFacing.UP ? true : (side == EnumFacing.DOWN && super.shouldSideBeRendered(worldIn, pos, side) ? true : !isSlab(iblockstate.getBlock()) || flag));
+            return flag1 ? (side == EnumFacing.DOWN || (side == EnumFacing.UP && super.shouldSideBeRendered(worldIn, pos, side) || !isSlab(iblockstate.getBlock()) || !flag)) : (side == EnumFacing.UP || (side == EnumFacing.DOWN && super.shouldSideBeRendered(worldIn, pos, side) || !isSlab(iblockstate.getBlock()) || flag));
         }
     }
 

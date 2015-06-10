@@ -1,11 +1,10 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.info.BowInfo;
+import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 
@@ -13,21 +12,20 @@ public class ItemBowFergo extends ItemBow
 {
 
     private int mod;
-    private BowInfo info;
+    private ToolMaterial material;
 
-    public ItemBowFergo(int mod, CreativeTabs tab, BowInfo info)
+    public ItemBowFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
     {
         super();
-        this.setMaxDamage(info.getMaterial().getMaxUses());
+        this.setMaxDamage(material.getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(info.getName());
-        this.info = info;
+        this.setUnlocalizedName(name);
+        this.material = material;
     }
 
-    @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.isItemEqual(info.getMaterial().getRepairItemStack()) || super.getIsRepairable(toRepair, repair);
+        return repair.isItemEqual(material.getRepairItemStack()) || super.getIsRepairable(toRepair, repair);
     }
 
     public String getUnlocalizedName() {
@@ -41,22 +39,27 @@ public class ItemBowFergo extends ItemBow
     @Override
     public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
     {
+        String[] pulls = new String[]{"_0", "_1", "_2",};
+        String standby = String.format("%s:%s", NameHelper.getModString(this.getMod()), getUnlocalizedName(stack).substring(5));
+        String pull0 = String.format("%s:%s%s", NameHelper.getModString(this.getMod()), getUnlocalizedName(stack).substring(5), pulls[0]);
+        String pull1 = String.format("%s:%s%s", NameHelper.getModString(this.getMod()), getUnlocalizedName(stack).substring(5), pulls[1]);
+        String pull2 = String.format("%s:%s%s", NameHelper.getModString(this.getMod()), getUnlocalizedName(stack).substring(5), pulls[2]);
 
-        ModelResourceLocation modelresourcelocation = new ModelResourceLocation(info.getIdleModel(), "inventory");
+        ModelResourceLocation modelresourcelocation = new ModelResourceLocation(standby, "inventory");
 
         if(stack.getItem() == this && player.getItemInUse() != null)
         {
             if(useRemaining >= 18)
             {
-                modelresourcelocation = new ModelResourceLocation(info.getPullModel0(), "inventory");
+                modelresourcelocation = new ModelResourceLocation(pull0, "inventory");
             }
             else if(useRemaining > 13)
             {
-                modelresourcelocation = new ModelResourceLocation(info.getPullModel1(), "inventory");
+                modelresourcelocation = new ModelResourceLocation(pull1, "inventory");
             }
             else if(useRemaining > 0)
             {
-                modelresourcelocation = new ModelResourceLocation(info.getPullModel2(), "inventory");
+                modelresourcelocation = new ModelResourceLocation(pull2, "inventory");
             }
         }
         return modelresourcelocation;
@@ -68,5 +71,12 @@ public class ItemBowFergo extends ItemBow
 
     public int getMod() {
         return mod;
+    }
+
+    public void registerModels(){
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5) + "_0");
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5) + "_1");
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5) + "_2");
     }
 }

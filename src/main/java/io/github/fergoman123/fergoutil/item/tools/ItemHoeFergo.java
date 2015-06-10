@@ -1,8 +1,7 @@
 package io.github.fergoman123.fergoutil.item.tools;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.info.ToolInfo;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
@@ -10,16 +9,20 @@ import net.minecraft.item.ItemStack;
 public class ItemHoeFergo extends ItemHoe
 {
     private int mod;
-    private ToolInfo info;
+    private ToolMaterial material;
 
-    public ItemHoeFergo(int mod, CreativeTabs tab, ToolInfo info)
+    public ItemHoeFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
     {
-        super(info.getMaterial());
-        this.setMaxDamage(info.getMaterial().getMaxUses());
+        super(material);
+        this.setMaxDamage(material.getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(info.getName());
-        this.info = info;
+        this.setUnlocalizedName(name);
+        this.material = material;
+    }
+
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair){
+        return repair.isItemEqual(material.getRepairItemStack()) || super.getIsRepairable(toRepair, repair);
     }
 
     @Override
@@ -41,13 +44,7 @@ public class ItemHoeFergo extends ItemHoe
         return mod;
     }
 
-    public ToolInfo getInfo()
-    {
-        return info;
-    }
-
-    public ModelResourceLocation getModel()
-    {
-        return new ModelResourceLocation(getInfo().getName(), "inventory");
+    public void registerModel(){
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

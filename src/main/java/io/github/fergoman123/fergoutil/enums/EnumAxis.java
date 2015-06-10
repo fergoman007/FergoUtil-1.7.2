@@ -8,7 +8,7 @@ public enum EnumAxis implements IStringSerializable
     X("x"),
     Y("y"),
     Z("z"),
-    NONE("none");
+    NONE("NONE");
 
     private final String name;
 

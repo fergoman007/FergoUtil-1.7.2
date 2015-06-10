@@ -1,8 +1,7 @@
 package io.github.fergoman123.fergoutil.item.tools;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.info.ToolInfo;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
@@ -10,24 +9,26 @@ import net.minecraft.item.ItemStack;
 public class ItemShovelFergo extends ItemSpade
 {
     private int mod;
-    private ToolInfo info;
+    private ToolMaterial material;
 
-    public ItemShovelFergo(int mod, CreativeTabs tab, ToolInfo info)
+    public ItemShovelFergo(ToolMaterial material, int mod, CreativeTabs tab, String name)
     {
-        super(info.getMaterial());
-        this.setMaxDamage(info.getMaterial().getMaxUses());
+        super(material);
+        this.setMaxDamage(material.getMaxUses());
         this.setMod(mod);
         this.setCreativeTab(tab);
-        this.setUnlocalizedName(info.getName());
-        this.info = info;
+        this.setUnlocalizedName(name);
+        this.material = material;
     }
 
-    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return repair.isItemEqual(material.getRepairItemStack()) || super.getIsRepairable(toRepair, repair);
+    }
+
     public String getUnlocalizedName() {
         return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
-    @Override
     public String getUnlocalizedName(ItemStack stack) {
         return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
@@ -41,13 +42,7 @@ public class ItemShovelFergo extends ItemSpade
         return mod;
     }
 
-    public ToolInfo getInfo()
-    {
-        return info;
-    }
-
-    public ModelResourceLocation getModel()
-    {
-        return new ModelResourceLocation(getInfo().getModel(), "inventory");
+    public void registerModel(){
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

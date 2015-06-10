@@ -1,7 +1,6 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.enums.SwitchEnumFacing;
-import io.github.fergoman123.fergoutil.info.BlockInfo;
 import io.github.fergoman123.fergoutil.interfaces.IBlockFurnaceFergo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,8 +28,8 @@ public abstract class BlockFurnaceFergo extends BlockContainerFergo implements I
     private boolean isActive;
     public static boolean keepInventory;
 
-    public BlockFurnaceFergo(boolean isActive, int mod, CreativeTabs tab, BlockInfo info) {
-        super(mod, null, 3.5f, 2000f, info);
+    public BlockFurnaceFergo(Material material, boolean isActive, int mod, CreativeTabs tab, String name) {
+        super(material, mod, null, 3.5f, 2000f, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setIsActive(isActive);
         if (isActive)

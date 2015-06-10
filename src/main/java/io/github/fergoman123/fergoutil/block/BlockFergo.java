@@ -1,9 +1,10 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.info.BlockInfo;
+import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -11,27 +12,20 @@ import net.minecraft.item.Item;
 public class BlockFergo extends Block
 {
     private int mod;
-    private BlockInfo info;
 
-    public BlockFergo(int mod, CreativeTabs tab, float hardness, float resistance, BlockInfo info)
+    public BlockFergo(Material material, int mod, CreativeTabs tab, float hardness, float resistance, String name)
     {
-        super(info.getMaterial());
+        super(material);
         this.setMod(mod);
         this.setCreativeTab(tab);
         this.setHardness(hardness);
         this.setResistance(resistance);
-        this.setUnlocalizedName(info.getName());
-        this.info = info;
+        this.setUnlocalizedName(name);
     }
 
     public String getUnlocalizedName()
     {
-        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), getInfo().getName());
-    }
-
-    public ModelResourceLocation getModel()
-    {
-        return new ModelResourceLocation(getInfo().getModel(), "inventory");
+        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public void setMod(int mod) {
@@ -47,8 +41,7 @@ public class BlockFergo extends Block
         return Item.getItemFromBlock(block);
     }
 
-    public BlockInfo getInfo()
-    {
-        return info;
+    public void registerModel(){
+        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }
