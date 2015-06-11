@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -38,7 +40,7 @@ public abstract class BlockLeavesFergo extends BlockLeavesBase implements IShear
 
     private int mod;
 
-    public BlockLeavesFergo(int mod, CreativeTabs tab, String name){
+    public BlockLeavesFergo(int mod, CreativeTabs tab, String name) {
         super(Material.leaves, false);
         this.setTickRandomly(true);
         this.setCreativeTab(tab);
@@ -235,7 +237,9 @@ public abstract class BlockLeavesFergo extends BlockLeavesBase implements IShear
         super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
     }
 
-    public void dropApple(World world, BlockPos pos, IBlockState state, int chance){}
+    public void dropApple(World world, BlockPos pos, IBlockState state, int chance){
+        spawnAsEntity(world, pos, new ItemStack(Items.apple, 1, 0));
+    }
 
     public int getSaplingDropChance(IBlockState state){return 20;}
 
@@ -291,6 +295,10 @@ public abstract class BlockLeavesFergo extends BlockLeavesBase implements IShear
             this.dropApple((World)world, pos, state, chance);
         ret.addAll(this.captureDrops(false));
         return ret;
+    }
+
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune){
+        return new ArrayList<ItemStack>(Collections.singletonList(new ItemStack(Item.getItemFromBlock(this), 1, 0)));
     }
 
     public String getUnlocalizedName(){

@@ -7,6 +7,4 @@ public interface IProxy
     void registerRenderers();
 
     void registerEventHandlers();
-
-    void registerForMeshing(ModelEntry entry);
 }

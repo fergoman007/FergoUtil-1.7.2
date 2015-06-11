@@ -62,23 +62,23 @@ public final class NameHelper
         return text.toLowerCase();
     }
 
-    public static String formatItemName(String modid, String name)
+    public static String formatItemName(int mod, String name)
     {
-        return String.format("item.%s:%s", modid.toLowerCase(), name);
+        return String.format("item.%s:%s", getModString(mod).toLowerCase(), name);
     }
 
-    public static String formatBlockName(String modid, String name)
+    public static String formatBlockName(int mod, String name)
     {
-        return String.format("tile.%s:%s", modid.toLowerCase(), name);
+        return String.format("tile.%s:%s", getModString(mod).toLowerCase(), name);
     }
 
-    public static String formatMetadataItem(ItemStack stack, String modid, String name, String[] subNames)
+    public static String formatMetadataItem(ItemStack stack, int mod, String name, String[] subNames)
     {
-        return String.format("item.%s:%s.%s", modid.toLowerCase(), name, subNames[MathHelper.clamp_int(stack.getItemDamage(), 0, subNames.length - 1)]);
+        return String.format("item.%s:%s.%s", getModString(mod).toLowerCase(), name, subNames[MathHelper.clamp_int(stack.getItemDamage(), 0, subNames.length - 1)]);
     }
 
-    public static String getBowModel(String modid, String name, String pull)
+    public static String getBowModel(int mod, String name, String pull)
     {
-        return String.format("%s:%s%s", modid.toLowerCase(), name, pull);
+        return String.format("%s:%s%s", getModString(mod).toLowerCase(), name, pull);
     }
 }

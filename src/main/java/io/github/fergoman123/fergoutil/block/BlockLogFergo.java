@@ -30,7 +30,7 @@ public abstract class BlockLogFergo extends BlockLog
     }
 
     public String getUnlocalizedName() {
-        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatBlockName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public void setMod(int mod) {

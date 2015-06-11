@@ -31,7 +31,7 @@ public abstract class BlockMultiFergo extends Block
 
     @Override
     public String getUnlocalizedName() {
-        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatBlockName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public void setMod(int mod) {
@@ -56,7 +56,7 @@ public abstract class BlockMultiFergo extends Block
 
     public void registerModels(){
         for (int i = 0; i < subNames.length; i++) {
-            RegisterHelper.registerModel(Item.getItemFromBlock(this), i, NameHelper.getModString(mod) + subNames[i]);
+            RegisterHelper.registerModel(Item.getItemFromBlock(this), i, NameHelper.getModString(getMod()) + subNames[i]);
         }
     }
 }
