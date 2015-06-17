@@ -56,11 +56,11 @@ public final class RegisterHelper
         registerModel(block, 0, name);
     }
 
-    public static void addVariantName(Item item, String variant){
+    public static void addVariantName(Item item, String... variant){
         ModelBakery.addVariantName(item, variant);
     }
 
-    public static void addVariantName(Block block, String variant){
+    public static void addVariantName(Block block, String... variant){
         addVariantName(Item.getItemFromBlock(block), variant);
     }
 }
