@@ -302,14 +302,10 @@ public abstract class BlockLeavesFergo extends BlockLeavesBase implements IShear
     }
 
     public String getUnlocalizedName(){
-        return NameHelper.formatBlockName(NameHelper.getModString(mod), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatBlockName(mod, NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public Item getItemFromBlock(Block block){
         return Item.getItemFromBlock(block);
-    }
-
-    public void registerModel(){
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

@@ -40,6 +40,4 @@ public abstract class BlockLogFergo extends BlockLog
     public int getMod() {
         return mod;
     }
-
-    public abstract void registerModels();
 }

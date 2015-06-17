@@ -23,11 +23,11 @@ public abstract class ItemMultiFergo extends Item
 
     public String getUnlocalizedName()
     {
-        return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatItemName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public String getUnlocalizedName(ItemStack stack) {
-        return NameHelper.formatMetadataItem(stack, NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)), this.getSubNames());
+        return NameHelper.formatMetadataItem(stack, this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)), this.getSubNames());
     }
 
     public void setMod(int mod) {
@@ -48,6 +48,7 @@ public abstract class ItemMultiFergo extends Item
     public void registerModels(){
         for (int i = 0; i < getSubNames().length; i++) {
             RegisterHelper.registerModel(this, i, NameHelper.getModString(getMod()) + getSubNames()[i]);
+            RegisterHelper.addVariantName(this, NameHelper.getModString(getMod()) + getSubNames()[i]);
         }
     }
 

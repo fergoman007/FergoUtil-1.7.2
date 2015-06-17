@@ -28,12 +28,12 @@ public class ItemAxeFergo extends ItemAxe
 
     @Override
     public String getUnlocalizedName() {
-        return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatItemName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+        return NameHelper.formatItemName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
     public void setMod(int mod)
@@ -43,9 +43,5 @@ public class ItemAxeFergo extends ItemAxe
 
     public int getMod() {
         return mod;
-    }
-
-    public void registerModel(){
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

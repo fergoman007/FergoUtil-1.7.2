@@ -4,8 +4,6 @@ import io.github.fergoman123.fergoutil.helper.NameHelper;
 import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -25,7 +23,7 @@ public class BlockFergo extends Block
 
     public String getUnlocalizedName()
     {
-        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatBlockName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public void setMod(int mod) {
@@ -39,9 +37,5 @@ public class BlockFergo extends Block
     public Item getItemFromBlock(Block block)
     {
         return Item.getItemFromBlock(block);
-    }
-
-    public void registerModel(){
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

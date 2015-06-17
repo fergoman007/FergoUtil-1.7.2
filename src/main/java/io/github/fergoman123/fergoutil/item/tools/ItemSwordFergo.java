@@ -22,11 +22,11 @@ public class ItemSwordFergo extends ItemSword
     }
 
     public String getUnlocalizedName() {
-        return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatItemName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public String getUnlocalizedName(ItemStack stack) {
-        return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+        return NameHelper.formatItemName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair){
@@ -43,6 +43,5 @@ public class ItemSwordFergo extends ItemSword
     }
 
     public void registerModel(){
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

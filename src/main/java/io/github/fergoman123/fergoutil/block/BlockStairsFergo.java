@@ -5,7 +5,6 @@ import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 
 public class BlockStairsFergo extends BlockStairs
 {
@@ -21,7 +20,7 @@ public class BlockStairsFergo extends BlockStairs
 
     public String getUnlocalizedName()
     {
-        return NameHelper.formatBlockName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatBlockName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
 
@@ -31,9 +30,5 @@ public class BlockStairsFergo extends BlockStairs
 
     public int getMod() {
         return mod;
-    }
-
-    public void registerModel(){
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
     }
 }

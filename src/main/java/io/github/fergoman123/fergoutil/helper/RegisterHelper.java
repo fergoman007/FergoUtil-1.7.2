@@ -1,8 +1,5 @@
 package io.github.fergoman123.fergoutil.helper;
 
-import io.github.fergoman123.fergoutil.block.BlockFergo;
-import io.github.fergoman123.fergoutil.block.BlockMultiFergo;
-import io.github.fergoman123.fergoutil.item.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -57,5 +54,13 @@ public final class RegisterHelper
 
     public static void registerModel(Block block, String name){
         registerModel(block, 0, name);
+    }
+
+    public static void addVariantName(Item item, String variant){
+        ModelBakery.addVariantName(item, variant);
+    }
+
+    public static void addVariantName(Block block, String variant){
+        addVariantName(Item.getItemFromBlock(block), variant);
     }
 }

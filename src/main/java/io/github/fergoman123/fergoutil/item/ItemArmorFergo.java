@@ -77,8 +77,4 @@ public class ItemArmorFergo extends ItemArmor
     {
         return material.getName();
     }
-
-    public void registerModel(){
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
-    }
 }

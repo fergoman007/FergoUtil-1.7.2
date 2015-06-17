@@ -29,11 +29,11 @@ public class ItemBowFergo extends ItemBow
     }
 
     public String getUnlocalizedName() {
-        return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
+        return NameHelper.formatItemName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName()));
     }
 
     public String getUnlocalizedName(ItemStack stack) {
-        return NameHelper.formatItemName(NameHelper.getModString(this.getMod()), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
+        return NameHelper.formatItemName(this.getMod(), NameHelper.getUnlocalizedName(super.getUnlocalizedName(stack)));
     }
 
     @Override
@@ -73,10 +73,4 @@ public class ItemBowFergo extends ItemBow
         return mod;
     }
 
-    public void registerModels(){
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5));
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5) + "_0");
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5) + "_1");
-        RegisterHelper.registerModel(this, getUnlocalizedName().substring(5) + "_2");
-    }
 }
