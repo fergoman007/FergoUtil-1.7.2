@@ -159,7 +159,7 @@ public abstract class TileFurnaceFergo extends TileEntityLockable implements IUp
 
     public boolean isUseableByPlayer(EntityPlayer player)
     {
-        return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     public void openInventory(EntityPlayer player){}
@@ -200,16 +200,11 @@ public abstract class TileFurnaceFergo extends TileEntityLockable implements IUp
     {
         switch (id)
         {
-            case 0:
-                return this.burnTime;
-            case 1:
-                return this.currentItemBurnTime;
-            case 2:
-                return this.cookTime;
-            case 3:
-                return this.totalCookTime;
-            default:
-                return 0;
+            case 0:return this.burnTime;
+            case 1:return this.currentItemBurnTime;
+            case 2:return this.cookTime;
+            case 3:return this.totalCookTime;
+            default:return 0;
         }
     }
 
@@ -217,17 +212,10 @@ public abstract class TileFurnaceFergo extends TileEntityLockable implements IUp
     {
         switch (id)
         {
-            case 0:
-                this.burnTime = value;
-                break;
-            case 1:
-                this.currentItemBurnTime = value;
-                break;
-            case 2:
-                this.cookTime = value;
-                break;
-            case 3:
-                this.totalCookTime = value;
+            case 0:this.burnTime = value;break;
+            case 1:this.currentItemBurnTime = value;break;
+            case 2:this.cookTime = value;break;
+            case 3:this.totalCookTime = value;
         }
     }
 
@@ -238,9 +226,9 @@ public abstract class TileFurnaceFergo extends TileEntityLockable implements IUp
 
     public void clear()
     {
-        for (int i = 0; i < this.slots.length; ++i)
+        for (ItemStack slot : slots)
         {
-            this.slots[i] = null;
+            slot = null;
         }
     }
 

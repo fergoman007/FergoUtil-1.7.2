@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class BlockFergo extends Block
+public abstract class BlockFergo extends Block implements IFergoBlock
 {
     private int mod;
 

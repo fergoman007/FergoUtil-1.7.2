@@ -11,8 +11,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
+import java.util.Random;
 
-public abstract class BlockMultiFergo extends Block
+public abstract class BlockMultiFergo extends Block implements IFergoBlock
 {
     private int mod;
     public String[] subNames;
@@ -50,5 +51,10 @@ public abstract class BlockMultiFergo extends Block
         for (int i = 0; i < subNames.length; i++) {
             list.add(new ItemStack(item, 1, i));
         }
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(getBlock());
     }
 }
