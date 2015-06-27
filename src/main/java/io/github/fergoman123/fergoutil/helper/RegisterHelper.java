@@ -1,5 +1,7 @@
 package io.github.fergoman123.fergoutil.helper;
 
+import io.github.fergoman123.fergoutil.model.ModelEntry;
+import io.github.fergoman123.fergoutil.model.ModelVariant;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -11,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public final class RegisterHelper
@@ -40,27 +43,13 @@ public final class RegisterHelper
         return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
     }
 
-    public static void registerModel(Item item, int meta, String name){
-        getModelMesher().register(item, meta, new ModelResourceLocation(name, "inventory"));
+    public static void registerModel(ModelEntry modelEntry)
+    {
+        getModelMesher().register(modelEntry.getItem(), modelEntry.getMeta(), new ModelResourceLocation(modelEntry.getName(), "inventory"));
     }
 
-    public static void registerModel(Item item, String name) {
-        registerModel(item, 0, name);
-    }
-
-    public static void registerModel(Block block, int meta, String name){
-        registerModel(Item.getItemFromBlock(block), meta, name);
-    }
-
-    public static void registerModel(Block block, String name){
-        registerModel(block, 0, name);
-    }
-
-    public static void addVariantName(Item item, String... variant){
-        ModelBakery.addVariantName(item, variant);
-    }
-
-    public static void addVariantName(Block block, String... variant){
-        addVariantName(Item.getItemFromBlock(block), variant);
+    public static void addVariant(ModelVariant variant)
+    {
+        ModelBakery.addVariantName(variant.getItem(), variant.getVariants());
     }
 }

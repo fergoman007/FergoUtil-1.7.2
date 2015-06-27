@@ -15,17 +15,17 @@ import net.minecraft.item.Item;
 public class ModelVariant
 {
     private Item item;
-    private String[] variants;
+    private String variant;
 
-    public ModelVariant(Item item, String... variants)
+    public ModelVariant(Item item, String variant)
     {
         this.item = item;
-        this.variants = variants;
+        this.variant = variant;
     }
 
-    public ModelVariant(Block block, String variants)
+    public ModelVariant(Block block, String variant)
     {
-        this(Item.getItemFromBlock(block), variants);
+        this(Item.getItemFromBlock(block), variant);
     }
 
     public Item getItem()
@@ -33,7 +33,7 @@ public class ModelVariant
         return item;
     }
 
-    public String[] getVariants() {
-        return variants;
+    public String getVariant() {
+        return variant;
     }
 }
