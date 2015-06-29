@@ -1,7 +1,6 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
@@ -13,8 +12,7 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BlockMultiFergo extends Block implements IFergoBlock
-{
+public abstract class BlockMultiFergo extends Block {
     private int mod;
     public String[] subNames;
 
@@ -53,8 +51,5 @@ public abstract class BlockMultiFergo extends Block implements IFergoBlock
         }
     }
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(getBlock());
-    }
+    public abstract Item getItemDropped(IBlockState state, Random random, int fortune);
 }

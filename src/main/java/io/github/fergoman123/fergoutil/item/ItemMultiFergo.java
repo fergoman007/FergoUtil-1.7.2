@@ -1,7 +1,6 @@
 package io.github.fergoman123.fergoutil.item;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,13 +41,6 @@ public abstract class ItemMultiFergo extends Item
     public void getSubItems(Item itemIn, CreativeTabs tab, List list) {
         for (int i = 0; i < getSubNames().length; i++) {
             list.add(new ItemStack(itemIn, 1, i));
-        }
-    }
-
-    public void registerModels(){
-        for (int i = 0; i < getSubNames().length; i++) {
-            RegisterHelper.registerModel(this, i, NameHelper.getModString(getMod()) + getSubNames()[i]);
-            RegisterHelper.addVariantName(this, NameHelper.getModString(getMod()) + getSubNames()[i]);
         }
     }
 

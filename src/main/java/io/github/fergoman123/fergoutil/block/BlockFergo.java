@@ -1,14 +1,12 @@
 package io.github.fergoman123.fergoutil.block;
 
 import io.github.fergoman123.fergoutil.helper.NameHelper;
-import io.github.fergoman123.fergoutil.helper.RegisterHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public abstract class BlockFergo extends Block implements IFergoBlock
-{
+public abstract class BlockFergo extends Block {
     private int mod;
 
     public BlockFergo(Material material, int mod, CreativeTabs tab, float hardness, float resistance, String name)
