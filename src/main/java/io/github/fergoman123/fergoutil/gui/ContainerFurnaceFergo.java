@@ -28,8 +28,8 @@ public abstract class ContainerFurnaceFergo extends Container implements IContai
     }
 
     @Override
-    public void onCraftGuiOpened(ICrafting listener) {
-        super.onCraftGuiOpened(listener);
+    public void addCraftingToCrafters(ICrafting listener) {
+        super.addCraftingToCrafters(listener);
         listener.func_175173_a(this, this.furnace);
     }
 
