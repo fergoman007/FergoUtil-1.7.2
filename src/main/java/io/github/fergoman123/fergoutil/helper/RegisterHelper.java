@@ -1,7 +1,5 @@
 package io.github.fergoman123.fergoutil.helper;
 
-import io.github.fergoman123.fergoutil.model.ModelEntry;
-import io.github.fergoman123.fergoutil.model.ModelVariant;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelBakery;
@@ -38,15 +36,5 @@ public final class RegisterHelper
     public static ItemModelMesher getModelMesher()
     {
         return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-    }
-
-    public static void registerModel(ModelEntry modelEntry)
-    {
-        getModelMesher().register(modelEntry.getItem(), modelEntry.getMeta(), new ModelResourceLocation(modelEntry.getName(), "inventory"));
-    }
-
-    public static void addVariant(ModelVariant variant)
-    {
-        ModelBakery.addVariantName(variant.getItem(), variant.getVariant());
     }
 }
