@@ -9,8 +9,8 @@ import net.minecraft.util.BlockPos;
 
 public abstract class CommandFergo extends CommandBase
 {
-    public abstract String getName();
+    public abstract String getCommandName();
     public abstract String getCommandUsage(ICommandSender sender);
-    public abstract void execute(ICommandSender sender, String[] args) throws CommandException;
+    public abstract void processCommand(ICommandSender sender, String[] args) throws CommandException;
     public abstract int getRequiredPermissionLevel();
 }

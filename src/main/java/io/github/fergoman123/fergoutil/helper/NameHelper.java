@@ -36,22 +36,6 @@ public final class NameHelper
         return "/assets/" + modid.toLowerCase() + "/logo.png";
     }
 
-    public static String getModString(int mod)
-    {
-        if (mod == 0)
-        {
-            return "FergoTools";
-        }
-        else if (mod == 1)
-        {
-            return "MSB";
-        }
-        else
-        {
-            return "null";
-        }
-    }
-
     public static String getDurabilityString(ItemStack stack)
     {
         return "Durability: " + (stack.getMaxDamage() - stack.getItemDamage()) + "/" + stack.getMaxDamage();
@@ -60,25 +44,5 @@ public final class NameHelper
     public static String toLower(String text)
     {
         return text.toLowerCase();
-    }
-
-    public static String formatItemName(int mod, String name)
-    {
-        return String.format("item.%s:%s", getModString(mod).toLowerCase(), name);
-    }
-
-    public static String formatBlockName(int mod, String name)
-    {
-        return String.format("tile.%s:%s", getModString(mod).toLowerCase(), name);
-    }
-
-    public static String formatMetadataItem(ItemStack stack, int mod, String name, String[] subNames)
-    {
-        return String.format("item.%s:%s.%s", getModString(mod).toLowerCase(), name, subNames[MathHelper.clamp_int(stack.getItemDamage(), 0, subNames.length - 1)]);
-    }
-
-    public static String getBowModel(int mod, String name, String pull)
-    {
-        return String.format("%s:%s%s", getModString(mod).toLowerCase(), name, pull);
     }
 }

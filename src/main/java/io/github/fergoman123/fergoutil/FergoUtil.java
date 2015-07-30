@@ -44,7 +44,8 @@ public class FergoUtil
     {
         LoggerFU.info("Mod Loaded!");
     }
-    
+
+    @EventHandler
     public void serverStarting(FMLServerStartingEvent evt){
     	evt.registerServerCommand(new CommandFergoDebug());
     }

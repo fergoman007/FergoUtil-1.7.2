@@ -11,7 +11,7 @@ public class CommandFergoDebug extends CommandFergo
 {
 
 	@Override
-	public String getName() {
+	public String getCommandName() {
 		return "fdb";
 	}
 
@@ -19,10 +19,11 @@ public class CommandFergoDebug extends CommandFergo
 	public String getCommandUsage(ICommandSender sender) {
 		return "fergoutil.cmd.debug";
 	}
-	
+
+
 	@Override
-	public boolean canCommandSenderUse(ICommandSender sender) {
-		return sender.getName().equals("fergoman123");
+	public boolean canCommandSenderUseCommand(ICommandSender sender) {
+		return sender.getCommandSenderName().equals("fergoman123");
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class CommandFergoDebug extends CommandFergo
 	}
 
 	@Override
-	public void execute(ICommandSender sender, String[] args) throws CommandException {
+	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		GameRules rules = new GameRules();
 		rules.setOrCreateGameRule("doMobSpawning", "false");
 		rules.setOrCreateGameRule("doDaylightCycle", "false");
