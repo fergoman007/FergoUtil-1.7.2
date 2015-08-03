@@ -1,7 +1,6 @@
 package io.github.fergoman123.fergoutil.helper;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
 public final class NameHelper

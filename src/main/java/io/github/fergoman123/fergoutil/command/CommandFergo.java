@@ -1,16 +1,24 @@
 package io.github.fergoman123.fergoutil.command;
 
-import java.util.List;
-
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.BlockPos;
 
-public abstract class CommandFergo extends CommandBase
+public class CommandFergo extends CommandBase
 {
-    public abstract String getCommandName();
-    public abstract String getCommandUsage(ICommandSender sender);
-    public abstract void processCommand(ICommandSender sender, String[] args) throws CommandException;
-    public abstract int getRequiredPermissionLevel();
+    public String getCommandName() {
+		return null;
+	}
+    public String getCommandUsage(ICommandSender sender) {
+		return null;
+	}
+    public void processCommand(ICommandSender sender, String[] args) {
+	}
+    public int getRequiredPermissionLevel() {
+		return 0;
+	}
+    
+	@Override
+	public int compareTo(Object o) {
+		return 0;
+	}
 }

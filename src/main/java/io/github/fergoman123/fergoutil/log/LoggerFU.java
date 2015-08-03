@@ -7,24 +7,25 @@ import org.apache.logging.log4j.Logger;
 import io.github.fergoman123.fergoutil.reference.ModInfo;
 
 public class LoggerFU{
-	private static Logger log = null;
+	private static Logger logger = null;
 	
-	private static void configureLogging(){
-		log = LogManager.getLogger(ModInfo.modid);
+	private static void configureLogger(){
+		logger = LogManager.getLogger(ModInfo.modid);
 	}
 	
 	public static void log(Level level, String message, Object... params){
-		if(log == null) configureLogging();
-		if(message == null){
-			log.log(level, "Attempted to log null message.");
+		if(logger == null){
+			configureLogger();
 		}
-		else{
-			try{
+		
+		if(message == null){
+			logger.log(level, "Attempted to log null message");
+		} else {
+			try {
 				message = String.format(message, params);
-			} catch (Exception e){
-				log.log(Level.ERROR, "Failed to format log message. Caused by: %s", e.getMessage());
+			} catch (Exception e) {
+				logger.log(level, "failed to format log message", e.getMessage());
 			}
-			log.log(level, message);
 		}
 	}
 	

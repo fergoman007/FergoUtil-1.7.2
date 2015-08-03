@@ -1,11 +1,9 @@
 package io.github.fergoman123.fergoutil.helper;
 
-import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
@@ -30,11 +28,6 @@ public class HelperEnum
         return EnumHelper.addArmorMaterial(name, name, durability, reductionAmounts, enchantability);
     }
 
-    public static EntityPainting.EnumArt addArt(String name, String tile, int sizeX, int sizeY, int offsetX, int offsetY)
-    {
-        return EnumHelper.addArt(name, tile, sizeX, sizeY, offsetX, offsetY);
-    }
-
     public static EnumCreatureAttribute addCreatureAttribute(String name)
     {
         return EnumHelper.addCreatureAttribute(name);
@@ -53,11 +46,6 @@ public class HelperEnum
     public static EnumEnchantmentType addEnchantmentType(String name)
     {
         return EnumHelper.addEnchantmentType(name);
-    }
-
-    public static BlockPressurePlate.Sensitivity addSensitivity(String name)
-    {
-        return EnumHelper.addSensitivity(name);
     }
 
     public static MovingObjectPosition.MovingObjectType addMovingObjectType(String name)

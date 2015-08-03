@@ -1,11 +1,7 @@
 package io.github.fergoman123.fergoutil.command;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
 
 public class CommandFergoDebug extends CommandFergo
 {
@@ -32,11 +28,15 @@ public class CommandFergoDebug extends CommandFergo
 	}
 
 	@Override
-	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-		GameRules rules = new GameRules();
-		rules.setOrCreateGameRule("doMobSpawning", "false");
-		rules.setOrCreateGameRule("doDaylightCycle", "false");
+	public void processCommand(ICommandSender sender, String[] args){
+		Minecraft.getMinecraft().theWorld.getGameRules().setOrCreateGameRule("doMobSpawning", "false");
+		Minecraft.getMinecraft().theWorld.getGameRules().setOrCreateGameRule("doDaylightCycle", "false");
 		Minecraft.getMinecraft().theWorld.setWorldTime(1600);
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		return 0;
 	}
 	
 
