@@ -1,25 +1,25 @@
 package io.github.fergoman123.fergoutil.block;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.EnumFaceDirection;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.Random;
 
 public abstract class BlockFurnaceFergo extends BlockContainer {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -120,6 +120,43 @@ public abstract class BlockFurnaceFergo extends BlockContainer {
     }
 
     public abstract void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack);
+    
+    public boolean hasComparatorOverride(){
+    	return true;
+    }
+    
+    public int getComparatorOverride(World world, BlockPos pos){
+    	return Container.calcRedstone(world.getTileEntity(pos));
+    }
+    
+    public abstract Item getItem(World world, BlockPos pos);
+    
+    public int getRenderType(){
+    	return 3;
+    }
+    
+    public IBlockState getStateForEntityRender(IBlockState state){
+    	return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
+    }
+    
+    public IBlockState getStateFromMeta(int meta){
+    	EnumFacing facing = EnumFacing.getFront(meta);
+    	
+    	if (facing.getAxis() == EnumFacing.Axis.Y) {
+			facing = EnumFacing.NORTH;
+		}
+    	
+    	return this.getDefaultState().withProperty(FACING, facing);
+    }
+    
+    @Override
+    public int getMetaFromState(IBlockState state) {
+    	return ((EnumFacing)state.getValue(FACING)).getIndex();
+    }
+    
+    public BlockState createBlockState(){
+    	return new BlockState(this, FACING);
+    }
 
     public String getMod() {
         return mod;
