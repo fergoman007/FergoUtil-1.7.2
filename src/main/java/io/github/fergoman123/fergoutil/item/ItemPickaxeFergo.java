@@ -34,7 +34,7 @@ public class ItemPickaxeFergo extends ItemPickaxe{
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
         tooltip.add("Tool Material: " + this.material.toString());
         tooltip.add("Harvest Level: " + this.material.getHarvestLevel());

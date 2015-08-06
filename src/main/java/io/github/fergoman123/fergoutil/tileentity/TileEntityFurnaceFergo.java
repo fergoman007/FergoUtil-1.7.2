@@ -91,8 +91,6 @@ public abstract class TileEntityFurnaceFergo extends TileEntityLockable
 		this.inventoryName = inventoryName;
 	}
 
-	// TODO: readFromNBT in inherited classes
-
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setShort("BurnTime", (short) this.burnTime);
@@ -150,7 +148,9 @@ public abstract class TileEntityFurnaceFergo extends TileEntityLockable
 
 	public abstract boolean isItemValidForSlot(int index, ItemStack stack);
 
-	public abstract int[] getSlotsForFace(EnumFacing side);
+	public int[] getSlotsForFace(EnumFacing side) {
+		return side == EnumFacing.DOWN ? slotsBottom : (side == EnumFacing.UP ? slotsTop : slotsSides);
+	}
 
 	public abstract boolean canInsertItem(int index, ItemStack stack, EnumFacing direction);
 
