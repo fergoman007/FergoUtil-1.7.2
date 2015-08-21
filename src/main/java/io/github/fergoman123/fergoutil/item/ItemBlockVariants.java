@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockVariants extends ItemBlock{
+public abstract class ItemBlockVariants extends ItemBlock{
 	
 	public ItemBlockVariants(Block block){
 		super(block);
@@ -18,8 +18,5 @@ public class ItemBlockVariants extends ItemBlock{
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		BlockMultiFergo blockMulti = (BlockMultiFergo)this.block;
-		return super.getUnlocalizedName() + "." + blockMulti.getSubNames()[stack.getItemDamage()];
-	}
+	public abstract String getUnlocalizedName(ItemStack stack);
 }

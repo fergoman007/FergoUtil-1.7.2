@@ -1,6 +1,6 @@
 package io.github.fergoman123.fergoutil.gui;
 
-public interface IContainerFurnaceFergo
+public interface IContainerFergo
 {
     void addInventorySlots();
     void addPlayerInventory();

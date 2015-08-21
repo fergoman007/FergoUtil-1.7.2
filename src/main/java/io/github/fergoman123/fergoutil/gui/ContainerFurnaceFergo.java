@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ContainerFurnaceFergo extends Container implements IContainerFurnaceFergo{
+public abstract class ContainerFurnaceFergo extends Container implements IContainerFergo{
 	
 	public final InventoryPlayer invPlayer;
 	public final IInventory furnace;
