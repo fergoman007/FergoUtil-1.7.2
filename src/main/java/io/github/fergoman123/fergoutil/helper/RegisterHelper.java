@@ -2,6 +2,9 @@ package io.github.fergoman123.fergoutil.helper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -34,5 +37,13 @@ public final class RegisterHelper
     public static ItemModelMesher getModelMesher()
     {
         return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+    }
+    
+    public static void registerModel(Item item, int meta, String name){
+    	getModelMesher().register(item, meta, new ModelResourceLocation(name, "inventory"));
+    }
+    
+    public static void addVariant(Item item, String name){
+    	ModelBakery.addVariantName(item, name);
     }
 }
