@@ -46,4 +46,6 @@ public final class RegisterHelper
     public static void addVariant(Item item, String name){
     	ModelBakery.addVariantName(item, name);
     }
+
+
 }

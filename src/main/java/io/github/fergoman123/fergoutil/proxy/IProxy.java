@@ -2,9 +2,7 @@ package io.github.fergoman123.fergoutil.proxy;
 
 public interface IProxy
 {
-    void registerTileEntities();
-
-    void registerRenderers();
-
-    void registerEventHandlers();
+    void preInit();
+    void init();
+    void postInit();
 }
