@@ -5,14 +5,18 @@ import net.minecraft.util.StatCollector;
 
 public final class NameHelper
 {
-    public static String getUnlocalizedName(String unlocalizedName)
+    public static String getName(String unlocalizedName)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
-    public static String getUnlocalizedName(String unlocalizedName, int plus)
+    public static String getName(String unlocalizedName, int plus)
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + plus);
+    }
+
+    public static String getName(String unlocalizedName, String indexOf){
+        return unlocalizedName.substring(unlocalizedName.indexOf(indexOf) + 1);
     }
 
     public static String translate(String locale)

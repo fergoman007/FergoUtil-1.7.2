@@ -3,7 +3,7 @@ package io.github.fergoman123.fergoutil.command;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 
-public class CommandFergo extends CommandBase
+public abstract class CommandFergo extends CommandBase
 {
     public String getCommandName() {
 		return null;

@@ -12,37 +12,31 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-
 @Mod(modid = ModInfo.modid, name = ModInfo.name, version = ModInfo.version)
-public class FergoUtil
-{
-	
-    @Instance(ModInfo.modid)
-    public static FergoUtil instance;
+public class FergoUtil {
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent evt)
-    {
-        MetadataFU.writeMetadata(evt.getModMetadata());
-        LoggerFU.info("Pre-Loading!");
-    }
+	@Instance(ModInfo.modid)
+	public static FergoUtil instance;
 
-    @EventHandler
-    public void load(FMLInitializationEvent evt)
-    {
-    	LoggerFU.info("Mod Loading!");
-    }
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent evt) {
+		MetadataFU.writeMetadata(evt.getModMetadata());
+		LoggerFU.info("Pre-Loading!");
+	}
 
-    @EventHandler
-    public void modsLoaded(FMLPostInitializationEvent evt)
-    {
-    	LoggerFU.info("Mod Loaded!");
-    }
+	@EventHandler
+	public void load(FMLInitializationEvent evt) {
+		LoggerFU.info("Mod Loading!");
+	}
 
-    @EventHandler
-    public void serverStarting(FMLServerStartingEvent evt){
-    	evt.registerServerCommand(new CommandFergoDebug());
-    }
+	@EventHandler
+	public void modsLoaded(FMLPostInitializationEvent evt) {
+		LoggerFU.info("Mod Loaded!");
+	}
 
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent evt) {
+		evt.registerServerCommand(new CommandFergoDebug());
+	}
 
 }

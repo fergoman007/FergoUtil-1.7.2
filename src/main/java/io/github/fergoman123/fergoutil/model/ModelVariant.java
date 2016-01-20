@@ -1,18 +1,19 @@
 package io.github.fergoman123.fergoutil.model;
 
-import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class ModelVariant {
 	public Item item;
-	public String name;
+	public String modid, name;
 	
-	public ModelVariant(Item item, String name){
+	public ModelVariant(Item item, String modid, String name){
 		this.item = item;
+		this.modid = modid;
 		this.name = name;
 	}
 	
-	public void add(){
-		ModelBakery.addVariantName(this.item, this.name);
+	public ModelVariant(Block block, String modid, String name){
+		this(Item.getItemFromBlock(block), modid, name);
 	}
 }

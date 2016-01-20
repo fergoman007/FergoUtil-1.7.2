@@ -19,7 +19,7 @@ public class CommandFergoDebug extends CommandFergo
 
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender sender) {
-		return sender.getCommandSenderName().equals("fergoman123");
+		return sender.getCommandSenderEntity().equals("fergoman123");
 	}
 
 	@Override
