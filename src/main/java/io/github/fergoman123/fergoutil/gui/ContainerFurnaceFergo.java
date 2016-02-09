@@ -30,7 +30,7 @@ public abstract class ContainerFurnaceFergo extends Container implements IContai
 	
 	public void onCraftGuiOpened(ICrafting crafting){
 		super.onCraftGuiOpened(crafting);
-		crafting.func_175173_a(this, this.furnace);
+		crafting.sendAllWindowProperties(this, this.furnace);
 	}
 	
 	public void detectAndSendChanges()

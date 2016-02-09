@@ -4,5 +4,5 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public interface INBTTaggable
 {
-    public void readFromNBT(NBTTagCompound compound);
+    void readFromNBT(NBTTagCompound compound);
 }

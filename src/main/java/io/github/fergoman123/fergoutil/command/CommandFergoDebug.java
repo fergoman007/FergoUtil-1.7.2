@@ -33,11 +33,4 @@ public class CommandFergoDebug extends CommandFergo
 		Minecraft.getMinecraft().theWorld.getGameRules().setOrCreateGameRule("doDaylightCycle", "false");
 		Minecraft.getMinecraft().theWorld.setWorldTime(1600);
 	}
-
-	@Override
-	public int compareTo(Object arg0) {
-		return 0;
-	}
-	
-
 }

@@ -2,9 +2,11 @@ package io.github.fergoman123.fergoutil.item;
 
 import java.util.List;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class ItemMultiFergo extends Item{
 	private String[] subNames;
